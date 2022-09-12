@@ -16,12 +16,14 @@ import {
   Divider,
   InputGroup,
   InputLeftElement,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { GoogleIcon } from '../../assets/AssetUtil';
 import GoogleAuth from '../../utils/google_auth';
 import { BsFillPersonFill } from 'react-icons/bs';
 
 export default function Login() {
+  const [isMobile] = useMediaQuery('(max-width: 425px)');
   const handleGoogleSignIn = async () => {
     try {
       await GoogleAuth.signIn();
@@ -44,11 +46,11 @@ export default function Login() {
         <Stack
           spacing={8}
           mx="1rem"
-          w="50vw"
-          minW="20rem"
-          maxW="40rem"
           py={12}
           px={6}
+          w="70vw"
+          minW="24rem"
+          maxW="30rem"
         >
           <Stack align={'center'}>
             <Heading fontSize="3xl">Sign in to WiJob</Heading>
@@ -56,7 +58,11 @@ export default function Login() {
           <Box
             rounded="1rem"
             bg={useColorModeValue('white', 'gray.700')}
-            boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;"
+            boxShadow={
+              isMobile
+                ? ''
+                : 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'
+            }
             p={8}
           >
             <Stack spacing={4}>
@@ -127,6 +133,7 @@ export default function Login() {
           </Box>
         </Stack>
       </Flex>
+
       <Center w="100vw" pos="absolute" bottom="1rem">
         <Text fontWeight={800}>© 2022 WiJob</Text>
       </Center>
