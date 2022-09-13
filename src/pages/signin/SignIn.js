@@ -22,7 +22,7 @@ import { GoogleIcon } from '../../assets/AssetUtil';
 import GoogleAuth from '../../utils/google_auth';
 import { BsFillPersonFill } from 'react-icons/bs';
 
-export default function Login() {
+export default function SignIn() {
   const [isMobile] = useMediaQuery('(max-width: 425px)');
   const handleGoogleSignIn = async () => {
     try {
@@ -77,7 +77,7 @@ export default function Login() {
               </FormControl>
 
               <Stack spacing={10}>
-                {/* email login button */}
+                {/* email SignIn button */}
                 <Button
                   bg="black"
                   color="white"
@@ -93,7 +93,7 @@ export default function Login() {
                 <Divider borderColor="black" />
               </Flex>
 
-              {/* google login button */}
+              {/* google SignIn button */}
               <Flex
                 bg="light.googleBtn"
                 color="white"
