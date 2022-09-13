@@ -117,7 +117,9 @@ export default function SignIn() {
 
             <Flex align="center" mt="5rem" mb="1rem">
               <Divider borderColor="black" />
-              <Text minW="14rem">Don't have an WiJob account ?</Text>
+              <Text minW="14rem" textAlign="center">
+                Don't have an WiJob account ?
+              </Text>
               <Divider borderColor="black" />
             </Flex>
 
