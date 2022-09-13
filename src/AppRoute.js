@@ -1,4 +1,4 @@
-import { HOME, PAGE404, SIGNIN } from './utils/route_name';
+import { HOME, PAGE404, SIGNIN, SIGNUP } from './utils/route_name';
 import {
   BrowserRouter,
   Routes,
@@ -6,10 +6,13 @@ import {
   Outlet,
   ProtectedRoute,
 } from 'react-router-dom';
-import SignIn from './pages/signin/SignIn';
-import Home from './pages/home/Home';
 import PageNotFound from './pages/page-not-found/PageNotFound';
 import { generateRoutes } from './utils/helpers';
+
+import SignIn from './pages/signin';
+import Home from './pages/home';
+import SignUp from './pages/signup';
+import MainLayout from './components/MainLayout.js';
 
 export const AppRouteConfig = [
   {
@@ -17,6 +20,12 @@ export const AppRouteConfig = [
     path: SIGNIN,
     title: 'Sign In',
     component: <SignIn />,
+  },
+  {
+    level: 0,
+    path: SIGNUP,
+    title: 'Sign up',
+    component: <SignUp />,
   },
   {
     level: 0,
@@ -37,9 +46,11 @@ export default function AppRoute() {
   const routes = generateRoutes(AppRouteConfig);
   return (
     <>
-      <BrowserRouter>
-        <Routes>{routes}</Routes>
-      </BrowserRouter>
+      <MainLayout>
+        <BrowserRouter>
+          <Routes>{routes}</Routes>
+        </BrowserRouter>
+      </MainLayout>
     </>
   );
 }

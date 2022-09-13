@@ -21,6 +21,7 @@ import {
 import { GoogleIcon } from '../../assets/AssetUtil';
 import GoogleAuth from '../../utils/google_auth';
 import { BsFillPersonFill } from 'react-icons/bs';
+import { SIGNUP } from '../../utils/route_name';
 
 export default function SignIn() {
   const [isMobile] = useMediaQuery('(max-width: 425px)');
@@ -42,7 +43,7 @@ export default function SignIn() {
 
   return (
     <>
-      <Flex minH="100vh" align="center" justify="center" mx="1rem">
+      <Flex align="center" justify="center" mx="1rem">
         <Stack
           spacing={8}
           mx="1rem"
@@ -52,9 +53,10 @@ export default function SignIn() {
           minW="24rem"
           maxW="30rem"
         >
-          <Stack align={'center'}>
+          <Box align="center">
             <Heading fontSize="3xl">Sign in to WiJob</Heading>
-          </Stack>
+          </Box>
+
           <Box
             rounded="1rem"
             bg={useColorModeValue('white', 'gray.700')}
@@ -124,21 +126,19 @@ export default function SignIn() {
             </Flex>
 
             {/* sign up button */}
-            <Button
-              _hover={{ backgroundColor: 'gray.100' }}
-              bg="white"
-              borderWidth="1px"
-              borderColor="black"
-            >
-              <Text>Sign Up</Text>
-            </Button>
+            <Link href={SIGNUP} textDecor="none" _hover={{ textDecor: 'none' }}>
+              <Button
+                _hover={{ backgroundColor: 'gray.100' }}
+                bg="white"
+                borderWidth="1px"
+                borderColor="black"
+              >
+                <Text>Sign Up</Text>
+              </Button>
+            </Link>
           </Box>
         </Stack>
       </Flex>
-
-      <Center w="100vw" pos="absolute" bottom="1rem">
-        <Text fontWeight={800}>© 2022 WiJob</Text>
-      </Center>
     </>
   );
 }

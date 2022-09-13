@@ -84,7 +84,7 @@ const AppTheme = extendTheme({
   components: {
     Link: {
       baseStyle: {
-        textDecoration: 'underline',
+        _hover: { textDecoration: 'none' },
       },
     },
     Button: {

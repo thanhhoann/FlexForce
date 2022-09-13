@@ -24,6 +24,7 @@ import { GoogleIcon } from '../../assets/AssetUtil';
 import GoogleAuth from '../../utils/google_auth';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { SIGNIN } from '../../utils/route_name';
 
 export default function SignUp() {
   const [isMobile] = useMediaQuery('(max-width: 425px)');
@@ -46,11 +47,24 @@ export default function SignUp() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
+  const [value, setValue] = React.useState('');
+  const handleChange = event => setValue(event.target.value);
+
   return (
     <>
-      <Flex minH="100vh" align="center" justify="center" mx="1rem">
-        <Stack mx="1rem" px={6} w="70vw" minW="24rem" maxW="30rem">
+      <Flex align="center" justify="center" mx="1rem">
+        <Stack
+          spacing={8}
+          mx="1rem"
+          py={5}
+          px={6}
+          w="70vw"
+          minW="24rem"
+          maxW="30rem"
+        >
           <Box
+            px={8}
+            py={3}
             rounded="1rem"
             bg={useColorModeValue('white', 'gray.700')}
             boxShadow={
@@ -58,9 +72,11 @@ export default function SignUp() {
                 ? ''
                 : 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'
             }
-            p={8}
           >
             <Stack spacing={4}>
+              <Box align="center">
+                <Heading fontSize="3xl">Sign up to WiJob</Heading>
+              </Box>
               {/* google SignIn button */}
               <Flex
                 bg="light.googleBtn"
@@ -89,14 +105,16 @@ export default function SignUp() {
               </Flex>
 
               <Stack spacing={4}>
-                <FormControl id="first-name">
-                  <Input type="text" placeholder="First name" />
-                </FormControl>
-                <FormControl id="last-name">
-                  <Input type="text" placeholder="Last name" />
-                </FormControl>
+                <Flex gap="0.4rem">
+                  <FormControl id="first-name">
+                    <Input type="text" placeholder="First name" />
+                  </FormControl>
+                  <FormControl id="last-name">
+                    <Input type="text" placeholder="Last name" />
+                  </FormControl>
+                </Flex>
                 <FormControl id="email">
-                  <Input type="email" placeholder="Email" />
+                  <Input type="email" placeholder="Email" isRequired />
                 </FormControl>
                 <FormControl id="password">
                   <InputGroup size="md">
@@ -104,6 +122,7 @@ export default function SignUp() {
                       pr="4.5rem"
                       type={show ? 'text' : 'password'}
                       placeholder="Enter password"
+                      isRequired
                     />
                     <InputRightElement width="4.5rem">
                       <Button
@@ -141,19 +160,23 @@ export default function SignUp() {
 
             <Flex align="center" mt="2rem" mb="1rem">
               <Divider borderColor="black" />
-              <Text minW="14rem">Already have an WiJob account ?</Text>
+              <Text minW="14rem" textAlign="center">
+                Already have an WiJob account ?
+              </Text>
               <Divider borderColor="black" />
             </Flex>
 
             {/* sign up button */}
-            <Button
-              _hover={{ backgroundColor: 'gray.100' }}
-              bg="white"
-              borderWidth="1px"
-              borderColor="black"
-            >
-              <Text>Log in</Text>
-            </Button>
+            <Link href={SIGNIN} textDecor="none" _hover={{ textDecor: 'none' }}>
+              <Button
+                _hover={{ backgroundColor: 'gray.100' }}
+                bg="white"
+                borderWidth="1px"
+                borderColor="black"
+              >
+                <Text>Sign in</Text>
+              </Button>
+            </Link>
           </Box>
         </Stack>
       </Flex>
