@@ -82,6 +82,11 @@ const AppTheme = extendTheme({
     },
   },
   components: {
+    Link: {
+      baseStyle: {
+        textDecoration: 'underline',
+      },
+    },
     Button: {
       baseStyle: {
         outLine: 'none',

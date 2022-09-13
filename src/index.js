@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import store from './store';
 import { ChakraProvider } from '@chakra-ui/react';
+import { Provider } from 'react-redux';
 import AppTheme from './AppTheme';
-import Login from './pages/login/Login';
-import App from './App';
+import AppRoute from './AppRoute';
+import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -15,8 +14,7 @@ const MainApp = () => {
       <ChakraProvider theme={AppTheme}>
         {/* <PersistGate loading={null} persistor={persistor}>
         </PersistGate> */}
-        {/* <AppRoute /> */}
-        <App />
+        <AppRoute />
       </ChakraProvider>
     </Provider>
   );

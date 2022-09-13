@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const AuthSlice = createSlice({
-  name: 'auth_slice',
+  name: 'auth',
   initialState: initialState,
   reducers: {
     updateAuthStatus: (state, payload) => {
@@ -34,5 +34,6 @@ const handleLogOut = () => {
 };
 
 export const userSelect = state => state.auth.user;
+export const authSelect = state => state.auth;
 export const authActions = AuthSlice.actions;
 export default AuthSlice;
