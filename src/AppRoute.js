@@ -6,7 +6,7 @@ import {
   Outlet,
   ProtectedRoute,
 } from 'react-router-dom';
-import PageNotFound from './pages/page-not-found/PageNotFound';
+import PageNotFound from './pages/page-not-found';
 import { generateRoutes } from './utils/helpers';
 
 import SignIn from './pages/signin';
