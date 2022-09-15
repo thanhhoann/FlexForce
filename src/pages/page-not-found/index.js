@@ -1,4 +1,4 @@
-import { Box, Image, Center } from '@chakra-ui/react'
+import { Box, Image, Center, extendTheme } from '@chakra-ui/react'
 import { PageNotFoundGif } from '../../assets/AssetUtil';
 
 export default function PageNotFound() {
@@ -7,11 +7,13 @@ export default function PageNotFound() {
   }
 
   return (
-    <Center w="100vw" h="100vh">
+    <Center w="100vw">
       <Box maxW='sm' borderRadius='lg' overflow='hidden'>
         <Image src={PageNotFoundGif} alt={property.imageAlt} />
-      </Box>
+        <Center fontSize='2.5rem' color='black'>
+          Oh no, bad luck!
+        </Center>
+      </Box>      
     </Center>
   )
 }
-
