@@ -6,16 +6,25 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../slices/authSlice';
 
-const GoogleAuth = {
-  signIn: () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
-    //     signInWithRedirect(auth, provider);
-  },
-  signOut: () => {
-    signOut(auth);
-  },
+export const GoogleSignIn = () => {
+  const provider = new GoogleAuthProvider();
+  const dispatch = useDispatch();
+  //     signInWithRedirect(auth, provider);
+  return signInWithPopup(auth, provider).then(res =>
+    dispatch(
+      authActions.setUser({
+        email: res.user.email,
+        uid: res.user.uid,
+        displayName: res.user.displayName,
+        photoURL: res.user.photoURL,
+      })
+    )
+  );
 };
 
-export default GoogleAuth;
+export const GoogleSignOut = () => {
+  return signOut(auth);
+};

@@ -1,3 +1,4 @@
+import { createStandaloneToast } from '@chakra-ui/toast';
 import { HOME, PAGE404, SIGNIN, SIGNUP } from './utils/route_name';
 import {
   BrowserRouter,
@@ -6,6 +7,7 @@ import {
   Outlet,
   ProtectedRoute,
 } from 'react-router-dom';
+
 import PageNotFound from './pages/page-not-found/PageNotFound';
 import { generateRoutes } from './utils/helpers';
 
@@ -43,12 +45,15 @@ export const AppRouteConfig = [
 ];
 
 export default function AppRoute() {
+  const { ToastContainer } = createStandaloneToast();
   const routes = generateRoutes(AppRouteConfig);
+
   return (
     <>
       <MainLayout>
         <BrowserRouter>
           <Routes>{routes}</Routes>
+          <ToastContainer />
         </BrowserRouter>
       </MainLayout>
     </>

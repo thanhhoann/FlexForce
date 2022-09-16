@@ -17,10 +17,12 @@ import { routeActions, routeSelect } from './slices/routeSlice';
 import { authActions, authSelect, userSelect } from './slices/authSlice';
 import SignUp from './pages/signup/SignUp';
 import SignIn from './pages/signin/SignIn';
+import { createStandaloneToast } from '@chakra-ui/toast';
 
 export default function App() {
   const dispatch = useDispatch();
   const user = useSelector(userSelect);
+  const { ToastContainer, toast } = createStandaloneToast();
 
   React.useEffect(() => {
     const updateUser = onAuthStateChanged(auth, currentUser => {

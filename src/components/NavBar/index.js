@@ -268,34 +268,34 @@ const MobileNavItem = ({ label, children, href }) => {
 };
 
 const NAV_ITEMS = [
-  {
-    label: 'label 1',
-    children: [
-      {
-        label: 'children_label 1',
-        subLabel: 'children_sub-label 1',
-        href: '#',
-      },
-      {
-        label: 'children_label 1',
-        subLabel: 'children_sub-label 1',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'label 2',
-    children: [
-      {
-        label: 'children_label 2',
-        subLabel: 'children_sub-label 2',
-        href: '#',
-      },
-      {
-        label: 'children_label 2',
-        subLabel: 'children_sub-label 2',
-        href: '#',
-      },
-    ],
-  },
+  // {
+  //   label: 'label 1',
+  //   children: [
+  //     {
+  //       label: 'children_label 1',
+  //       subLabel: 'children_sub-label 1',
+  //       href: '#',
+  //     },
+  //     {
+  //       label: 'children_label 1',
+  //       subLabel: 'children_sub-label 1',
+  //       href: '#',
+  //     },
+  //   ],
+  // },
+  // {
+  //   label: 'label 2',
+  //   children: [
+  //     {
+  //       label: 'children_label 2',
+  //       subLabel: 'children_sub-label 2',
+  //       href: '#',
+  //     },
+  //     {
+  //       label: 'children_label 2',
+  //       subLabel: 'children_sub-label 2',
+  //       href: '#',
+  //     },
+  //   ],
+  // },
 ];

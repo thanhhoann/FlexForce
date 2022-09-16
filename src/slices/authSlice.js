@@ -2,14 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../firebase';
 
-const AuthStatus = {
+export const AuthStatus = {
   AUTHORIZED: 'AUTHORIZED',
   UNAUTHORIZED: 'UNAUTHORIZED',
 };
 
 const initialState = {
   authStatus: AuthStatus.UNAUTHORIZED,
-  user: {},
+  user: null,
 };
 
 const AuthSlice = createSlice({
@@ -20,6 +20,7 @@ const AuthSlice = createSlice({
       state.authStatus = payload.payload;
     },
     setUser: (state, payload) => {
+      state.authStatus = AuthStatus.AUTHORIZED;
       state.user = payload.payload;
     },
     logOut: () => {
@@ -30,7 +31,7 @@ const AuthSlice = createSlice({
 });
 
 const handleLogOut = () => {
-  localStorage.clear();
+  // localStorage.removeItem('persist:root');
 };
 
 export const userSelect = state => state.auth.user;
