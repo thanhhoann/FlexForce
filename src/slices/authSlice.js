@@ -7,8 +7,14 @@ export const AuthStatus = {
   UNAUTHORIZED: 'UNAUTHORIZED',
 };
 
+export const UserType = {
+  FREELANCER: 'FREELANCER',
+  CLIENT: 'CLIENT',
+};
+
 const initialState = {
   authStatus: AuthStatus.UNAUTHORIZED,
+  userType: UserType.CLIENT,
   user: null,
 };
 

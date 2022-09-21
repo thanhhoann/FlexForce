@@ -23,6 +23,7 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 import { HOME, SIGNIN, SIGNUP } from '../../utils/route_name';
+import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
 
 export default function NavBar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -35,9 +36,6 @@ export default function NavBar() {
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}
       >
         <Flex
@@ -57,54 +55,57 @@ export default function NavBar() {
             aria-label={'Toggle Navigation'}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+
+        <Flex align="center" justify="space-between" w="full">
           <Link href={HOME}>
             <Heading
               textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
               color={useColorModeValue('gray.800', 'white')}
               fontSize="lg"
             >
-              WiJob
+              Logo
             </Heading>
           </Link>
 
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+          <Flex>
             <DesktopNav />
           </Flex>
-        </Flex>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}
-        >
-          <Link href={SIGNIN}>
-            <Button
-              as={'a'}
-              fontSize={'sm'}
-              fontWeight={400}
-              variant="link"
-              href={SIGNIN}
-            >
-              Sign In
-            </Button>
-          </Link>
-          <Link href={SIGNUP}>
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={600}
-              color={'white'}
-              bg="gray.400"
-              _hover={{
-                bg: 'gray.300',
-              }}
-            >
-              Sign Up
-            </Button>
-          </Link>
-        </Stack>
+          <Flex gap={2}>
+            <ColorModeSwitcher w="1rem" h="1rem" />
+            <Link href={SIGNIN}>
+              <Button
+                fontSize={'sm'}
+                fontWeight={600}
+                borderWidth={2}
+                borderColor={useColorModeValue('black', 'white')}
+                color={useColorModeValue('black', 'white')}
+                rounded="0.5rem"
+                bgColor={useColorModeValue('light.primary', 'dark.primary')}
+              >
+                <Flex align="center" pl={2}>
+                  <Text>Contact</Text>
+                  <ChevronRightIcon fontSize="1.2rem" />
+                </Flex>
+              </Button>
+            </Link>
+
+            <Link href={SIGNIN}>
+              <Button
+                fontSize={'sm'}
+                fontWeight={600}
+                color={useColorModeValue('white', 'black')}
+                bgColor={useColorModeValue('black', 'light.primary')}
+                rounded="0.5rem"
+              >
+                <Flex align="center" pl={2}>
+                  <Text>Sign Up</Text>
+                  <ChevronRightIcon fontSize="1.2rem" />
+                </Flex>
+              </Button>
+            </Link>
+          </Flex>
+        </Flex>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -115,51 +116,59 @@ export default function NavBar() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
+  const prefixLinkColor = useColorModeValue('gray.400', 'gray.100');
+  const linkColor = useColorModeValue('gray.800', 'gray.200');
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
   return (
-    <Stack direction={'row'} spacing={4}>
-      {NAV_ITEMS.map(navItem => (
-        <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'sm'}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor,
-                }}
-              >
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
+    <>
+      <Stack direction={'row'} spacing={4}>
+        {NAV_ITEMS.map(navItem => (
+          <Box key={navItem.label}>
+            <Popover trigger={'hover'} placement={'bottom-start'}>
+              <PopoverTrigger>
+                <Link
+                  p={2}
+                  href={navItem.href ?? '#'}
+                  fontSize={'sm'}
+                  fontWeight={700}
+                  color={linkColor}
+                  _hover={{
+                    textDecoration: 'none',
+                    color: linkHoverColor,
+                  }}
+                >
+                  <Flex align="center" gap="0.5rem">
+                    <Text color={prefixLinkColor} fontWeight={800}>
+                      /
+                    </Text>
+                    <Text>{navItem.label}</Text>
+                  </Flex>
+                </Link>
+              </PopoverTrigger>
 
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}
-              >
-                <Stack>
-                  {navItem.children.map(child => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
-        </Box>
-      ))}
-    </Stack>
+              {navItem.children && (
+                <PopoverContent
+                  border={0}
+                  boxShadow={'xl'}
+                  bg={popoverContentBgColor}
+                  p={4}
+                  rounded={'xl'}
+                  minW={'sm'}
+                >
+                  <Stack>
+                    {navItem.children.map(child => (
+                      <DesktopSubNav key={child.label} {...child} />
+                    ))}
+                  </Stack>
+                </PopoverContent>
+              )}
+            </Popover>
+          </Box>
+        ))}
+      </Stack>
+    </>
   );
 };
 
@@ -268,34 +277,34 @@ const MobileNavItem = ({ label, children, href }) => {
 };
 
 const NAV_ITEMS = [
-  // {
-  //   label: 'label 1',
-  //   children: [
-  //     {
-  //       label: 'children_label 1',
-  //       subLabel: 'children_sub-label 1',
-  //       href: '#',
-  //     },
-  //     {
-  //       label: 'children_label 1',
-  //       subLabel: 'children_sub-label 1',
-  //       href: '#',
-  //     },
-  //   ],
-  // },
-  // {
-  //   label: 'label 2',
-  //   children: [
-  //     {
-  //       label: 'children_label 2',
-  //       subLabel: 'children_sub-label 2',
-  //       href: '#',
-  //     },
-  //     {
-  //       label: 'children_label 2',
-  //       subLabel: 'children_sub-label 2',
-  //       href: '#',
-  //     },
-  //   ],
-  // },
+  {
+    label: 'Client as a Service',
+    children: [
+      {
+        label: 'children_label 1',
+        subLabel: 'children_sub-label 1',
+        href: '#',
+      },
+      {
+        label: 'children_label 1',
+        subLabel: 'children_sub-label 1',
+        href: '#',
+      },
+    ],
+  },
+  {
+    label: 'Work as a Service',
+    children: [
+      {
+        label: 'children_label 2',
+        subLabel: 'children_sub-label 2',
+        href: '#',
+      },
+      {
+        label: 'children_label 2',
+        subLabel: 'children_sub-label 2',
+        href: '#',
+      },
+    ],
+  },
 ];

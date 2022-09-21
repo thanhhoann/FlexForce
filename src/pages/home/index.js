@@ -1,11 +1,16 @@
 import { Button, Center, Image, Text, VStack } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions, userSelect } from '../../slices/authSlice';
+import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
+import { persistUser } from '../../utils/helpers/local-storage.helper';
 
 export default function Home() {
   const dispatch = useDispatch();
   const persistRoot = JSON.parse(localStorage.getItem('persist:root'));
   const user = JSON.parse(persistRoot.auth).user;
+
+  // force reload when local storage key not found
+  if (!persistUser) window.location.reload();
 
   return (
     <>

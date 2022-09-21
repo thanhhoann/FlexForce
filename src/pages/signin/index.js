@@ -13,7 +13,7 @@ import { auth } from '../../firebase';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { Formik, Form, Field } from 'formik';
 import { AuthStatus } from '../../slices/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, redirect, useLocation } from 'react-router-dom';
 import {
   Flex,
   Box,
@@ -44,6 +44,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = createStandaloneToast();
   const [isMobile] = useMediaQuery('(max-width: 425px)');
   const dispatch = useDispatch();

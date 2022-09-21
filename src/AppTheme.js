@@ -21,18 +21,10 @@ const AppTheme = extendTheme({
   },
   colors: {
     light: {
-      googleBtn: poolWater,
-      primary: dogerBlue,
-      secondary: zumthor,
-      primaryTitle: mineShaft,
-      disable: alto,
-      hover: periwinkle,
-      success: fruitSalad,
-      bgSuccessPopup: hintOfGreen,
-      error: sunsetOrange,
-      bgErrorPopup: pippin,
-      warning: pizazz,
-      bgWarningPopup: citrineWhite,
+      primary: 'white',
+    },
+    dark: {
+      primary: 'gray.600',
     },
   },
   textStyles: {
