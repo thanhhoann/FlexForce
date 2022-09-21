@@ -13,7 +13,7 @@ export default function PageNotFound() {
         <Center fontSize='2.5rem' color='black'>
           Oh no, bad luck!
         </Center>
-      </Box>      
+      </Box>
     </Center>
   )
 }
