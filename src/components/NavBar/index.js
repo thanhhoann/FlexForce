@@ -84,7 +84,7 @@ export default function NavBar() {
                 bgColor={useColorModeValue('light.primary', 'dark.primary')}
               >
                 <Flex align="center" pl={2}>
-                  <Text>Contact</Text>
+                  <Text>Sign in</Text>
                   <ChevronRightIcon fontSize="1.2rem" />
                 </Flex>
               </Button>
@@ -140,7 +140,7 @@ const DesktopNav = () => {
                   }}
                 >
                   <Flex align="center" gap="0.5rem">
-                    <Text color={prefixLinkColor} fontWeight={800}>
+                    <Text color={prefixLinkColor} fontWeight={1000}>
                       /
                     </Text>
                     <Text>{navItem.label}</Text>
@@ -277,6 +277,36 @@ const MobileNavItem = ({ label, children, href }) => {
 };
 
 const NAV_ITEMS = [
+  {
+    label: 'About',
+    children: [
+      {
+        label: 'children_label 2',
+        subLabel: 'children_sub-label 2',
+        href: '#',
+      },
+      {
+        label: 'children_label 2',
+        subLabel: 'children_sub-label 2',
+        href: '#',
+      },
+    ],
+  },
+  {
+    label: 'Contact',
+    children: [
+      {
+        label: 'children_label 2',
+        subLabel: 'children_sub-label 2',
+        href: '#',
+      },
+      {
+        label: 'children_label 2',
+        subLabel: 'children_sub-label 2',
+        href: '#',
+      },
+    ],
+  },
   {
     label: 'Client as a Service',
     children: [
