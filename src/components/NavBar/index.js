@@ -15,6 +15,15 @@ import {
   useBreakpointValue,
   useDisclosure,
   Heading,
+  useMediaQuery,
+  Center,
+  Image,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -24,9 +33,16 @@ import {
 } from '@chakra-ui/icons';
 import { HOME, SIGNIN, SIGNUP } from '../../utils/route_name';
 import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
+import { persistUser } from '../../utils/helpers/local-storage.helper';
+import { LogoImg } from '../../assets/AssetUtil';
 
 export default function NavBar() {
-  const { isOpen, onToggle } = useDisclosure();
+  const [isLaptop] = useMediaQuery('(min-width: 1024px)');
+
+  const light_dark = useColorModeValue('light.primary', 'dark.primary');
+  const dark_light = useColorModeValue('dark.primary', 'light.primary');
+
+  const { isOpen, onClose, onToggle } = useDisclosure();
 
   return (
     <Box>
@@ -38,79 +54,111 @@ export default function NavBar() {
         px={{ base: 4 }}
         align={'center'}
       >
-        <Flex
-          flex={{ base: 1, md: 'auto' }}
-          ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}
-        >
-          <IconButton
-            onClick={onToggle}
-            w="fit-content"
-            rounded="0.2rem"
-            _active={{ bg: 'none' }}
-            icon={
-              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
-            }
-            variant={'ghost'}
-            aria-label={'Toggle Navigation'}
-          />
-        </Flex>
-
         <Flex align="center" justify="space-between" w="full">
           <Link href={HOME}>
-            <Heading
-              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-              color={useColorModeValue('gray.800', 'white')}
-              fontSize="lg"
-            >
-              Logo
+            <Heading>
+              <Image src={LogoImg} />
             </Heading>
           </Link>
 
-          <Flex>
-            <DesktopNav />
-          </Flex>
+          {isLaptop && (
+            <Flex>
+              <DesktopNav />
+            </Flex>
+          )}
 
-          <Flex gap={2}>
-            <ColorModeSwitcher w="1rem" h="1rem" />
-            <Link href={SIGNIN}>
-              <Button
-                fontSize={'sm'}
-                fontWeight={600}
-                borderWidth={2}
-                borderColor={useColorModeValue('black', 'white')}
-                color={useColorModeValue('black', 'white')}
-                rounded="0.5rem"
-                bgColor={useColorModeValue('light.primary', 'dark.primary')}
-              >
-                <Flex align="center" pl={2}>
-                  <Text>Sign in</Text>
-                  <ChevronRightIcon fontSize="1.2rem" />
-                </Flex>
-              </Button>
-            </Link>
+          <Flex gap={2} align="center">
+            <ColorModeSwitcher w="1rem" h="1rem" rounded={4} mr="1rem" />
+            {isLaptop &&
+              (persistUser ? (
+                <Center
+                  bg={dark_light}
+                  color={light_dark}
+                  rounded="0.3rem"
+                  px="0.5rem"
+                  py="0.2rem"
+                  h="full"
+                  w="full"
+                >
+                  <Text fontWeight={700}>{persistUser.email}</Text>
+                </Center>
+              ) : (
+                <>
+                  <Link href={SIGNIN}>
+                    <Button
+                      fontSize={'sm'}
+                      fontWeight={600}
+                      borderWidth={2}
+                      borderColor={dark_light}
+                      color={dark_light}
+                      rounded="0.5rem"
+                      bgColor={light_dark}
+                    >
+                      <Flex align="center" pl={2}>
+                        <Text>Sign in</Text>
+                        <ChevronRightIcon fontSize="1.2rem" />
+                      </Flex>
+                    </Button>
+                  </Link>
 
-            <Link href={SIGNIN}>
-              <Button
-                fontSize={'sm'}
-                fontWeight={600}
-                color={useColorModeValue('white', 'black')}
-                bgColor={useColorModeValue('black', 'light.primary')}
-                rounded="0.5rem"
-              >
-                <Flex align="center" pl={2}>
-                  <Text>Sign Up</Text>
-                  <ChevronRightIcon fontSize="1.2rem" />
-                </Flex>
-              </Button>
-            </Link>
+                  <Link href={SIGNIN}>
+                    <Button
+                      fontSize={'sm'}
+                      fontWeight={600}
+                      color={light_dark}
+                      bgColor={dark_light}
+                      rounded="0.5rem"
+                    >
+                      <Flex align="center" pl={2}>
+                        <Text>Sign Up</Text>
+                        <ChevronRightIcon fontSize="1.2rem" />
+                      </Flex>
+                    </Button>
+                  </Link>
+                </>
+              ))}
           </Flex>
         </Flex>
+
+        {!isLaptop && (
+          <Flex
+            flex={{ base: 1, md: 'auto' }}
+            ml={{ base: -2 }}
+            display={{ sm: 'flex', md: 'flex', lg: 'none' }}
+          >
+            <IconButton
+              onClick={onToggle}
+              w="fit-content"
+              rounded="0.2rem"
+              _active={{ bg: 'none' }}
+              icon={<HamburgerIcon w={5} h={5} />}
+              variant={'ghost'}
+              aria-label={'Toggle Navigation'}
+            />
+          </Flex>
+        )}
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
+      {!isLaptop && (
+        <Drawer onClose={onClose} isOpen={isOpen} size="full">
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader></DrawerHeader>
+            <DrawerBody>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Consequat nisl vel pretium lectus quam id. Semper quis lectus
+                nulla at volutpat diam ut venenatis. Dolor morbi non arcu risus
+                quis varius quam quisque. Massa ultricies mi quis hendrerit
+                dolor magna eget est lorem. Erat imperdiet sed euismod nisi
+                porta. Lectus vestibulum mattis ullamcorper velit.
+              </p>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
+      )}
     </Box>
   );
 }
@@ -206,73 +254,6 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
         </Flex>
       </Stack>
     </Link>
-  );
-};
-
-const MobileNav = () => {
-  return (
-    <Stack
-      bg={useColorModeValue('white', 'gray.800')}
-      p={4}
-      display={{ md: 'none' }}
-    >
-      {NAV_ITEMS.map(navItem => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
-    </Stack>
-  );
-};
-
-const MobileNavItem = ({ label, children, href }) => {
-  const { isOpen, onToggle } = useDisclosure();
-
-  return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
-        py={2}
-        as={Link}
-        href={href ?? '#'}
-        justify={'space-between'}
-        align={'center'}
-        _hover={{
-          textDecoration: 'none',
-        }}
-      >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}
-        >
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )}
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}
-        >
-          {children &&
-            children.map(child => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse>
-    </Stack>
   );
 };
 

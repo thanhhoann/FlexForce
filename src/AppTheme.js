@@ -24,7 +24,7 @@ const AppTheme = extendTheme({
       primary: 'white',
     },
     dark: {
-      primary: 'gray.600',
+      primary: 'black',
     },
   },
   textStyles: {
