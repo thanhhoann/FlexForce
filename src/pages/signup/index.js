@@ -95,14 +95,13 @@ export default function SignUp() {
             <Stack spacing={4}>
               {/* google SignIn button */}
               <Flex
-                bg="light.googleBtn"
-                color="white"
                 p="1px"
                 rounded="full"
                 cursor="pointer"
                 onClick={handleGoogleSignIn}
+                border="1px solid black"
               >
-                <Box bg="white" rounded="full" minW="38px" minH="38px">
+                <Box rounded="full" minW="38px" minH="38px">
                   <Center w="full" h="full">
                     <Image w="20px" h="20px" src={GoogleIcon} />
                   </Center>
