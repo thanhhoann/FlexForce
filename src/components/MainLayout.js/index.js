@@ -1,10 +1,10 @@
-import { Box } from '@chakra-ui/react';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 import NavBar from '../NavBar';
 
 export default function MainLayout({ children }) {
   return (
     <>
-      <Box>
+      <Box bg={useColorModeValue('light.background', 'dark.background')}>
         <NavBar />
         {children}
       </Box>
