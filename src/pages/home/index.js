@@ -1,5 +1,6 @@
 import { Button, Center, Image, Text, VStack } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
+import HeroSection from '../../components/HeroSection';
 import { authActions, userSelect } from '../../slices/authSlice';
 import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
 import { persistUser } from '../../utils/helpers/local-storage.helper';
@@ -15,7 +16,8 @@ export default function Home() {
   return (
     <>
       <Center w="100vw" h="90vh">
-        <VStack>
+        <HeroSection/>
+        {/* <VStack>
           {user ? (
             <>
               <Text>
@@ -34,7 +36,7 @@ export default function Home() {
           <Button w="7rem" onClick={() => dispatch(authActions.logOut())}>
             Log out
           </Button>
-        </VStack>
+        </VStack> */}
       </Center>
     </>
   );
