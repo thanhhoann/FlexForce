@@ -21,10 +21,11 @@ const AppTheme = extendTheme({
   },
   colors: {
     light: {
-      primary: 'white',
+      primary: '#FFFFFF',
+      background: '#F5F5F5'
     },
     dark: {
-      primary: 'gray.600',
+      primary: '#151b2b',
     },
   },
   textStyles: {
