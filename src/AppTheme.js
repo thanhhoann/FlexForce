@@ -23,7 +23,8 @@ const AppTheme = extendTheme({
     light: {
       primary: '#FFFFFF',
       background: '#F5F5F5',
-      orange: '#F8503C'
+      header_orange: '#F8503C',
+      header_blue: '#A0B8FF'
     },
     dark: {
       primary: '#151b2b',
