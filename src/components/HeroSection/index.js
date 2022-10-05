@@ -17,41 +17,34 @@ export default function HeroSection() {
   const section2_3 = useRef(null);
 
   const isInViewRef = useRef(null);
-  const isInView = useInView(isInViewRef);
+  const isInView = useInView(isInViewRef, { once: true });
 
   return (
     <>
-      <Flex flexDir="column" align="center" justify="center" m="1rem">
+      <Flex flexDir="column" align="center" justify="center">
         {/* section 1 */}
         <Box h="100vh">
-          <Flex h="full" w="full" gap="6rem">
+          <Flex mt="2rem" mx="auto" h="80%" w="80%" gap="2rem">
             <Box
-              align="center"
-              bg="light.primary"
+              bg="dark.primary"
               h="full"
               w="full"
-              color="black"
-              clipPath="polygon(0 0, 100% 0, 70% 100%, 0 100%)"
-              marginRight="-7rem"
+              color="white"
               rounded="0.5rem"
+              p="1rem"
             >
               <Box
-                color="light.header_orange"
+                color="light.header_blue"
                 p={9}
                 fontWeight="black"
                 fontSize="-moz-initial"
               >
-                FOR EMPLOYERS
+                FOR RECRUITERS & ENTREPRENEURS
               </Box>
-              <Box
-                p={5}
-                color="dark.primary"
-                fontWeight="black"
-                fontSize="large"
-              >
-                GET ACCESS TO 100.000+ <br></br> EMPLOYEES AVAILABLE
+              <Box p={5} fontWeight="black" fontSize="large">
+                GET ACCESS TO 100.000+ <br></br> JOBS AVAILABLE
               </Box>
-              <Box p={5} maxW="290px">
+              <Box p={5}>
                 <Text>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Delectus iusto laudantium tempora perferendis, consectetur
@@ -59,24 +52,18 @@ export default function HeroSection() {
                   eos, quo nemo ipsa quidem non unde exercitationem error!
                 </Text>
               </Box>
-              <Button
-                bgColor="light.header_orange"
-                color="light.primary"
-                boxSize="-webkit-max-content"
-              >
-                GET EMPLOYEES
+              <Button bgColor="light.header_orange" color="light.primary">
+                GET JOBS
               </Button>
             </Box>
 
             <Box
-              align="center"
               bg="dark.primary"
               h="full"
               w="full"
               color="white"
-              clipPath="polygon(30% 0, 100% 0, 100% 100%, 0 100%)"
-              marginLeft="-7rem"
               rounded="0.5rem"
+              p="1rem"
             >
               <Box
                 color="light.header_blue"
@@ -97,11 +84,7 @@ export default function HeroSection() {
                   eos, quo nemo ipsa quidem non unde exercitationem error!
                 </Text>
               </Box>
-              <Button
-                bgColor="light.header_orange"
-                color="light.primary"
-                boxSize="webkit-max-content"
-              >
+              <Button bgColor="light.header_orange" color="light.primary">
                 GET JOBS
               </Button>
             </Box>
