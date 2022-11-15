@@ -23,7 +23,7 @@ export default function HeroSection() {
     <>
       <Flex flexDir="column" align="center" justify="center">
         {/* section 1 */}
-        <Box h="100vh">
+        <Box h="102vh">
           <Flex mt="2rem" mx="auto" h="80%" w="80%" gap="2rem">
             <Box
               bg="dark.primary"
@@ -38,6 +38,8 @@ export default function HeroSection() {
                 p={9}
                 fontWeight="black"
                 fontSize="-moz-initial"
+                w="full"
+                
               >
                 FOR RECRUITERS & ENTREPRENEURS
               </Box>
