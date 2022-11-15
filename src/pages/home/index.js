@@ -15,9 +15,8 @@ export default function Home() {
 
   return (
     <>
-      <Center w="100vw" h="90vh">
-        <HeroSection/>
-        {/* <VStack>
+      <HeroSection />
+      {/* <VStack>
           {user ? (
             <>
               <Text>
@@ -37,7 +36,6 @@ export default function Home() {
             Log out
           </Button>
         </VStack> */}
-      </Center>
     </>
   );
 }
