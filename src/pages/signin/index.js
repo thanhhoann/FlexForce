@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Router from 'next/router';
 import { GoogleIcon } from '../../assets/AssetUtil';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { SIGNUP, HOME } from '../../utils/route_name';
@@ -57,7 +58,7 @@ export default function SignIn() {
     try {
       //     signInWithRedirect(auth, provider);
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider).then(res =>
+      await signInWithPopup(auth, provider).then(res => {
         dispatch(
           authActions.setUser({
             email: res.user.email,
@@ -65,8 +66,10 @@ export default function SignIn() {
             displayName: res.user.displayName,
             // photoURL: res.user.photoURL,
           })
-        )
-      );
+        );
+        window.location.reload();
+        window.location.replace('/');
+      });
     } catch (error) {
       console.log(error);
     }

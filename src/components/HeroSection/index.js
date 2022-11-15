@@ -24,15 +24,21 @@ export default function HeroSection() {
       <Flex flexDir="column" align="center" justify="center" m="1rem">
         {/* section 1 */}
         <Box h="100vh">
-          <Flex h="full" w="full" gap="6rem">
+          <SimpleGrid
+            columns={{ sm: 1, md: 1, lg: 2 }}
+            h="full"
+            w="full"
+            gap="2rem"
+          >
             <Box
+              boxShadow="2xl"
+              h="85%"
               align="center"
               bg="light.primary"
-              h="full"
               w="full"
               color="black"
-              clipPath="polygon(0 0, 100% 0, 70% 100%, 0 100%)"
-              marginRight="-7rem"
+              // clipPath="polygon(0 0, 100% 0, 70% 100%, 0 100%)"
+              // marginRight="-7rem"
               rounded="0.5rem"
             >
               <Box
@@ -69,13 +75,14 @@ export default function HeroSection() {
             </Box>
 
             <Box
+              boxShadow="2xl"
+              h="85%"
               align="center"
               bg="dark.primary"
-              h="full"
               w="full"
               color="white"
-              clipPath="polygon(30% 0, 100% 0, 100% 100%, 0 100%)"
-              marginLeft="-7rem"
+              // clipPath="polygon(30% 0, 100% 0, 100% 100%, 0 100%)"
+              // marginLeft="-7rem"
               rounded="0.5rem"
             >
               <Box
@@ -105,7 +112,7 @@ export default function HeroSection() {
                 GET JOBS
               </Button>
             </Box>
-          </Flex>
+          </SimpleGrid>
         </Box>
 
         {/* section 2 */}

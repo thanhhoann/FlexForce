@@ -50,7 +50,7 @@ export default function SignUp() {
     try {
       //     signInWithRedirect(auth, provider);
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider).then(res =>
+      await signInWithPopup(auth, provider).then(res => {
         dispatch(
           authActions.setUser({
             email: res.user.email,
@@ -58,8 +58,10 @@ export default function SignUp() {
             displayName: res.user.displayName,
             // photoURL: res.user.photoURL,
           })
-        )
-      );
+        );
+        window.location.reload();
+        window.location.replace('/');
+      });
     } catch (error) {
       console.log(error);
     }

@@ -31,13 +31,12 @@ const AuthSlice = createSlice({
     },
     logOut: () => {
       handleLogOut();
-      return initialState;
     },
   },
 });
 
 const handleLogOut = () => {
-  // localStorage.removeItem('persist:root');
+  localStorage.removeItem('persist:root');
 };
 
 export const userSelect = state => state.auth.user;

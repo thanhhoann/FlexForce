@@ -35,6 +35,7 @@ import { HOME, SIGNIN, SIGNUP } from '../../utils/route_name';
 import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
 import { persistUser } from '../../utils/helpers/local-storage.helper';
 import { LogoImg } from '../../assets/AssetUtil';
+import Router from 'next/router';
 
 export default function NavBar() {
   const [isLaptop] = useMediaQuery('(min-width: 1024px)');
@@ -43,6 +44,11 @@ export default function NavBar() {
   const dark_light = useColorModeValue('dark.primary', 'light.primary');
 
   const { isOpen, onClose, onToggle } = useDisclosure();
+
+  const handleSignOut = () => {
+    localStorage.removeItem('persist:root');
+    window.location.reload();
+  };
 
   return (
     <Box>
@@ -72,15 +78,25 @@ export default function NavBar() {
             {isLaptop &&
               (persistUser ? (
                 <Center
-                  bg={dark_light}
                   color={light_dark}
                   rounded="0.3rem"
                   px="0.5rem"
                   py="0.2rem"
                   h="full"
                   w="full"
+                  gap="1rem"
                 >
-                  <Text fontWeight={700}>{persistUser.email}</Text>
+                  <Text bg={dark_light} fontWeight={700} p="1">
+                    {persistUser.email}
+                  </Text>
+                  <Button
+                    rounded="0.5rem"
+                    bg={dark_light}
+                    p="1"
+                    onClick={handleSignOut}
+                  >
+                    Sign out
+                  </Button>
                 </Center>
               ) : (
                 <>

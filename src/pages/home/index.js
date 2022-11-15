@@ -8,10 +8,10 @@ import { persistUser } from '../../utils/helpers/local-storage.helper';
 export default function Home() {
   const dispatch = useDispatch();
   const persistRoot = JSON.parse(localStorage.getItem('persist:root'));
-  const user = JSON.parse(persistRoot.auth).user;
+  // const user = JSON.parse(persistRoot.auth).user;
 
   // force reload when local storage key not found
-  if (!persistUser) window.location.reload();
+  // if (!persistUser) window.location.reload();
 
   return (
     <>
