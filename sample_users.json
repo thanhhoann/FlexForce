@@ -1,0 +1,62 @@
+[
+  {
+    "user_id": "string",
+    "user_name": "string",
+    "home_address": "string",
+    "work_dones": [
+      {
+        "job_name": "string",
+        "time_done": "string"
+      }
+    ],
+    "work_log": {
+      "rating": "number",
+      "comments": [
+        {
+          "user_name": "string",
+          "content": "string"
+        }
+      ]
+    }
+  },
+  {
+    "user_id": "string",
+    "user_name": "string",
+    "home_address": "string",
+    "work_dones": [
+      {
+        "job_name": "string",
+        "time_done": "string"
+      }
+    ],
+    "work_log": {
+      "rating": "number",
+      "comments": [
+        {
+          "user_name": "string",
+          "content": "string"
+        }
+      ]
+    }
+  },
+  {
+    "user_id": "string",
+    "user_name": "string",
+    "home_address": "string",
+    "work_dones": [
+      {
+        "job_name": "string",
+        "time_done": "string"
+      }
+    ],
+    "work_log": {
+      "rating": "number",
+      "comments": [
+        {
+          "user_name": "string",
+          "content": "string"
+        }
+      ]
+    }
+  }
+]
