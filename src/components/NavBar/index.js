@@ -35,7 +35,6 @@ import { HOME, SIGNIN, SIGNUP } from '../../utils/route_name';
 import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
 import { persistUser } from '../../utils/helpers/local-storage.helper';
 import { LogoImg } from '../../assets/AssetUtil';
-import Router from 'next/router';
 
 export default function NavBar() {
   const [isLaptop] = useMediaQuery('(min-width: 1024px)');
