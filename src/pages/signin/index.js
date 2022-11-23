@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Router from 'next/router';
 import { GoogleIcon } from '../../assets/AssetUtil';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { SIGNUP, HOME } from '../../utils/route_name';
