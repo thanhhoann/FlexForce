@@ -33,6 +33,7 @@ import {
 } from '@chakra-ui/icons';
 import { HOME, SIGNIN, SIGNUP } from '../../utils/route_name';
 import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
+import { HiOutlineUser } from 'react-icons/hi';
 import { persistUser } from '../../utils/helpers/local-storage.helper';
 import { LogoImg } from '../../assets/AssetUtil';
 
@@ -73,7 +74,7 @@ export default function NavBar() {
           )}
 
           <Flex gap={2} align="center">
-            <ColorModeSwitcher w="1rem" h="1rem" rounded={4} mr="1rem" />
+            {/* <ColorModeSwitcher w="1rem" h="1rem" rounded={4} mr="1rem" /> */}
             {isLaptop &&
               (persistUser ? (
                 <Center
@@ -85,13 +86,16 @@ export default function NavBar() {
                   w="full"
                   gap="1rem"
                 >
-                  <Text bg={dark_light} fontWeight={700} p="1">
-                    {persistUser.email}
-                  </Text>
+                  <Flex gap="0.5rem" justifyContent="center" align="center">
+                    <HiOutlineUser color="black" />
+                    <Text color="black" fontWeight={700} p="1">
+                      {persistUser.email}
+                    </Text>
+                  </Flex>
                   <Button
                     rounded="0.5rem"
                     bg={dark_light}
-                    p="1"
+                    p="2"
                     onClick={handleSignOut}
                   >
                     Sign out
@@ -116,7 +120,7 @@ export default function NavBar() {
                     </Button>
                   </Link>
 
-                  <Link href={SIGNIN}>
+                  <Link href={SIGNUP}>
                     <Button
                       fontSize={'sm'}
                       fontWeight={600}
@@ -274,63 +278,48 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 const NAV_ITEMS = [
   {
-    label: 'About',
-    children: [
-      {
-        label: 'children_label 2',
-        subLabel: 'children_sub-label 2',
-        href: '#',
-      },
-      {
-        label: 'children_label 2',
-        subLabel: 'children_sub-label 2',
-        href: '#',
-      },
-    ],
+    label: 'Why WiJob',
+    // children: [
+    //   {
+    //     label: 'children_label 2',
+    //     subLabel: 'children_sub-label 2',
+    //     href: '#',
+    //   },
+    //   {
+    //     label: 'children_label 2',
+    //     subLabel: 'children_sub-label 2',
+    //     href: '#',
+    //   },
+    // ],
+  },
+  {
+    label: 'Find workers',
+    // children: [
+    //   {
+    //     label: 'children_label 2',
+    //     subLabel: 'children_sub-label 2',
+    //     href: '#',
+    //   },
+    //   {
+    //     label: 'children_label 2',
+    //     subLabel: 'children_sub-label 2',
+    //     href: '#',
+    //   },
+    // ],
   },
   {
     label: 'Contact',
-    children: [
-      {
-        label: 'children_label 2',
-        subLabel: 'children_sub-label 2',
-        href: '#',
-      },
-      {
-        label: 'children_label 2',
-        subLabel: 'children_sub-label 2',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'Client as a Service',
-    children: [
-      {
-        label: 'children_label 1',
-        subLabel: 'children_sub-label 1',
-        href: '#',
-      },
-      {
-        label: 'children_label 1',
-        subLabel: 'children_sub-label 1',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'Work as a Service',
-    children: [
-      {
-        label: 'children_label 2',
-        subLabel: 'children_sub-label 2',
-        href: '#',
-      },
-      {
-        label: 'children_label 2',
-        subLabel: 'children_sub-label 2',
-        href: '#',
-      },
-    ],
+    // children: [
+    //   {
+    //     label: 'children_label 1',
+    //     subLabel: 'children_sub-label 1',
+    //     href: '#',
+    //   },
+    //   {
+    //     label: 'children_label 1',
+    //     subLabel: 'children_sub-label 1',
+    //     href: '#',
+    //   },
+    // ],
   },
 ];

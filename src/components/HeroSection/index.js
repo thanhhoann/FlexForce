@@ -7,224 +7,63 @@ import {
   Center,
   SimpleGrid,
   Grid,
+  Container,
+  Stack,
+  Icon,
+  IconProps,
 } from '@chakra-ui/react';
 import { motion, useInView } from 'framer-motion';
 import React, { useRef } from 'react';
+import Testimonial from '../Testimonial';
 
 export default function HeroSection() {
-  const section2_1 = useRef(null);
-  const section2_2 = useRef(null);
-  const section2_3 = useRef(null);
-
-  const isInViewRef = useRef(null);
-  const isInView = useInView(isInViewRef);
-
   return (
-    <>
-      <Flex flexDir="column" align="center" justify="center" m="1rem">
-        {/* section 1 */}
-        <Box h="100vh">
-          <SimpleGrid
-            columns={{ sm: 1, md: 1, lg: 2 }}
-            h="full"
-            w="full"
-            gap="2rem"
+    <Center h="85vh">
+      <Stack
+        textAlign={'center'}
+        align={'center'}
+        py={{ base: 20, md: 28 }}
+        gap="2rem"
+      >
+        <Flex>
+          <Heading
+            fontWeight={600}
+            fontSize={{ base: '4xl', sm: '4xl', md: '6xl', lg: '8xl' }}
           >
-            <Box
-              boxShadow="2xl"
-              h="85%"
-              align="center"
-              bg="light.primary"
-              w="full"
-              color="black"
-              // clipPath="polygon(0 0, 100% 0, 70% 100%, 0 100%)"
-              // marginRight="-7rem"
-              rounded="0.5rem"
-            >
-              <Box
-                color="light.header_orange"
-                p={9}
-                fontWeight="black"
-                fontSize="-moz-initial"
-              >
-                FOR EMPLOYERS
-              </Box>
-              <Box
-                p={5}
-                color="dark.primary"
-                fontWeight="black"
-                fontSize="large"
-              >
-                GET ACCESS TO 100.000+ <br></br> EMPLOYEES AVAILABLE
-              </Box>
-              <Box p={5} maxW="290px">
-                <Text>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Delectus iusto laudantium tempora perferendis, consectetur
-                  aliquam quasi accusantium facilis velit expedita! Recusandae
-                  eos, quo nemo ipsa quidem non unde exercitationem error!
-                </Text>
-              </Box>
-              <Button
-                bgColor="light.header_orange"
-                color="light.primary"
-                boxSize="-webkit-max-content"
-              >
-                GET EMPLOYEES
-              </Button>
-            </Box>
-
-            <Box
-              boxShadow="2xl"
-              h="85%"
-              align="center"
-              bg="dark.primary"
-              w="full"
-              color="white"
-              // clipPath="polygon(30% 0, 100% 0, 100% 100%, 0 100%)"
-              // marginLeft="-7rem"
-              rounded="0.5rem"
-            >
-              <Box
-                color="light.header_blue"
-                p={9}
-                fontWeight="black"
-                fontSize="-moz-initial"
-              >
-                FOR EMPLOYERS
-              </Box>
-              <Box p={5} fontWeight="black" fontSize="large">
-                GET ACCESS TO 100.000+ <br></br> JOBS AVAILABLE
-              </Box>
-              <Box p={5}>
-                <Text>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Delectus iusto laudantium tempora perferendis, consectetur
-                  aliquam quasi accusantium facilis velit expedita! Recusandae
-                  eos, quo nemo ipsa quidem non unde exercitationem error!
-                </Text>
-              </Box>
-              <Button
-                bgColor="light.header_orange"
-                color="light.primary"
-                boxSize="webkit-max-content"
-              >
-                GET JOBS
-              </Button>
-            </Box>
-          </SimpleGrid>
-        </Box>
-
-        {/* section 2 */}
-        <Flex flexDir="column" align="center" w="100vw" h="100vh" px="1rem">
-          <Flex flexDir="column" align="center" justify="center" my="5rem">
-            <Heading
-              color="#F8503C"
-              ref={isInViewRef}
-              style={{
-                transform: isInView ? 'none' : 'translateX(-200px)',
-                opacity: isInView ? 1 : 0,
-                transition: 'all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
-              }}
-            >
-              WHAT DO CLIENTS SAY AND USERS SAY
-            </Heading>
-            <Text
-              fontSize="1.5rem"
-              fontWeight="700"
-              ref={isInViewRef}
-              style={{
-                transform: isInView ? 'none' : 'translateX(200px)',
-                opacity: isInView ? 1 : 0,
-                transition: 'all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
-              }}
-            >
-              DO IT FOR ME, QUICK JOB QUICK MONEY
-            </Text>
-          </Flex>
-
-          <Grid
-            flexDir="row"
-            align="center"
-            gap="1rem"
-            templateRows="repeat(1, 1fr)"
-            templateColumns={{
-              sm: 'repeat(1, 1fr)',
-              md: 'repeat(3, 1fr)',
-              lg: 'repeat(3, 1fr)',
-            }}
+            Quick Job&nbsp;
+          </Heading>
+          <Heading
+            fontWeight={600}
+            fontSize={{ base: '4xl', sm: '4xl', md: '6xl', lg: '8xl' }}
+            color="orange"
           >
-            <Box
-              boxShadow="2xl"
-              rounded="0.5rem"
-              py="2rem"
-              px="1.2rem"
-              bg="gray.800"
-              color="white"
-              ref={isInViewRef}
-              style={{
-                transform: isInView ? 'none' : 'translateX(-200px)',
-                opacity: isInView ? 1 : 0,
-                transition: 'all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
-              }}
-            >
-              <Heading fontSize="1rem" mb="1rem">
-                Ruben is op z’n plekkie bij T-Mobile.
-              </Heading>
-              <Text fontSize="0.8rem" color="gray.200" fontWeight="600">
-                “Ik mocht eerst een opleiding volgen tot JavaScript Vue-expert
-                en kon daarna meteen voor T-Mobile aan de slag.”
-              </Text>
-            </Box>
-
-            <Box
-              boxShadow="2xl"
-              rounded="0.5rem"
-              p="1rem"
-              bg="white"
-              h="full"
-              ref={isInViewRef}
-              style={{
-                transform: isInView ? 'none' : 'translateY(-200px)',
-                opacity: isInView ? 1 : 0,
-                transition: 'all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
-              }}
-            >
-              <Heading fontSize="1.3rem">
-                Ruben is op z’n plekkie bij T-Mobile.
-              </Heading>
-              <Text>
-                “Ik mocht eerst een opleiding volgen tot JavaScript Vue-expert
-                en kon daarna meteen voor T-Mobile aan de slag.”
-              </Text>
-            </Box>
-
-            <Box
-              // as={motion.div}
-              boxShadow="2xl"
-              rounded="0.5rem"
-              py="2rem"
-              px="1.2rem"
-              bg="gray.800"
-              color="white"
-              ref={isInViewRef}
-              style={{
-                transform: isInView ? 'none' : 'translateX(200px)',
-                opacity: isInView ? 1 : 0,
-                transition: 'all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
-              }}
-            >
-              <Heading fontSize="1rem" mb="1rem">
-                Ruben is op z’n plekkie bij T-Mobile.
-              </Heading>
-              <Text fontSize="0.8rem" color="gray.200" fontWeight="600">
-                “Ik mocht eerst een opleiding volgen tot JavaScript Vue-expert
-                en kon daarna meteen voor T-Mobile aan de slag.”
-              </Text>
-            </Box>
-          </Grid>
+            Quick Money
+          </Heading>
         </Flex>
-      </Flex>
-    </>
+
+        <Text
+          color={'gray.500'}
+          fontWeight={400}
+          fontSize={{ base: '1xl', sm: '1xl', md: '3xl', lg: '3xl' }}
+        >
+          The World Most Trusted Freelance Website
+        </Text>
+
+        <Stack spacing={6} direction={'row'}>
+          <Button
+            rounded={'full'}
+            px={6}
+            colorScheme={'orange'}
+            bg={'orange.400'}
+            _hover={{ bg: 'orange.500' }}
+          >
+            GET WORKERS
+          </Button>
+          <Button rounded={'full'} px={6}>
+            GET JOBS
+          </Button>
+        </Stack>
+      </Stack>
+    </Center>
   );
 }

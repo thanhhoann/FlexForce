@@ -1,9 +1,10 @@
-import { Button, Center, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, Image, Text, VStack } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeroSection from '../../components/HeroSection';
 import { authActions, userSelect } from '../../slices/authSlice';
 import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
 import { persistUser } from '../../utils/helpers/local-storage.helper';
+import Testimonial from '../../components/Testimonial';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <Testimonial />
       {/* <VStack>
           {user ? (
             <>

@@ -248,11 +248,11 @@ export default function SignIn() {
                           errors.termsOfService && touched.termsOfService
                         }
                       >
-                        <Field as={Checkbox} id="rememberMe" name="rememberMe">
+                        {/* <Field as={Checkbox} id="rememberMe" name="rememberMe">
                           <Text textAlign="start" fontSize="0.8rem">
                             I'm horny
                           </Text>
-                        </Field>
+                        </Field> */}
                       </FormControl>
 
                       {/*  sign in button */}
