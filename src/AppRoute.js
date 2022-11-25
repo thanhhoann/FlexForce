@@ -1,5 +1,11 @@
 import { createStandaloneToast } from '@chakra-ui/toast';
-import { HOME, PAGE404, SIGNIN, SIGNUP } from './utils/route_name';
+import {
+  HOME,
+  PAGE404,
+  SIGNIN,
+  SIGNUP,
+  FIND_WORKERS,
+} from './utils/route_name';
 import {
   BrowserRouter,
   Routes,
@@ -15,6 +21,7 @@ import SignIn from './pages/signin';
 import Home from './pages/home';
 import SignUp from './pages/signup';
 import MainLayout from './components/MainLayout.js';
+import FindWorkers from './pages/find-workers';
 
 export const AppRouteConfig = [
   {
@@ -41,6 +48,12 @@ export const AppRouteConfig = [
     path: PAGE404,
     title: 'Not found',
     component: <PageNotFound />,
+  },
+  {
+    level: 0,
+    path: FIND_WORKERS,
+    title: 'Find Workers',
+    component: <FindWorkers />,
   },
 ];
 

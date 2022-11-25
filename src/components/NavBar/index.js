@@ -294,6 +294,7 @@ const NAV_ITEMS = [
   },
   {
     label: 'Find workers',
+    href: 'find-workers',
     // children: [
     //   {
     //     label: 'children_label 2',
