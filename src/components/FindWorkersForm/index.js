@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Image,
   Progress,
   Box,
   ButtonGroup,
@@ -17,9 +18,22 @@ import {
   Textarea,
   FormHelperText,
   InputRightElement,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+  Center,
+  Text,
+  Spinner,
 } from '@chakra-ui/react';
 
 import { useToast } from '@chakra-ui/react';
+import UserCard from '../UserCard';
+import { LoadingGif } from '../../assets/AssetUtil';
 
 export default function FindWorkersForm({ getBookInfo }) {
   const [typeOfJob, setTypeOfJob] = React.useState('');
@@ -29,6 +43,8 @@ export default function FindWorkersForm({ getBookInfo }) {
   const [description, setDescription] = React.useState('');
 
   const [isDisableBook, setIsDisableBook] = React.useState(true);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
     if (
@@ -42,6 +58,7 @@ export default function FindWorkersForm({ getBookInfo }) {
   }, [description, startTime, streetAddress, transactionMethod, typeOfJob]);
 
   const book = () => {
+    setIsLoading(true);
     const bookInfo = {
       type_of_job: typeOfJob,
       street_address: streetAddress,
@@ -49,7 +66,20 @@ export default function FindWorkersForm({ getBookInfo }) {
       transaction_method: transactionMethod,
       description: description,
     };
-    getBookInfo(bookInfo);
+
+    //     getBookInfo(bookInfo);
+
+    // open modal
+    onOpen();
+
+    setTimeout(() => setIsLoading(false), Math.floor(Math.random() * 3000));
+
+    // reset forms
+    setTypeOfJob('');
+    setStreetAddress('');
+    setStartTime('');
+    setTransactionMethod('');
+    setDescription('');
   };
 
   return (
@@ -203,10 +233,36 @@ export default function FindWorkersForm({ getBookInfo }) {
           />
         </FormControl>
 
-        <Button mt={5} onClick={book} isDisabled={isDisableBook}>
+        <Button mt={5} onClick={book} isDisabled={false}>
           Book now
         </Button>
       </Box>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader></ModalHeader>
+          <ModalBody>
+            {isLoading ? (
+              <Center flexDir="column" mb="2rem">
+                <Image w="20rem" src={LoadingGif} />
+                <Text fontWeight={700} fontSize="2xl">
+                  Finding your match ...
+                </Text>
+              </Center>
+            ) : (
+              <UserCard />
+            )}
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button variant="ghost">Choose</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

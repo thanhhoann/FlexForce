@@ -23,9 +23,9 @@ export default function FindWorkers() {
     console.log(bookInfo);
   }
 
-  React.useEffect(() => {
-    setTimeout(() => onOpen(), 2000);
-  }, [bookInfo]);
+  // React.useEffect(() => {
+  //   setTimeout(() => onOpen(), 2000);
+  // }, [bookInfo]);
 
   return (
     <>
