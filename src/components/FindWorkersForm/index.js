@@ -21,35 +21,47 @@ import {
 
 import { useToast } from '@chakra-ui/react';
 
-export default function FindWorkersForm() {
+export default function FindWorkersForm({ getBookInfo }) {
   const [typeOfJob, setTypeOfJob] = React.useState('');
   const [streetAddress, setStreetAddress] = React.useState('');
-  const [city, setCity] = React.useState('');
   const [transactionMethod, setTransactionMethod] = React.useState('');
+  const [startTime, setStartTime] = React.useState('');
   const [description, setDescription] = React.useState('');
 
-  const toast = useToast();
+  const [isDisableBook, setIsDisableBook] = React.useState(true);
+
+  React.useEffect(() => {
+    if (
+      typeOfJob.length > 0 &&
+      streetAddress.length > 0 &&
+      transactionMethod.length > 0 &&
+      startTime.length > 0
+    )
+      setIsDisableBook(false);
+    else setIsDisableBook(true);
+  }, [description, startTime, streetAddress, transactionMethod, typeOfJob]);
 
   const book = () => {
     const bookInfo = {
       type_of_job: typeOfJob,
       street_address: streetAddress,
-      city: city,
+      start_time: startTime,
       transaction_method: transactionMethod,
       description: description,
     };
-    console.log(bookInfo);
+    getBookInfo(bookInfo);
   };
 
   return (
     <>
-      <Box rounded="lg" maxWidth={800} p={6} m="10px auto" as="form">
+      <Box h="10vh" rounded="lg" maxWidth={800} p={6} m="10px auto" as="form">
         <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
           Hiring Information
         </Heading>
-        <FormControl as={GridItem} colSpan={[6, 3]}>
+
+        {/* type of job */}
+        <FormControl as={GridItem} colSpan={[6, 3]} isRequired>
           <FormLabel
-            htmlFor="country"
             fontSize="sm"
             fontWeight="md"
             color="gray.700"
@@ -60,9 +72,9 @@ export default function FindWorkersForm() {
             Type of job
           </FormLabel>
           <Select
-            id="country"
-            name="country"
-            autoComplete="country"
+            id="type_of_job"
+            name="type_of_job"
+            autoComplete="type-of-job"
             placeholder="Select option"
             focusBorderColor="brand.400"
             shadow="sm"
@@ -80,7 +92,8 @@ export default function FindWorkersForm() {
           </Select>
         </FormControl>
 
-        <FormControl as={GridItem} colSpan={6}>
+        {/* street address */}
+        <FormControl as={GridItem} colSpan={6} isRequired>
           <FormLabel
             htmlFor="street_address"
             fontSize="sm"
@@ -108,9 +121,9 @@ export default function FindWorkersForm() {
           />
         </FormControl>
 
-        <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
+        {/* start time */}
+        <FormControl as={GridItem} colSpan={6} isRequired>
           <FormLabel
-            htmlFor="city"
             fontSize="sm"
             fontWeight="md"
             color="gray.700"
@@ -119,24 +132,25 @@ export default function FindWorkersForm() {
             }}
             mt="2%"
           >
-            City
+            Start Time
           </FormLabel>
           <Input
-            type="text"
-            name="city"
-            id="city"
-            autoComplete="city"
+            type="time"
+            name="start_time"
+            id="start_time"
+            autoComplete="start-time"
             focusBorderColor="brand.400"
             shadow="sm"
             size="sm"
             w="full"
             rounded="md"
-            value={city}
-            onChange={e => setCity(e.target.value)}
+            value={startTime}
+            onChange={e => setStartTime(e.target.value)}
           />
         </FormControl>
 
-        <FormControl as={GridItem} colSpan={[6, 3]} mt="5">
+        {/* transaction method */}
+        <FormControl as={GridItem} colSpan={[6, 3]} mt="5" isRequired>
           <FormLabel
             fontSize="sm"
             fontWeight="md"
@@ -165,6 +179,7 @@ export default function FindWorkersForm() {
           </Select>
         </FormControl>
 
+        {/* description */}
         <FormControl id="description" mt={5}>
           <FormLabel
             fontSize="sm"
@@ -188,7 +203,7 @@ export default function FindWorkersForm() {
           />
         </FormControl>
 
-        <Button mt={5} onClick={book}>
+        <Button mt={5} onClick={book} isDisabled={isDisableBook}>
           Book now
         </Button>
       </Box>
