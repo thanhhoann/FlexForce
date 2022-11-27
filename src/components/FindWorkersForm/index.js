@@ -65,6 +65,8 @@ export default function FindWorkersForm({ getBookInfo }) {
     setTimeout(() => {
       onClose();
       setIsAcceptBooking(false);
+      window.location.reload();
+      window.location.replace('/');
     }, 1500);
   };
 
@@ -245,7 +247,7 @@ export default function FindWorkersForm({ getBookInfo }) {
           />
         </FormControl>
 
-        <Button mt={5} onClick={book} isDisabled={false}>
+        <Button mt={5} onClick={book} isDisabled={isDisableBook}>
           Book now
         </Button>
       </Box>

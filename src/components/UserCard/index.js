@@ -12,15 +12,28 @@ import {
   StackProps,
   Divider,
   useColorModeValue,
+  Badge,
+  List,
+  ListItem,
+  UnorderedList,
 } from '@chakra-ui/react';
+import React from 'react';
 // Here we have used react-icons package for the icons
 import { AiFillGithub } from 'react-icons/ai';
+import sample_users from '../../utils/sample_users.json';
 
 const UserCard = () => {
+  const [profile, setProfle] = React.useState();
+
+  React.useEffect(() => {
+    setProfle(sample_users[Math.floor(Math.random() * 100)]);
+  }, []);
+  console.log(profile);
+
   return (
     <Container maxW="5xl" p={{ base: 5, md: 6 }}>
       <Stack
-        w="17rem"
+        w="23rem"
         spacing={2}
         p={4}
         border="1px solid"
@@ -45,15 +58,39 @@ const UserCard = () => {
           </Box>
         </HStack>
         <chakra.h1 fontSize="xl" fontWeight="bold">
-          Muhammad Ahmad
+          {profile && profile.user_name}
+          <Badge fontSize="0.8rem" fontWeight="bold" ml="0.5rem">
+            ID : {profile && profile.user_id}
+          </Badge>
         </chakra.h1>
         <Text fontSize="md" color="gray.500">
-          Software Engineer, Creator of TemplatesKart
+          {profile && profile.home_address}
         </Text>
         <Divider />
-        <Text fontSize="md" color="gray.500">
-          Sports lover ⚽️, exercise addict 🏋 and lifelong learner 👨🏻‍💻
+        <Text fontWeight={700} fontSize="1.2rem">
+          Past activities
         </Text>
+        <UnorderedList px="1rem">
+          {profile &&
+            profile.work_done.map(({ job_name }, index) => (
+              <ListItem key={index} fontSize="md">
+                {job_name}
+              </ListItem>
+            ))}
+        </UnorderedList>
+
+        <Divider />
+        <Text fontWeight={700} fontSize="1.2rem">
+          Comments
+        </Text>
+        <UnorderedList px="1rem">
+          {profile &&
+            profile.work_log.comment.map((comment, index) => (
+              <ListItem>
+                "{comment.content}" - {comment.user_name}
+              </ListItem>
+            ))}
+        </UnorderedList>
       </Stack>
     </Container>
   );
