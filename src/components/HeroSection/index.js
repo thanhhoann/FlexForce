@@ -12,10 +12,12 @@ import {
   Icon,
   IconProps,
   Image,
+  Link,
 } from '@chakra-ui/react';
 import { motion, useInView } from 'framer-motion';
 import React, { useRef } from 'react';
 import { ArrowDownGif } from '../../assets/AssetUtil';
+import { FIND_WORKERS } from '../../utils/route_name';
 import Testimonial from '../Testimonial';
 
 export default function HeroSection() {
@@ -53,15 +55,17 @@ export default function HeroSection() {
           </Text>
 
           <Stack spacing={6} direction={'row'}>
-            <Button
-              rounded={'full'}
-              px={6}
-              colorScheme={'orange'}
-              bg={'orange.400'}
-              _hover={{ bg: 'orange.500' }}
-            >
-              GET WORKERS
-            </Button>
+            <Link href={FIND_WORKERS}>
+              <Button
+                rounded={'full'}
+                px={6}
+                colorScheme={'orange'}
+                bg={'orange.400'}
+                _hover={{ bg: 'orange.500' }}
+              >
+                GET WORKERS
+              </Button>
+            </Link>
             <Button rounded={'full'} px={6}>
               GET JOBS
             </Button>

@@ -33,7 +33,7 @@ import {
 
 import { useToast } from '@chakra-ui/react';
 import UserCard from '../UserCard';
-import { LoadingGif } from '../../assets/AssetUtil';
+import { LoadingGif, SuccessGif } from '../../assets/AssetUtil';
 
 export default function FindWorkersForm({ getBookInfo }) {
   const [typeOfJob, setTypeOfJob] = React.useState('');
@@ -45,6 +45,7 @@ export default function FindWorkersForm({ getBookInfo }) {
   const [isDisableBook, setIsDisableBook] = React.useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = React.useState(true);
+  const [isAcceptBooking, setIsAcceptBooking] = React.useState(false);
 
   React.useEffect(() => {
     if (
@@ -57,6 +58,16 @@ export default function FindWorkersForm({ getBookInfo }) {
     else setIsDisableBook(true);
   }, [description, startTime, streetAddress, transactionMethod, typeOfJob]);
 
+  const handleAcceptBooking = () => {
+    setIsLoading(false);
+    setIsAcceptBooking(true);
+
+    setTimeout(() => {
+      onClose();
+      setIsAcceptBooking(false);
+    }, 1500);
+  };
+
   const book = () => {
     setIsLoading(true);
     const bookInfo = {
@@ -67,11 +78,10 @@ export default function FindWorkersForm({ getBookInfo }) {
       description: description,
     };
 
-    //     getBookInfo(bookInfo);
-
     // open modal
     onOpen();
 
+    // set loading state
     setTimeout(() => setIsLoading(false), Math.floor(Math.random() * 3000));
 
     // reset forms
@@ -80,6 +90,8 @@ export default function FindWorkersForm({ getBookInfo }) {
     setStartTime('');
     setTransactionMethod('');
     setDescription('');
+
+    // reset accept booking state
   };
 
   return (
@@ -165,7 +177,7 @@ export default function FindWorkersForm({ getBookInfo }) {
             Start Time
           </FormLabel>
           <Input
-            type="time"
+            type="datetime-local"
             name="start_time"
             id="start_time"
             autoComplete="start-time"
@@ -250,17 +262,28 @@ export default function FindWorkersForm({ getBookInfo }) {
                   Finding your match ...
                 </Text>
               </Center>
+            ) : isAcceptBooking ? (
+              <Center>
+                <Image src={SuccessGif} w="10rem" />
+              </Center>
             ) : (
               <UserCard />
             )}
           </ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button variant="ghost">Choose</Button>
-          </ModalFooter>
+          {!isAcceptBooking && (
+            <ModalFooter>
+              <Button colorScheme="red" onClick={onClose}>
+                Deny
+              </Button>
+              <Button colorScheme="orange" mx={3} onClick={onClose}>
+                Negotiate
+              </Button>
+              <Button colorScheme="green" onClick={handleAcceptBooking}>
+                Accept
+              </Button>
+            </ModalFooter>
+          )}
         </ModalContent>
       </Modal>
     </>
