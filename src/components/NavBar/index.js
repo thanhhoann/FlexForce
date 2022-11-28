@@ -31,7 +31,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons';
-import { HOME, SIGNIN, SIGNUP } from '../../utils/route_name';
+import { FIND_WORKERS, HOME, SIGNIN, SIGNUP } from '../../utils/route_name';
 import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
 import { HiOutlineUser } from 'react-icons/hi';
 import { persistUser } from '../../utils/helpers/local-storage.helper';
@@ -165,15 +165,77 @@ export default function NavBar() {
             <DrawerCloseButton />
             <DrawerHeader></DrawerHeader>
             <DrawerBody>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Consequat nisl vel pretium lectus quam id. Semper quis lectus
-                nulla at volutpat diam ut venenatis. Dolor morbi non arcu risus
-                quis varius quam quisque. Massa ultricies mi quis hendrerit
-                dolor magna eget est lorem. Erat imperdiet sed euismod nisi
-                porta. Lectus vestibulum mattis ullamcorper velit.
-              </p>
+              <Center
+                flexDir="column"
+                h="full"
+                fontWeight={700}
+                fontSize="2.5rem"
+              >
+                <Link href="#">Why WiJob</Link>
+                <Link href={FIND_WORKERS}>Find workers</Link>
+                <Link href="#">Contact</Link>
+
+                {persistUser ? (
+                  <Center
+                    color={light_dark}
+                    rounded="0.3rem"
+                    px="0.5rem"
+                    py="0.2rem"
+                    h="full"
+                    w="full"
+                    gap="1rem"
+                  >
+                    <Flex gap="0.5rem" justifyContent="center" align="center">
+                      <HiOutlineUser color="black" />
+                      <Text color="black" fontWeight={700} p="1">
+                        {persistUser.email}
+                      </Text>
+                    </Flex>
+                    <Button
+                      rounded="0.5rem"
+                      bg={dark_light}
+                      p="2"
+                      onClick={handleSignOut}
+                    >
+                      Sign out
+                    </Button>
+                  </Center>
+                ) : (
+                  <>
+                    <Link href={SIGNIN}>
+                      <Button
+                        fontSize={'sm'}
+                        fontWeight={600}
+                        borderWidth={2}
+                        borderColor={dark_light}
+                        color={dark_light}
+                        rounded="0.5rem"
+                        bgColor={light_dark}
+                      >
+                        <Flex align="center" pl={2}>
+                          <Text>Sign in</Text>
+                          <ChevronRightIcon fontSize="1.2rem" />
+                        </Flex>
+                      </Button>
+                    </Link>
+
+                    <Link href={SIGNUP}>
+                      <Button
+                        fontSize={'sm'}
+                        fontWeight={600}
+                        color={light_dark}
+                        bgColor={dark_light}
+                        rounded="0.5rem"
+                      >
+                        <Flex align="center" pl={2}>
+                          <Text>Sign Up</Text>
+                          <ChevronRightIcon fontSize="1.2rem" />
+                        </Flex>
+                      </Button>
+                    </Link>
+                  </>
+                )}
+              </Center>
             </DrawerBody>
           </DrawerContent>
         </Drawer>
