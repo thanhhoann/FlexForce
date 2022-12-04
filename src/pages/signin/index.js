@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleIcon } from '../../assets/AssetUtil';
-import { BsFillPersonFill } from 'react-icons/bs';
+import { BsFillPersonFill, BsX } from 'react-icons/bs';
 import { SIGNUP, HOME } from '../../utils/route_name';
 import { useDispatch } from 'react-redux';
 import {
@@ -286,6 +286,29 @@ export default function SignIn() {
               >
                 <Text>Sign Up</Text>
               </Button>
+              <Box>
+                <div>The number has changed for the rea time indicate</div>
+                <Box w='100px'>
+                  <Box>
+                    <Flex>
+                      The initialValues
+                      <div class="container text-center">
+                        <div class="row">
+                          <div class="col">
+                            Index 1
+                          </div>
+                          <div class="col order-5">
+                            Index 2
+                          </div>
+                          <div class="col order-1">
+                            Index 3
+                          </div>
+                        </div>
+                      </div>
+                    </Flex>
+                  </Box>
+                </Box>
+              </Box>
             </Link>
           </Box>
         </Stack>
