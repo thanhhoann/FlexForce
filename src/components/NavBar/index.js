@@ -71,7 +71,7 @@ export default function NavBar() {
         <Flex align="center" justify="space-between" w="full">
           <Link href={HOME}>
             <Heading>
-              <Image src={LogoImg} />
+              <Image src={LogoImg} rounded="1rem" w="3.5rem" />
             </Heading>
           </Link>
 

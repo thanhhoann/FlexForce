@@ -25,6 +25,9 @@ const AuthSlice = createSlice({
     updateAuthStatus: (state, payload) => {
       state.authStatus = payload.payload;
     },
+    updateUserType: (state, payload) => {
+      state.userType = payload.payload;
+    },
     setUser: (state, payload) => {
       state.authStatus = AuthStatus.AUTHORIZED;
       state.user = payload.payload;

@@ -67,6 +67,12 @@ export default function SignUp() {
     }
   };
 
+  const persistRoot = JSON.parse(localStorage.getItem('persist:root'));
+  const userType = JSON.parse(persistRoot.auth).userType;
+  if (userType === null) {
+    window.location.replace('pick-role');
+  }
+
   return (
     <>
       <Flex align="center" justify="center" mx="1rem">

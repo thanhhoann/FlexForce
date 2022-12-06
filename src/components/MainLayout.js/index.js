@@ -9,7 +9,7 @@ export default function MainLayout({ children }) {
       {/* <ParallaxContainer>  */}
       <NavBar />
       {children}
-      <Footer />
+      {/* <Footer /> */}
       {/* </ParallaxContainer> */}
     </>
   );
