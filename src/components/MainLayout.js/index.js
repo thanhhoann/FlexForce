@@ -6,11 +6,11 @@ import NavBar from '../NavBar';
 export default function MainLayout({ children }) {
   return (
     <>
-      <ParallaxContainer>
-        <NavBar />
-        {children}
-        {/* <Footer /> */}
-      </ParallaxContainer>
+      {/* <ParallaxContainer>  */}
+      <NavBar />
+      {children}
+      <Footer />
+      {/* </ParallaxContainer> */}
     </>
   );
 }

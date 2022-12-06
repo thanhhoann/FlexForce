@@ -23,7 +23,7 @@ import Testimonial from '../Testimonial';
 export default function HeroSection() {
   return (
     <>
-      <Center h="75vh">
+      <Center h="100vh" px="1rem">
         <Stack
           textAlign={'center'}
           align={'center'}
@@ -54,7 +54,7 @@ export default function HeroSection() {
             The World Most Trusted Freelance Website
           </Text>
 
-          <Stack spacing={6} direction={'row'}>
+          <Stack spacing={3} direction={'row'}>
             <Link href={FIND_WORKERS}>
               <Button
                 rounded={'full'}
@@ -63,19 +63,19 @@ export default function HeroSection() {
                 bg={'orange.400'}
                 _hover={{ bg: 'orange.500' }}
               >
-                GET WORKERS
+                FIND WORKERS
               </Button>
             </Link>
             <Button rounded={'full'} px={6}>
-              GET JOBS
+              TAKE JOBS
             </Button>
           </Stack>
         </Stack>
       </Center>
 
-      <Center>
+      {/* <Center>
         <Image w="5rem" src={ArrowDownGif} />
-      </Center>
+      </Center> */}
     </>
   );
 }

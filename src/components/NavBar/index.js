@@ -8,6 +8,7 @@ import {
   Collapse,
   Icon,
   Link,
+  Divider,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -24,6 +25,13 @@ import {
   DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
+  Menu,
+  MenuButton,
+  Avatar,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  MenuGroup,
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -87,19 +95,47 @@ export default function NavBar() {
                   gap="1rem"
                 >
                   <Flex gap="0.5rem" justifyContent="center" align="center">
-                    <HiOutlineUser color="black" />
-                    <Text color="black" fontWeight={700} p="1">
-                      {persistUser.email}
-                    </Text>
+                    <Flex alignItems={'center'}>
+                      <Menu>
+                        <MenuButton
+                          as={Button}
+                          rounded={'full'}
+                          variant={'link'}
+                          cursor={'pointer'}
+                          minW={0}
+                        >
+                          <Avatar size={'sm'} />
+                        </MenuButton>
+                        <MenuList>
+                          <MenuGroup color="black" title={persistUser.email}>
+                            {/* <Text
+                              color="black"
+                              fontWeight={700}
+                              p="1"
+                              minW="10rem"
+                              _hover={{ fontWeight: '900' }}
+                              cursor="pointer"
+                            >
+                              {persistUser.email}
+                            </Text> */}
+                            <MenuItem color="black">User profile</MenuItem>
+                            <MenuDivider />
+                            <MenuItem _hover={{ bg: 'none' }}>
+                              <Button
+                                rounded="0.5rem"
+                                bg={dark_light}
+                                p="2"
+                                onClick={handleSignOut}
+                                _hover={{ bg: 'gray.500' }}
+                              >
+                                Sign out
+                              </Button>
+                            </MenuItem>
+                          </MenuGroup>
+                        </MenuList>
+                      </Menu>
+                    </Flex>
                   </Flex>
-                  <Button
-                    rounded="0.5rem"
-                    bg={dark_light}
-                    p="2"
-                    onClick={handleSignOut}
-                  >
-                    Sign out
-                  </Button>
                 </Center>
               ) : (
                 <>
@@ -175,6 +211,8 @@ export default function NavBar() {
                 <Link href={FIND_WORKERS}>Find workers</Link>
                 <Link href="#">Contact</Link>
 
+                <Divider />
+
                 {persistUser ? (
                   <Center
                     color={light_dark}
@@ -185,12 +223,6 @@ export default function NavBar() {
                     w="full"
                     gap="1rem"
                   >
-                    <Flex gap="0.5rem" justifyContent="center" align="center">
-                      <HiOutlineUser color="black" />
-                      <Text color="black" fontWeight={700} p="1">
-                        {persistUser.email}
-                      </Text>
-                    </Flex>
                     <Button
                       rounded="0.5rem"
                       bg={dark_light}

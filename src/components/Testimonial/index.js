@@ -8,6 +8,7 @@ import {
   Container,
   Avatar,
   useColorModeValue,
+  Center,
 } from '@chakra-ui/react';
 
 const Testimonial = ({ children }) => {
@@ -71,9 +72,9 @@ const TestimonialAvatar = ({ src, name, title }) => {
       <Avatar src={src} alt={name} mb={2} />
       <Stack spacing={-1} align={'center'}>
         <Text fontWeight={600}>{name}</Text>
-        <Text fontSize={'sm'} color={useColorModeValue('gray.600', 'gray.400')}>
+        {/* <Text fontSize={'sm'} color={useColorModeValue('gray.600', 'gray.400')}>
           {title}
-        </Text>
+        </Text> */}
       </Stack>
     </Flex>
   );
@@ -81,8 +82,8 @@ const TestimonialAvatar = ({ src, name, title }) => {
 
 export default function WithSpeechBubbles() {
   return (
-    <Box>
-      <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
+    <Center h="100vh">
+      <Container maxW={'7xl'} my="5rem" as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
           <Heading>Our Clients Speak</Heading>
           <Text>We have been working with clients around the world</Text>
@@ -100,11 +101,8 @@ export default function WithSpeechBubbles() {
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={
-                'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-              }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              src={'https://bit.ly/dan-abramov'}
+              name={'Dan Abarmov'}
             />
           </Testimonial>
           <Testimonial>
@@ -116,11 +114,8 @@ export default function WithSpeechBubbles() {
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={
-                'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-              }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              src={'https://bit.ly/kent-c-dodds'}
+              name={'Kent Dodds'}
             />
           </Testimonial>
           <Testimonial>
@@ -132,15 +127,12 @@ export default function WithSpeechBubbles() {
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={
-                'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-              }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              src={'https://bit.ly/sage-adebayo'}
+              name={'Sage Adebayo'}
             />
           </Testimonial>
         </Stack>
       </Container>
-    </Box>
+    </Center>
   );
 }

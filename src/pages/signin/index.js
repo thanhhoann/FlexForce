@@ -82,6 +82,10 @@ export default function SignIn() {
     // }
   };
 
+  const persistRoot = JSON.parse(localStorage.getItem('persist:root'));
+  const authStatus = JSON.parse(persistRoot.auth);
+  console.log(authStatus);
+
   return (
     <>
       <Flex align="center" justify="center" mx="1rem">

@@ -29,6 +29,8 @@ import {
   Center,
   Text,
   Spinner,
+  InputLeftElement,
+  InputRightAddon,
 } from '@chakra-ui/react';
 
 import { useToast } from '@chakra-ui/react';
@@ -41,6 +43,9 @@ export default function FindWorkersForm({ getBookInfo }) {
   const [transactionMethod, setTransactionMethod] = React.useState('');
   const [startTime, setStartTime] = React.useState('');
   const [description, setDescription] = React.useState('');
+  const [totalWorkingHours, setTotalWorkingHours] = React.useState();
+  const [salaryPerHour, setSalaryPerHour] = React.useState();
+  const [totalSalary, setTotalSalary] = React.useState();
 
   const [isDisableBook, setIsDisableBook] = React.useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -98,7 +103,7 @@ export default function FindWorkersForm({ getBookInfo }) {
 
   return (
     <>
-      <Box h="10vh" rounded="lg" maxWidth={800} p={6} m="10px auto" as="form">
+      <Box rounded="lg" maxWidth={800} p={6} m="10px auto" as="form">
         <Heading w="100%" textAlign={'center'} fontWeight="normal" mb="2%">
           Hiring Information
         </Heading>
@@ -106,7 +111,7 @@ export default function FindWorkersForm({ getBookInfo }) {
         {/* type of job */}
         <FormControl as={GridItem} colSpan={[6, 3]} isRequired>
           <FormLabel
-            fontSize="sm"
+            font
             fontWeight="md"
             color="gray.700"
             _dark={{
@@ -122,7 +127,6 @@ export default function FindWorkersForm({ getBookInfo }) {
             placeholder="Select option"
             focusBorderColor="brand.400"
             shadow="sm"
-            size="sm"
             w="full"
             rounded="md"
             value={typeOfJob}
@@ -140,7 +144,7 @@ export default function FindWorkersForm({ getBookInfo }) {
         <FormControl as={GridItem} colSpan={6} isRequired>
           <FormLabel
             htmlFor="street_address"
-            fontSize="sm"
+            font
             fontWeight="md"
             color="gray.700"
             _dark={{
@@ -157,7 +161,6 @@ export default function FindWorkersForm({ getBookInfo }) {
             autoComplete="street-address"
             focusBorderColor="brand.400"
             shadow="sm"
-            size="sm"
             w="full"
             rounded="md"
             value={streetAddress}
@@ -168,7 +171,7 @@ export default function FindWorkersForm({ getBookInfo }) {
         {/* start time */}
         <FormControl as={GridItem} colSpan={6} isRequired>
           <FormLabel
-            fontSize="sm"
+            font
             fontWeight="md"
             color="gray.700"
             _dark={{
@@ -185,7 +188,6 @@ export default function FindWorkersForm({ getBookInfo }) {
             autoComplete="start-time"
             focusBorderColor="brand.400"
             shadow="sm"
-            size="sm"
             w="full"
             rounded="md"
             value={startTime}
@@ -193,10 +195,105 @@ export default function FindWorkersForm({ getBookInfo }) {
           />
         </FormControl>
 
+        {/* total working hours */}
+        <FormControl as={GridItem} colSpan={6} isRequired>
+          <FormLabel
+            font
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: 'gray.50',
+            }}
+            mt="2%"
+          >
+            Total Working Hours
+          </FormLabel>
+          <InputGroup>
+            <Input
+              type="number"
+              name="total_working_hours"
+              id="total_working_hours"
+              focusBorderColor="brand.400"
+              shadow="sm"
+              w="full"
+              rounded="md"
+              value={totalWorkingHours}
+              onChange={e => setTotalWorkingHours(e.target.value)}
+            />
+            <InputRightAddon children="hours" />
+          </InputGroup>
+        </FormControl>
+
+        {/* salary per hour */}
+        <FormControl as={GridItem} colSpan={6} isRequired>
+          <FormLabel
+            font
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: 'gray.50',
+            }}
+            mt="2%"
+          >
+            Salary Per Hour
+          </FormLabel>
+          <InputGroup>
+            <InputLeftElement
+              pointerEvents="none"
+              fontSize="1.1rem"
+              children="$"
+            />
+            <Input
+              type="number"
+              name="salay_per_hour"
+              id="salay_per_hour"
+              focusBorderColor="brand.400"
+              shadow="sm"
+              w="full"
+              rounded="md"
+              value={salaryPerHour}
+              onChange={e => setSalaryPerHour(e.target.value)}
+            />
+          </InputGroup>
+        </FormControl>
+
+        {/* total salary */}
+        <FormControl as={GridItem} colSpan={6} isRequired>
+          <FormLabel
+            font
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: 'gray.50',
+            }}
+            mt="2%"
+          >
+            Total Salary
+          </FormLabel>
+          <InputGroup>
+            <InputLeftElement
+              pointerEvents="none"
+              fontSize="1.1rem"
+              children="$"
+            />
+            <Input
+              type="number"
+              name="total_salary"
+              id="total_salary"
+              focusBorderColor="brand.400"
+              shadow="sm"
+              w="full"
+              rounded="md"
+              value={totalSalary}
+              onChange={e => setTotalSalary(e.target.value)}
+            />
+          </InputGroup>
+        </FormControl>
+
         {/* transaction method */}
         <FormControl as={GridItem} colSpan={[6, 3]} mt="5" isRequired>
           <FormLabel
-            fontSize="sm"
+            font
             fontWeight="md"
             color="gray.700"
             _dark={{
@@ -212,7 +309,6 @@ export default function FindWorkersForm({ getBookInfo }) {
             placeholder="Select option"
             focusBorderColor="brand.400"
             shadow="sm"
-            size="sm"
             w="full"
             rounded="md"
             value={transactionMethod}
@@ -226,7 +322,7 @@ export default function FindWorkersForm({ getBookInfo }) {
         {/* description */}
         <FormControl id="description" mt={5}>
           <FormLabel
-            fontSize="sm"
+            font
             fontWeight="md"
             color="gray.700"
             _dark={{
@@ -275,15 +371,14 @@ export default function FindWorkersForm({ getBookInfo }) {
 
           {!isAcceptBooking && (
             <ModalFooter>
-              <Button colorScheme="red" onClick={onClose}>
-                Deny
-              </Button>
-              <Button colorScheme="orange" mx={3} onClick={onClose}>
-                Negotiate
-              </Button>
-              <Button colorScheme="green" onClick={handleAcceptBooking}>
-                Accept
-              </Button>
+              <Center w="full" mx="2rem" gap="3rem">
+                <Button colorScheme="red" onClick={onClose}>
+                  Deny
+                </Button>
+                <Button colorScheme="green" onClick={handleAcceptBooking}>
+                  Accept
+                </Button>
+              </Center>
             </ModalFooter>
           )}
         </ModalContent>
