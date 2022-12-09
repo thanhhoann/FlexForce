@@ -16,15 +16,15 @@ import {
 
 const AppTheme = extendTheme({
   fonts: {
-    heading: 'Montserrat, sans-serif',
-    body: 'Montserrat, sans-serif',
+    heading: `'Open Sans', sans-serif`,
+    body: `'Open Sans', sans-serif`,
   },
   colors: {
     light: {
       primary: '#FFFFFF',
       background: '#F5F5F5',
       header_orange: '#F8503C',
-      header_blue: '#A0B8FF'
+      header_blue: '#A0B8FF',
     },
     dark: {
       primary: '#151b2b',
