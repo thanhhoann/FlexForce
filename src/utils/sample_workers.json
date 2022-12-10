@@ -1,0 +1,22 @@
+[
+  {
+    "type_of_job": "Presence Hiring",
+    "street_address": "95 Đường 13B Phường Bình Trị Đông B, Quận Bình Tân",
+    "start_time": ["12-07-2002", "12:07", "AM"],
+    "total_working_hours": 5,
+    "salary_per_hour": 15,
+    "total_salary": 75,
+    "transaction_method": "Paypal",
+    "description": "work till day gets dark"
+  },
+  {
+    "type_of_job": "Presence Hiring",
+    "street_address": "95 Đường 13B Phường Bình Trị Đông B, Quận Bình Tân",
+    "start_time": ["12-07-2002", "12:07", "AM"],
+    "total_working_hours": 5,
+    "salary_per_hour": 15,
+    "total_salary": 75,
+    "transaction_method": "Paypal",
+    "description": "work till day gets dark"
+  }
+]
