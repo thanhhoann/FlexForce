@@ -35,7 +35,12 @@ import {
 
 import { useToast } from '@chakra-ui/react';
 import UserCard from '../UserCard';
-import { LoadingGif, SuccessGif } from '../../assets/AssetUtil';
+import {
+  CheckSvg,
+  FindSvg,
+  LoadingGif,
+  SuccessGif,
+} from '../../assets/AssetUtil';
 
 export default function FindWorkersForm({ getBookInfo }) {
   const [typeOfJob, setTypeOfJob] = React.useState('');
@@ -355,14 +360,13 @@ export default function FindWorkersForm({ getBookInfo }) {
           <ModalBody>
             {isLoading ? (
               <Center flexDir="column" mb="2rem">
-                <Image w="20rem" src={LoadingGif} />
                 <Text fontWeight={700} fontSize="2xl">
                   Finding your match ...
                 </Text>
               </Center>
             ) : isAcceptBooking ? (
-              <Center>
-                <Image src={SuccessGif} w="10rem" />
+              <Center p="1rem">
+                <Image src={CheckSvg} w="10rem" />
               </Center>
             ) : (
               <UserCard />

@@ -10,3 +10,5 @@ export { default as SuccessGif } from './gifs/success.gif';
 // svg
 export { default as LogoImg } from './imgs/logo.svg';
 export { default as MapSvg } from './imgs/Maps.svg';
+export { default as CheckSvg } from './icons/check.svg';
+export { default as FindSvg } from './icons/find.svg';
