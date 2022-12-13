@@ -24,12 +24,12 @@ export default function TakeJobs() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isAccept, setIsAccept] = React.useState(false);
   const [noWorkers, setNoWorkers] = React.useState(100);
-  const [startIndex, setStartIndex] = React.useState(0);
+  let [startIndex, setStartIndex] = React.useState(0);
   const [modifiedList, setModifiedList] = React.useState();
 
-  // React.useEffect(() => {
-  //   setModifiedList(jobs.slice(startIndex, 100));
-  // }, []);
+  React.useEffect(() => {
+    setStartIndex(startIndex++);
+  }, [startIndex]);
 
   // const handleDeny = () => {
   //   setStartIndex(startIndex => startIndex++);
@@ -63,7 +63,7 @@ export default function TakeJobs() {
         right="3rem"
         overflow="scroll"
       >
-        {jobs.slice(0, 100).map((job, index) => (
+        {jobs.slice(startIndex, 100).map((job, index) => (
           <Stack
             p="1rem"
             rounded="10px"
@@ -103,7 +103,12 @@ export default function TakeJobs() {
               content={job.description}
             />
             <Center w="full" mx="2rem" gap="3rem">
-              <Button colorScheme="red">Deny</Button>
+              <Button
+                colorScheme="red"
+                onClick={() => setStartIndex(startIndex++)}
+              >
+                Deny
+              </Button>
               <Button colorScheme="green" onClick={handleAccept}>
                 Accept
               </Button>
@@ -112,7 +117,7 @@ export default function TakeJobs() {
         ))}
       </Flex>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader></ModalHeader>
