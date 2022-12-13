@@ -258,7 +258,7 @@ export default function FindWorkersForm({ getBookInfo }) {
         </FormControl>
 
         {/* total salary */}
-        <FormControl as={GridItem} colSpan={6} isRequired>
+        <FormControl as={GridItem} colSpan={6} isReadOnly>
           <FormLabel
             font
             fontWeight="md"
@@ -284,7 +284,7 @@ export default function FindWorkersForm({ getBookInfo }) {
               shadow="sm"
               w="full"
               rounded="md"
-              value={totalSalary}
+              value={totalWorkingHours * salaryPerHour}
               onChange={e => setTotalSalary(e.target.value)}
             />
           </InputGroup>

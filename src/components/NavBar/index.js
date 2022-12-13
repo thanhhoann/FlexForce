@@ -45,6 +45,7 @@ import {
   SIGNIN,
   SIGNUP,
   TAKE_JOBS,
+  USER_PROFILE,
 } from '../../utils/route_name';
 import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
 import { HiOutlineUser } from 'react-icons/hi';
@@ -113,7 +114,7 @@ export default function NavBar() {
                         >
                           <Avatar size={'sm'} />
                         </MenuButton>
-                        <MenuList>
+                        <MenuList zIndex={2}>
                           <MenuGroup color="black" title={persistUser.email}>
                             {/* <Text
                               color="black"
@@ -125,7 +126,9 @@ export default function NavBar() {
                             >
                               {persistUser.email}
                             </Text> */}
-                            <MenuItem color="black">User profile</MenuItem>
+                            <MenuItem color="black">
+                              <Link href={USER_PROFILE}>User profile</Link>
+                            </MenuItem>
                             <MenuDivider />
                             <MenuItem _hover={{ bg: 'none' }}>
                               <Button

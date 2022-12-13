@@ -7,6 +7,7 @@ import {
   FIND_WORKERS,
   PICK_ROLE,
   TAKE_JOBS,
+  USER_PROFILE,
 } from './utils/route_name';
 import {
   BrowserRouter,
@@ -26,6 +27,7 @@ import MainLayout from './components/MainLayout.js';
 import FindWorkers from './pages/find-workers';
 import PickRole from './pages/pick-role';
 import TakeJobs from './pages/take-jobs';
+import UserProfile from './pages/user-profile';
 
 export const AppRouteConfig = [
   {
@@ -64,6 +66,12 @@ export const AppRouteConfig = [
     path: TAKE_JOBS,
     title: 'Take Jobs',
     component: <TakeJobs />,
+  },
+  {
+    level: 0,
+    path: USER_PROFILE,
+    title: 'User Profile',
+    component: <UserProfile />,
   },
   {
     level: 0,
