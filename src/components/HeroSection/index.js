@@ -17,7 +17,7 @@ import {
 import { motion, useInView } from 'framer-motion';
 import React, { useRef } from 'react';
 import { ArrowDownGif } from '../../assets/AssetUtil';
-import { FIND_WORKERS } from '../../utils/route_name';
+import { FIND_WORKERS, TAKE_JOBS } from '../../utils/route_name';
 import Testimonial from '../Testimonial';
 
 export default function HeroSection() {
@@ -66,9 +66,12 @@ export default function HeroSection() {
                 FIND WORKERS
               </Button>
             </Link>
-            <Button rounded={'full'} px={6}>
-              TAKE JOBS
-            </Button>
+
+            <Link href={TAKE_JOBS}>
+              <Button rounded={'full'} px={6}>
+                TAKE JOBS
+              </Button>
+            </Link>
           </Stack>
         </Stack>
       </Center>

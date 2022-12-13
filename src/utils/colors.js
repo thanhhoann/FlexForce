@@ -11,3 +11,6 @@ export const sunsetOrange = '#ff5151';
 export const pippin = '#FFE5E5';
 
 export const poolWater = '#0083ef';
+
+export const neonCarrot = '#fb9c15';
+export const royalPurple = '#390b73';

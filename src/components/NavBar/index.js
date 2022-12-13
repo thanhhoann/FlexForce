@@ -39,11 +39,18 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons';
-import { FIND_WORKERS, HOME, SIGNIN, SIGNUP } from '../../utils/route_name';
+import {
+  FIND_WORKERS,
+  HOME,
+  SIGNIN,
+  SIGNUP,
+  TAKE_JOBS,
+} from '../../utils/route_name';
 import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
 import { HiOutlineUser } from 'react-icons/hi';
 import { persistUser } from '../../utils/helpers/local-storage.helper';
 import { LogoImg } from '../../assets/AssetUtil';
+import { royalPurple } from '../../utils/colors';
 
 export default function NavBar() {
   const [isLaptop] = useMediaQuery('(min-width: 1024px)');
@@ -61,7 +68,7 @@ export default function NavBar() {
   return (
     <Box>
       <Flex
-        bg={useColorModeValue('light.background', 'dark.background')}
+        bg="white"
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         py={{ base: 2 }}
@@ -278,7 +285,7 @@ export default function NavBar() {
 
 const DesktopNav = () => {
   const prefixLinkColor = useColorModeValue('gray.400', 'gray.100');
-  const linkColor = useColorModeValue('gray.800', 'gray.200');
+  const linkColor = 'black';
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
@@ -373,48 +380,16 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 const NAV_ITEMS = [
   {
     label: 'Why WiJob',
-    // children: [
-    //   {
-    //     label: 'children_label 2',
-    //     subLabel: 'children_sub-label 2',
-    //     href: '#',
-    //   },
-    //   {
-    //     label: 'children_label 2',
-    //     subLabel: 'children_sub-label 2',
-    //     href: '#',
-    //   },
-    // ],
   },
   {
     label: 'Find workers',
-    href: 'find-workers',
-    // children: [
-    //   {
-    //     label: 'children_label 2',
-    //     subLabel: 'children_sub-label 2',
-    //     href: '#',
-    //   },
-    //   {
-    //     label: 'children_label 2',
-    //     subLabel: 'children_sub-label 2',
-    //     href: '#',
-    //   },
-    // ],
+    href: FIND_WORKERS,
+  },
+  {
+    label: 'Take jobs',
+    href: TAKE_JOBS,
   },
   {
     label: 'Contact',
-    // children: [
-    //   {
-    //     label: 'children_label 1',
-    //     subLabel: 'children_sub-label 1',
-    //     href: '#',
-    //   },
-    //   {
-    //     label: 'children_label 1',
-    //     subLabel: 'children_sub-label 1',
-    //     href: '#',
-    //   },
-    // ],
   },
 ];
