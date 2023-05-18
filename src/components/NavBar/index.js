@@ -1,44 +1,44 @@
 import {
+  Avatar,
   Box,
-  Flex,
-  Text,
-  IconButton,
   Button,
-  Stack,
-  Collapse,
-  Icon,
-  Link,
-  Divider,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  useColorModeValue,
-  useBreakpointValue,
-  useDisclosure,
-  Heading,
-  useMediaQuery,
   Center,
-  Image,
+  Collapse,
+  Divider,
   Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
   DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
+  Heading,
+  Icon,
+  IconButton,
+  Image,
+  Link,
   Menu,
   MenuButton,
-  Avatar,
-  MenuList,
-  MenuItem,
   MenuDivider,
   MenuGroup,
-} from '@chakra-ui/react';
+  MenuItem,
+  MenuList,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Stack,
+  Text,
+  useBreakpointValue,
+  useColorModeValue,
+  useDisclosure,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import {
-  HamburgerIcon,
-  CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from '@chakra-ui/icons';
+  CloseIcon,
+  HamburgerIcon,
+} from "@chakra-ui/icons";
 import {
   FIND_WORKERS,
   HOME,
@@ -46,35 +46,38 @@ import {
   SIGNUP,
   TAKE_JOBS,
   USER_PROFILE,
-} from '../../utils/route_name';
-import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
-import { HiOutlineUser } from 'react-icons/hi';
-import { persistUser } from '../../utils/helpers/local-storage.helper';
-import { LogoImg } from '../../assets/AssetUtil';
-import { royalPurple } from '../../utils/colors';
+} from "../../utils/route_name";
+import { ColorModeSwitcher } from "../../utils/helpers/color-mode.helper";
+import { HiOutlineUser } from "react-icons/hi";
+import { persistUser } from "../../utils/helpers/local-storage.helper";
+import { LogoImg } from "../../assets/AssetUtil";
+import { royalPurple } from "../../utils/colors";
 
 export default function NavBar() {
-  const [isLaptop] = useMediaQuery('(min-width: 1024px)');
+  const [isLaptop] = useMediaQuery("(min-width: 1024px)");
+  const role = localStorage.getItem("role");
 
-  const light_dark = useColorModeValue('light.primary', 'dark.primary');
-  const dark_light = useColorModeValue('dark.primary', 'light.primary');
+  const light_dark = useColorModeValue("light.primary", "dark.primary");
+  const dark_light = useColorModeValue("dark.primary", "light.primary");
 
   const { isOpen, onClose, onToggle } = useDisclosure();
 
   const handleSignOut = () => {
-    localStorage.removeItem('persist:root');
+    localStorage.removeItem("role");
+    localStorage.removeItem("persist:root");
     window.location.reload();
+    window.location.replace(SIGNIN);
   };
 
   return (
     <Box>
       <Flex
         bg="white"
-        color={useColorModeValue('gray.600', 'white')}
-        minH={'60px'}
+        color={useColorModeValue("gray.600", "white")}
+        minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        align={'center'}
+        align={"center"}
       >
         <Flex align="center" justify="space-between" w="full">
           <Link href={HOME}>
@@ -92,31 +95,33 @@ export default function NavBar() {
           <Flex gap={2} align="center">
             {/* <ColorModeSwitcher w="1rem" h="1rem" rounded={4} mr="1rem" /> */}
             {isLaptop &&
-              (persistUser ? (
-                <Center
-                  color={light_dark}
-                  rounded="0.3rem"
-                  px="0.5rem"
-                  py="0.2rem"
-                  h="full"
-                  w="full"
-                  gap="1rem"
-                >
-                  <Flex gap="0.5rem" justifyContent="center" align="center">
-                    <Flex alignItems={'center'}>
-                      <Menu>
-                        <MenuButton
-                          as={Button}
-                          rounded={'full'}
-                          variant={'link'}
-                          cursor={'pointer'}
-                          minW={0}
-                        >
-                          <Avatar size={'sm'} />
-                        </MenuButton>
-                        <MenuList zIndex={2}>
-                          <MenuGroup color="black" title={persistUser.email}>
-                            {/* <Text
+              (persistUser
+                ? (
+                  <Center
+                    color={light_dark}
+                    rounded="0.3rem"
+                    px="0.5rem"
+                    py="0.2rem"
+                    h="full"
+                    w="full"
+                    gap="1rem"
+                  >
+                    <Flex gap="0.5rem" justifyContent="center" align="center">
+                      <Flex alignItems={"center"}>
+                        <Menu>
+                          <MenuButton
+                            as={Button}
+                            rounded={"full"}
+                            variant={"link"}
+                            cursor={"pointer"}
+                            minW={0}
+                          >
+                            <Avatar size={"sm"} />
+                          </MenuButton>
+                          <MenuList zIndex={2}>
+                            <MenuGroup color="black" title={persistUser.email}>
+                              {
+                                /* <Text
                               color="black"
                               fontWeight={700}
                               p="1"
@@ -125,80 +130,82 @@ export default function NavBar() {
                               cursor="pointer"
                             >
                               {persistUser.email}
-                            </Text> */}
-                            <MenuItem color="black">
-                              <Link href={USER_PROFILE}>User profile</Link>
-                            </MenuItem>
-                            <MenuDivider />
-                            <MenuItem _hover={{ bg: 'none' }}>
-                              <Button
-                                rounded="0.5rem"
-                                bg={dark_light}
-                                p="2"
-                                onClick={handleSignOut}
-                                _hover={{ bg: 'gray.500' }}
-                              >
-                                Sign out
-                              </Button>
-                            </MenuItem>
-                          </MenuGroup>
-                        </MenuList>
-                      </Menu>
+                            </Text> */
+                              }
+                              <MenuItem color="black">
+                                <Link href={USER_PROFILE}>User profile</Link>
+                              </MenuItem>
+                              <MenuDivider />
+                              <MenuItem _hover={{ bg: "none" }}>
+                                <Button
+                                  rounded="0.5rem"
+                                  bg={dark_light}
+                                  p="2"
+                                  onClick={handleSignOut}
+                                  _hover={{ bg: "gray.500" }}
+                                >
+                                  Sign out
+                                </Button>
+                              </MenuItem>
+                            </MenuGroup>
+                          </MenuList>
+                        </Menu>
+                      </Flex>
                     </Flex>
-                  </Flex>
-                </Center>
-              ) : (
-                <>
-                  <Link href={SIGNIN}>
-                    <Button
-                      fontSize={'sm'}
-                      fontWeight={600}
-                      borderWidth={2}
-                      borderColor={dark_light}
-                      color={dark_light}
-                      rounded="0.5rem"
-                      bgColor={light_dark}
-                    >
-                      <Flex align="center" pl={2}>
-                        <Text>Sign in</Text>
-                        <ChevronRightIcon fontSize="1.2rem" />
-                      </Flex>
-                    </Button>
-                  </Link>
+                  </Center>
+                )
+                : (
+                  <>
+                    <Link href={SIGNIN}>
+                      <Button
+                        fontSize={"sm"}
+                        fontWeight={600}
+                        borderWidth={2}
+                        borderColor={dark_light}
+                        color={dark_light}
+                        rounded="0.5rem"
+                        bgColor={light_dark}
+                      >
+                        <Flex align="center" pl={2}>
+                          <Text>Sign in</Text>
+                          <ChevronRightIcon fontSize="1.2rem" />
+                        </Flex>
+                      </Button>
+                    </Link>
 
-                  <Link href={SIGNUP}>
-                    <Button
-                      fontSize={'sm'}
-                      fontWeight={600}
-                      color={light_dark}
-                      bgColor={dark_light}
-                      rounded="0.5rem"
-                    >
-                      <Flex align="center" pl={2}>
-                        <Text>Sign Up</Text>
-                        <ChevronRightIcon fontSize="1.2rem" />
-                      </Flex>
-                    </Button>
-                  </Link>
-                </>
-              ))}
+                    <Link href={SIGNUP}>
+                      <Button
+                        fontSize={"sm"}
+                        fontWeight={600}
+                        color={light_dark}
+                        bgColor={dark_light}
+                        rounded="0.5rem"
+                      >
+                        <Flex align="center" pl={2}>
+                          <Text>Sign Up</Text>
+                          <ChevronRightIcon fontSize="1.2rem" />
+                        </Flex>
+                      </Button>
+                    </Link>
+                  </>
+                ))}
           </Flex>
         </Flex>
 
         {!isLaptop && (
           <Flex
-            flex={{ base: 1, md: 'auto' }}
+            flex={{ base: 1, md: "auto" }}
             ml={{ base: -2 }}
-            display={{ sm: 'flex', md: 'flex', lg: 'none' }}
+            display={{ sm: "flex", md: "flex", lg: "none" }}
           >
             <IconButton
               onClick={onToggle}
               w="fit-content"
               rounded="0.2rem"
-              _active={{ bg: 'none' }}
+              _active={{ bg: "none" }}
               icon={<HamburgerIcon w={5} h={5} />}
-              variant={'ghost'}
-              aria-label={'Toggle Navigation'}
+              variant={"ghost"}
+              aria-label={"Toggle Navigation"}
             />
           </Flex>
         )}
@@ -223,60 +230,62 @@ export default function NavBar() {
 
                 <Divider />
 
-                {persistUser ? (
-                  <Center
-                    color={light_dark}
-                    rounded="0.3rem"
-                    px="0.5rem"
-                    py="0.2rem"
-                    h="full"
-                    w="full"
-                    gap="1rem"
-                  >
-                    <Button
-                      rounded="0.5rem"
-                      bg={dark_light}
-                      p="2"
-                      onClick={handleSignOut}
+                {persistUser
+                  ? (
+                    <Center
+                      color={light_dark}
+                      rounded="0.3rem"
+                      px="0.5rem"
+                      py="0.2rem"
+                      h="full"
+                      w="full"
+                      gap="1rem"
                     >
-                      Sign out
-                    </Button>
-                  </Center>
-                ) : (
-                  <>
-                    <Link href={SIGNIN}>
                       <Button
-                        fontSize={'sm'}
-                        fontWeight={600}
-                        borderWidth={2}
-                        borderColor={dark_light}
-                        color={dark_light}
                         rounded="0.5rem"
-                        bgColor={light_dark}
+                        bg={dark_light}
+                        p="2"
+                        onClick={handleSignOut}
                       >
-                        <Flex align="center" pl={2}>
-                          <Text>Sign in</Text>
-                          <ChevronRightIcon fontSize="1.2rem" />
-                        </Flex>
+                        Sign out
                       </Button>
-                    </Link>
+                    </Center>
+                  )
+                  : (
+                    <>
+                      <Link href={SIGNIN}>
+                        <Button
+                          fontSize={"sm"}
+                          fontWeight={600}
+                          borderWidth={2}
+                          borderColor={dark_light}
+                          color={dark_light}
+                          rounded="0.5rem"
+                          bgColor={light_dark}
+                        >
+                          <Flex align="center" pl={2}>
+                            <Text>Sign in</Text>
+                            <ChevronRightIcon fontSize="1.2rem" />
+                          </Flex>
+                        </Button>
+                      </Link>
 
-                    <Link href={SIGNUP}>
-                      <Button
-                        fontSize={'sm'}
-                        fontWeight={600}
-                        color={light_dark}
-                        bgColor={dark_light}
-                        rounded="0.5rem"
-                      >
-                        <Flex align="center" pl={2}>
-                          <Text>Sign Up</Text>
-                          <ChevronRightIcon fontSize="1.2rem" />
-                        </Flex>
-                      </Button>
-                    </Link>
-                  </>
-                )}
+                      <Link href={SIGNUP}>
+                        <Button
+                          fontSize={"sm"}
+                          fontWeight={600}
+                          color={light_dark}
+                          bgColor={dark_light}
+                          rounded="0.5rem"
+                        >
+                          <Flex align="center" pl={2}>
+                            <Text>Sign Up</Text>
+                            <ChevronRightIcon fontSize="1.2rem" />
+                          </Flex>
+                        </Button>
+                      </Link>
+                    </>
+                  )}
               </Center>
             </DrawerBody>
           </DrawerContent>
@@ -287,26 +296,26 @@ export default function NavBar() {
 }
 
 const DesktopNav = () => {
-  const prefixLinkColor = useColorModeValue('gray.400', 'gray.100');
-  const linkColor = 'black';
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+  const prefixLinkColor = useColorModeValue("gray.400", "gray.100");
+  const linkColor = "black";
+  const linkHoverColor = useColorModeValue("gray.800", "white");
+  const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
     <>
-      <Stack direction={'row'} spacing={4}>
-        {NAV_ITEMS.map(navItem => (
+      <Stack direction={"row"} spacing={4}>
+        {NAV_ITEMS.map((navItem) => (
           <Box key={navItem.label}>
-            <Popover trigger={'hover'} placement={'bottom-start'}>
+            <Popover trigger={"hover"} placement={"bottom-start"}>
               <PopoverTrigger>
                 <Link
                   p={2}
-                  href={navItem.href ?? '#'}
-                  fontSize={'sm'}
+                  href={navItem.href ?? "#"}
+                  fontSize={"sm"}
                   fontWeight={700}
                   color={linkColor}
                   _hover={{
-                    textDecoration: 'none',
+                    textDecoration: "none",
                     color: linkHoverColor,
                   }}
                 >
@@ -322,14 +331,14 @@ const DesktopNav = () => {
               {navItem.children && (
                 <PopoverContent
                   border={0}
-                  boxShadow={'xl'}
+                  boxShadow={"xl"}
                   bg={popoverContentBgColor}
                   p={4}
-                  rounded={'xl'}
-                  minW={'sm'}
+                  rounded={"xl"}
+                  minW={"sm"}
                 >
                   <Stack>
-                    {navItem.children.map(child => (
+                    {navItem.children.map((child) => (
                       <DesktopSubNav key={child.label} {...child} />
                     ))}
                   </Stack>
@@ -347,33 +356,33 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
       href={href}
-      role={'group'}
-      display={'block'}
+      role={"group"}
+      display={"block"}
       p={2}
-      rounded={'md'}
-      _hover={{ bg: useColorModeValue('gray.50', 'gray.900') }}
+      rounded={"md"}
+      _hover={{ bg: useColorModeValue("gray.50", "gray.900") }}
     >
-      <Stack direction={'row'} align={'center'}>
+      <Stack direction={"row"} align={"center"}>
         <Box>
           <Text
-            transition={'all .3s ease'}
-            _groupHover={{ color: 'gray.400' }}
+            transition={"all .3s ease"}
+            _groupHover={{ color: "gray.400" }}
             fontWeight={500}
           >
             {label}
           </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
+          <Text fontSize={"sm"}>{subLabel}</Text>
         </Box>
         <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
+          transition={"all .3s ease"}
+          transform={"translateX(-10px)"}
           opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
+          _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
+          justify={"flex-end"}
+          align={"center"}
           flex={1}
         >
-          <Icon color={'gray.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={"gray.400"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -382,17 +391,9 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 const NAV_ITEMS = [
   {
-    label: 'Why WiJob',
+    label: "Why WiJob",
   },
   {
-    label: 'Find workers',
-    href: FIND_WORKERS,
-  },
-  {
-    label: 'Take jobs',
-    href: TAKE_JOBS,
-  },
-  {
-    label: 'Contact',
+    label: "Contact",
   },
 ];

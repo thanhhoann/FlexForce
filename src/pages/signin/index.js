@@ -1,52 +1,52 @@
-import React, { useState } from 'react';
-import { GoogleIcon } from '../../assets/AssetUtil';
-import { BsFillPersonFill } from 'react-icons/bs';
-import { SIGNUP, HOME } from '../../utils/route_name';
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { GoogleIcon } from "../../assets/AssetUtil";
+import { BsFillPersonFill } from "react-icons/bs";
+import { HOME, SIGNUP } from "../../utils/route_name";
+import { useDispatch } from "react-redux";
 import {
-  updateProfile,
   signInWithEmailAndPassword,
   signInWithPopup,
-} from 'firebase/auth';
-import { authActions } from '../../slices/authSlice';
-import { auth } from '../../firebase';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { Formik, Form, Field } from 'formik';
-import { AuthStatus } from '../../slices/authSlice';
-import { useNavigate, redirect, useLocation } from 'react-router-dom';
+  updateProfile,
+} from "firebase/auth";
+import { authActions } from "../../slices/authSlice";
+import { auth } from "../../firebase";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { Field, Form, Formik } from "formik";
+import { AuthStatus } from "../../slices/authSlice";
+import { redirect, useLocation, useNavigate } from "react-router-dom";
 import {
-  Flex,
   Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Checkbox,
-  Stack,
-  Link,
   Button,
-  Heading,
-  Text,
-  useColorModeValue,
-  Image,
   Center,
+  Checkbox,
+  createStandaloneToast,
   Divider,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Image,
+  Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  Link,
+  Stack,
+  Text,
+  useColorModeValue,
   useMediaQuery,
-  createStandaloneToast,
   VStack,
-  FormErrorMessage,
-} from '@chakra-ui/react';
-import { AUTH_REDIRECT_TIME } from '../../utils/times';
-import { persistUser } from '../../utils/helpers/local-storage.helper';
-import { GoogleAuthProvider } from 'firebase/auth';
+} from "@chakra-ui/react";
+import { AUTH_REDIRECT_TIME } from "../../utils/times";
+import { persistUser } from "../../utils/helpers/local-storage.helper";
+import { GoogleAuthProvider } from "firebase/auth";
 
 export default function SignIn() {
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = createStandaloneToast();
-  const [isMobile] = useMediaQuery('(max-width: 425px)');
+  const [isMobile] = useMediaQuery("(max-width: 425px)");
   const dispatch = useDispatch();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -57,17 +57,17 @@ export default function SignIn() {
     try {
       //     signInWithRedirect(auth, provider);
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider).then(res => {
+      await signInWithPopup(auth, provider).then((res) => {
         dispatch(
           authActions.setUser({
             email: res.user.email,
             uid: res.user.uid,
             displayName: res.user.displayName,
             // photoURL: res.user.photoURL,
-          })
+          }),
         );
         window.location.reload();
-        window.location.replace('/');
+        window.location.replace("/");
       });
     } catch (error) {
       console.log(error);
@@ -101,12 +101,10 @@ export default function SignIn() {
 
           <Box
             rounded="1rem"
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={
-              isMobile
-                ? ''
-                : 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'
-            }
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={isMobile
+              ? ""
+              : "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;"}
             p={8}
           >
             <Stack spacing={4}>
@@ -140,17 +138,17 @@ export default function SignIn() {
               {/* email and password  */}
               <Formik
                 initialValues={{
-                  email: '',
-                  password: '',
+                  email: "",
+                  password: "",
                   rememberMe: false,
                 }}
                 onSubmit={({ email, password, rememberMe }) => {
                   signInWithEmailAndPassword(auth, email, password)
-                    .then(res => {
+                    .then((res) => {
                       console.log(res);
                       // update auth status
                       dispatch(
-                        authActions.updateAuthStatus(AuthStatus.AUTHORIZED)
+                        authActions.updateAuthStatus(AuthStatus.AUTHORIZED),
                       );
 
                       // update user info
@@ -158,28 +156,31 @@ export default function SignIn() {
                         authActions.setUser({
                           uid: res.user.uid,
                           email: res.user.email,
-                        })
+                        }),
                       );
                       setIsRedirecting(true);
                       if (persistUser) {
                         navigate(HOME, { replace: true });
                       }
                     })
-                    .catch(err => {
+                    .catch((err) => {
                       console.log(err);
-                      let message = 'User not found';
-                      if (err.code === 'auth/invalid-email')
-                        message = 'Invalid email';
-                      if (err.code === 'auth/wrong-password')
-                        message = 'Wrong password';
-                      if (err)
+                      let message = "User not found";
+                      if (err.code === "auth/invalid-email") {
+                        message = "Invalid email";
+                      }
+                      if (err.code === "auth/wrong-password") {
+                        message = "Wrong password";
+                      }
+                      if (err) {
                         toast({
-                          variant: 'top-accent',
+                          variant: "top-accent",
                           description: message,
-                          status: 'error',
+                          status: "error",
                           duration: 5000,
                           isClosable: true,
                         });
+                      }
                     });
                 }}
               >
@@ -194,10 +195,11 @@ export default function SignIn() {
                           name="email"
                           type="email"
                           placeholder="Email"
-                          validate={value => {
+                          validate={(value) => {
                             let error;
-                            if (value.length === 0)
-                              error = 'Please enter your email';
+                            if (value.length === 0) {
+                              error = "Please enter your email";
+                            }
                             return error;
                           }}
                         />
@@ -213,13 +215,13 @@ export default function SignIn() {
                             as={Input}
                             id="password"
                             name="password"
-                            type={showPassword ? 'text' : 'password'}
+                            type={showPassword ? "text" : "password"}
                             placeholder="Password"
-                            validate={value => {
+                            validate={(value) => {
                               let error;
                               if (value.length < 5) {
                                 error =
-                                  'Password must contain at least 6 characters';
+                                  "Password must contain at least 6 characters";
                               }
                               return error;
                             }}
@@ -227,15 +229,13 @@ export default function SignIn() {
                           <InputRightElement width="4.5rem">
                             <Button
                               bg="white"
-                              _hover={{ bg: 'white' }}
-                              _active={{ bg: 'white' }}
+                              _hover={{ bg: "white" }}
+                              _active={{ bg: "white" }}
                               onClick={handleShowPassword}
                             >
-                              {showPassword ? (
-                                <AiOutlineEye />
-                              ) : (
-                                <AiOutlineEyeInvisible />
-                              )}
+                              {showPassword
+                                ? <AiOutlineEye />
+                                : <AiOutlineEyeInvisible />}
                             </Button>
                           </InputRightElement>
                         </InputGroup>
@@ -244,22 +244,23 @@ export default function SignIn() {
 
                       {/* remember me */}
                       <FormControl
-                        isInvalid={
-                          errors.termsOfService && touched.termsOfService
-                        }
+                        isInvalid={errors.termsOfService &&
+                          touched.termsOfService}
                       >
-                        {/* <Field as={Checkbox} id="rememberMe" name="rememberMe">
+                        {
+                          /* <Field as={Checkbox} id="rememberMe" name="rememberMe">
                           <Text textAlign="start" fontSize="0.8rem">
                             I'm horny
                           </Text>
-                        </Field> */}
+                        </Field> */
+                        }
                       </FormControl>
 
                       {/*  sign in button */}
                       <Button
                         bg="black"
                         color="white"
-                        _hover={{ backgroundColor: 'gray.700' }}
+                        _hover={{ backgroundColor: "gray.700" }}
                         type="submit"
                       >
                         <Text>Sign in</Text>
@@ -279,9 +280,9 @@ export default function SignIn() {
             </Flex>
 
             {/* sign up button */}
-            <Link href={SIGNUP} textDecor="none" _hover={{ textDecor: 'none' }}>
+            <Link href={SIGNUP} textDecor="none" _hover={{ textDecor: "none" }}>
               <Button
-                _hover={{ backgroundColor: 'gray.100' }}
+                _hover={{ backgroundColor: "gray.100" }}
                 bg="white"
                 borderWidth="1px"
                 borderColor="black"

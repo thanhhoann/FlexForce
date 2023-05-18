@@ -1,24 +1,45 @@
-import { Box, Button, Center, Image, Text, VStack } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
-import HeroSection from '../../components/HeroSection';
-import { authActions, userSelect } from '../../slices/authSlice';
-import { ColorModeSwitcher } from '../../utils/helpers/color-mode.helper';
-import { persistUser } from '../../utils/helpers/local-storage.helper';
-import Testimonial from '../../components/Testimonial';
+import React, { useEffect, useState } from "react";
+import { Box, Button, Center, Image, Text, VStack } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import HeroSection from "../../components/HeroSection";
+import { authActions, userSelect } from "../../slices/authSlice";
+import { ColorModeSwitcher } from "../../utils/helpers/color-mode.helper";
+import { persistUser } from "../../utils/helpers/local-storage.helper";
+import Testimonial from "../../components/Testimonial";
+import { persistAuthStatus } from "../../utils/helpers/local-storage.helper";
+import { AuthStatus } from "../../slices/authSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const persistRoot = JSON.parse(localStorage.getItem('persist:root'));
+  const persistRoot = JSON.parse(localStorage.getItem("persist:root"));
+  const [role, setRole] = useState("");
   // const user = JSON.parse(persistRoot.auth).user;
 
   // force reload when local storage key not found
   // if (!persistUser) window.location.reload();
 
+  useEffect(() => {
+    if (persistAuthStatus === AuthStatus.UNAUTHORIZED) {
+      window.location.replace("sign-in");
+    } else {
+      if (
+        localStorage.getItem("role") === null &&
+        persistAuthStatus === AuthStatus.AUTHORIZED
+      ) {
+        window.location.replace("pick-role");
+      } else {
+        const roleFromLocalStorage = localStorage.getItem("role");
+        setRole(roleFromLocalStorage);
+      }
+    }
+  }, []);
+
   return (
     <>
-      <HeroSection />
+      <HeroSection role={role} />
       <Testimonial />
-      {/* <VStack>
+      {
+        /* <VStack>
           {user ? (
             <>
               <Text>
@@ -37,7 +58,8 @@ export default function Home() {
           <Button w="7rem" onClick={() => dispatch(authActions.logOut())}>
             Log out
           </Button>
-        </VStack> */}
+        </VStack> */
+      }
     </>
   );
 }

@@ -1,45 +1,45 @@
 // add display name field
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { authActions, AuthStatus } from '../../slices/authSlice';
-import { auth } from '../../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { GoogleIcon } from '../../assets/AssetUtil';
-import GoogleAuth, { GoogleSignIn } from '../../utils/google_auth';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { HOME, SIGNIN } from '../../utils/route_name';
-import { Formik, Field } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import { AUTH_REDIRECT_TIME } from '../../utils/times';
-import { persistUser } from '../../utils/helpers/local-storage.helper';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { authActions, AuthStatus } from "../../slices/authSlice";
+import { auth } from "../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { GoogleIcon } from "../../assets/AssetUtil";
+import GoogleAuth, { GoogleSignIn } from "../../utils/google_auth";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { HOME, SIGNIN } from "../../utils/route_name";
+import { Field, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { AUTH_REDIRECT_TIME } from "../../utils/times";
+import { persistUser } from "../../utils/helpers/local-storage.helper";
 import {
-  Flex,
   Box,
-  FormControl,
-  Input,
-  Checkbox,
-  Stack,
-  Link,
   Button,
-  Heading,
-  Text,
-  useColorModeValue,
-  Image,
   Center,
+  Checkbox,
+  createStandaloneToast,
   Divider,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  Heading,
+  Image,
+  Input,
   InputGroup,
   InputRightElement,
+  Link,
+  Stack,
+  Text,
+  useColorModeValue,
   useMediaQuery,
-  FormErrorMessage,
   VStack,
-  createStandaloneToast,
-} from '@chakra-ui/react';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+} from "@chakra-ui/react";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export default function SignUp() {
   const { toast } = createStandaloneToast();
   const dispatch = useDispatch();
-  const [isMobile] = useMediaQuery('(max-width: 425px)');
+  const [isMobile] = useMediaQuery("(max-width: 425px)");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
@@ -50,28 +50,25 @@ export default function SignUp() {
     try {
       //     signInWithRedirect(auth, provider);
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider).then(res => {
+      await signInWithPopup(auth, provider).then((res) => {
         dispatch(
           authActions.setUser({
             email: res.user.email,
             uid: res.user.uid,
             displayName: res.user.displayName,
             // photoURL: res.user.photoURL,
-          })
+          }),
         );
         window.location.reload();
-        window.location.replace('/');
+        window.location.replace("/");
       });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const persistRoot = JSON.parse(localStorage.getItem('persist:root'));
+  const persistRoot = JSON.parse(localStorage.getItem("persist:root"));
   const userType = JSON.parse(persistRoot.auth).userType;
-  if (userType === null) {
-    window.location.replace('pick-role');
-  }
 
   return (
     <>
@@ -93,12 +90,10 @@ export default function SignUp() {
           <Box
             p={8}
             rounded="1rem"
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={
-              isMobile
-                ? ''
-                : 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'
-            }
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={isMobile
+              ? ""
+              : "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;"}
           >
             <Stack spacing={4}>
               {/* google SignIn button */}
@@ -129,19 +124,19 @@ export default function SignUp() {
 
               <Formik
                 initialValues={{
-                  email: '',
-                  password: '',
+                  email: "",
+                  password: "",
                   termsOfService: false,
                 }}
                 onSubmit={({ email, password, termsOfService }) => {
                   createUserWithEmailAndPassword(auth, email, password)
-                    .then(res => {
+                    .then((res) => {
                       toast({
-                        description: 'Account successfully created',
-                        status: 'success',
+                        description: "Account successfully created",
+                        status: "success",
                         duration: 5000,
                         isClosable: true,
-                        variant: 'top-accent',
+                        variant: "top-accent",
                       });
 
                       // update user info
@@ -149,7 +144,7 @@ export default function SignUp() {
                         authActions.setUser({
                           uid: res.user.uid,
                           email: res.user.email,
-                        })
+                        }),
                       );
 
                       setIsRedirecting(true);
@@ -157,21 +152,21 @@ export default function SignUp() {
                         navigate(HOME, { replace: true });
                       }
                     })
-
-                    .catch(err => {
+                    .catch((err) => {
                       const message = err.message;
 
                       if (
                         message ===
-                        'Firebase: Error (auth/email-already-in-use).'
-                      )
+                        "Firebase: Error (auth/email-already-in-use)."
+                      ) {
                         toast({
-                          variant: 'top-accent',
-                          description: 'Email already in use',
-                          status: 'error',
+                          variant: "top-accent",
+                          description: "Email already in use",
+                          status: "error",
                           duration: 5000,
                           isClosable: true,
                         });
+                      }
                     });
                 }}
               >
@@ -186,10 +181,11 @@ export default function SignUp() {
                           name="email"
                           type="email"
                           placeholder="Email"
-                          validate={value => {
+                          validate={(value) => {
                             let error;
-                            if (value.length === 0)
-                              error = 'Please enter your email';
+                            if (value.length === 0) {
+                              error = "Please enter your email";
+                            }
                             return error;
                           }}
                         />
@@ -205,13 +201,15 @@ export default function SignUp() {
                             as={Input}
                             id="password"
                             name="password"
-                            type={showPassword ? 'text' : 'password'}
+                            type={showPassword
+                              ? "text"
+                              : "password"}
                             placeholder="Password"
-                            validate={value => {
+                            validate={(value) => {
                               let error;
                               if (value.length < 5) {
                                 error =
-                                  'Password must contain at least 6 characters';
+                                  "Password must contain at least 6 characters";
                               }
                               return error;
                             }}
@@ -219,15 +217,13 @@ export default function SignUp() {
                           <InputRightElement width="4.5rem">
                             <Button
                               bg="white"
-                              _hover={{ bg: 'white' }}
-                              _active={{ bg: 'white' }}
+                              _hover={{ bg: "white" }}
+                              _active={{ bg: "white" }}
                               onClick={handleShowPassword}
                             >
-                              {showPassword ? (
-                                <AiOutlineEye />
-                              ) : (
-                                <AiOutlineEyeInvisible />
-                              )}
+                              {showPassword
+                                ? <AiOutlineEye />
+                                : <AiOutlineEyeInvisible />}
                             </Button>
                           </InputRightElement>
                         </InputGroup>
@@ -236,42 +232,42 @@ export default function SignUp() {
 
                       {/* terms of service */}
                       <FormControl
-                        isInvalid={
-                          errors.termsOfService && touched.termsOfService
-                        }
+                        isInvalid={errors.termsOfService &&
+                          touched.termsOfService}
                       >
                         <Field
                           as={Checkbox}
                           id="termsOfService"
                           name="termsOfService"
-                          validate={value => {
+                          validate={(value) => {
                             let error;
-                            if (value === false)
-                              error = 'Please accept the terms';
+                            if (value === false) {
+                              error = "Please accept the terms";
+                            }
                             return error;
                           }}
                         >
                           <Text textAlign="start" fontSize="0.8rem">
-                            Yes, I understand and agree to the{' '}
+                            Yes, I understand and agree to the{" "}
                             <Link
                               color="blue"
-                              _hover={{ textDecor: 'underline' }}
+                              _hover={{ textDecor: "underline" }}
                               href="#"
                             >
                               WiJob Terms of Service
                             </Link>
-                            , including the{' '}
+                            , including the{" "}
                             <Link
                               color="blue"
-                              _hover={{ textDecor: 'underline' }}
+                              _hover={{ textDecor: "underline" }}
                               href="#"
                             >
                               User Agreement
-                            </Link>{' '}
-                            and{' '}
+                            </Link>{" "}
+                            and{" "}
                             <Link
                               color="blue"
-                              _hover={{ textDecor: 'underline' }}
+                              _hover={{ textDecor: "underline" }}
                               href="#"
                             >
                               Privacy Policy
@@ -288,7 +284,7 @@ export default function SignUp() {
                       <Button
                         bg="black"
                         color="white"
-                        _hover={{ backgroundColor: 'gray.700' }}
+                        _hover={{ backgroundColor: "gray.700" }}
                         type="submit"
                       >
                         <Text>Create my account</Text>
@@ -308,9 +304,9 @@ export default function SignUp() {
               <Divider borderColor="black" />
             </Flex>
 
-            <Link href={SIGNIN} textDecor="none" _hover={{ textDecor: 'none' }}>
+            <Link href={SIGNIN} textDecor="none" _hover={{ textDecor: "none" }}>
               <Button
-                _hover={{ backgroundColor: 'gray.100' }}
+                _hover={{ backgroundColor: "gray.100" }}
                 bg="white"
                 borderWidth="1px"
                 borderColor="black"

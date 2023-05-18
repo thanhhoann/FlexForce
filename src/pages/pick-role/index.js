@@ -1,43 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import {
-  Flex,
   Box,
-  FormControl,
-  Input,
-  Checkbox,
-  Stack,
-  Link,
   Button,
-  Heading,
-  Text,
-  useColorModeValue,
-  Image,
   Center,
+  Checkbox,
+  createStandaloneToast,
   Divider,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  Heading,
+  Image,
+  Input,
   InputGroup,
   InputRightElement,
-  useMediaQuery,
-  FormErrorMessage,
-  VStack,
-  createStandaloneToast,
+  Link,
   Spinner,
-} from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
-import { LogoImg } from '../../assets/AssetUtil';
-import { authActions } from '../../slices/authSlice';
-import { SIGNUP } from '../../utils/route_name';
+  Stack,
+  Text,
+  useColorModeValue,
+  useMediaQuery,
+  VStack,
+} from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { LogoImg } from "../../assets/AssetUtil";
+import { authActions, AuthStatus } from "../../slices/authSlice";
+import { HOME, SIGNUP } from "../../utils/route_name";
+import { persistAuthStatus } from "../../utils/helpers/local-storage.helper";
 
 export default function PickRole() {
   const { toast } = createStandaloneToast();
-  const [isMobile] = useMediaQuery('(max-width: 425px)');
+  const [isMobile] = useMediaQuery("(max-width: 425px)");
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [roleInternalUse, setRoleInternalUse] = useState("");
 
-  const handlePickRole = role => {
+  const handlePickRole = (role) => {
+    setRoleInternalUse(role);
     dispatch(authActions.updateUserType(role));
+    localStorage.setItem("role", role);
     setIsLoading(true);
-    setTimeout(() => window.location.replace(SIGNUP), 2000);
+    setTimeout(() => window.location.replace(HOME), 2000);
   };
+
+  useEffect(() => {
+    if (persistAuthStatus === AuthStatus.UNAUTHORIZED) {
+      window.location.replace("signin");
+    }
+  }, []);
 
   return (
     <>
@@ -53,13 +63,11 @@ export default function PickRole() {
           maxW="30rem"
         >
           <Box align="center">
-            <Heading fontSize="3xl">Sign up to WiJob</Heading>
+            <Heading fontSize="3xl">Pick your role</Heading>
           </Box>
 
           <Center>
-            {isLoading ? (
-              <Spinner />
-            ) : (
+            {isLoading ? <Spinner /> : (
               <Center
                 flexDir="column"
                 justifyContent="space-around"
@@ -75,17 +83,21 @@ export default function PickRole() {
                     boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
                     _hover={{
                       boxShadow:
-                        'rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px',
+                        "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px",
                     }}
                     w="10rem"
                     h="10rem"
                     cursor="pointer"
-                    onClick={() => handlePickRole('CLIENT')}
+                    onClick={() => handlePickRole("CLIENT")}
                   >
                     <Text fontWeight="700" fontSize="1.2rem">
                       Join as&nbsp;
                     </Text>
-                    <Text fontWeight="700" fontSize="1.2rem" color="orange.300">
+                    <Text
+                      fontWeight="700"
+                      fontSize="1.2rem"
+                      color="orange.300"
+                    >
                       Client
                     </Text>
                   </Center>
@@ -95,12 +107,12 @@ export default function PickRole() {
                     boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
                     _hover={{
                       boxShadow:
-                        'rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px',
+                        "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px",
                     }}
                     w="10rem"
                     h="10rem"
                     cursor="pointer"
-                    onClick={() => handlePickRole('WORKER')}
+                    onClick={() => handlePickRole("WORKER")}
                   >
                     <Text fontWeight="700" fontSize="1.2rem">
                       Join as&nbsp;
