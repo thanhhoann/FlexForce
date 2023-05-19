@@ -8,6 +8,8 @@ import { persistUser } from "../../utils/helpers/local-storage.helper";
 import Testimonial from "../../components/Testimonial";
 import { persistAuthStatus } from "../../utils/helpers/local-storage.helper";
 import { AuthStatus } from "../../slices/authSlice";
+import scrollDownGIF from "../../assets/gifs/scroll-down.gif";
+import { purple_1 } from "../../utils/colors";
 
 export default function Home() {
   const dispatch = useDispatch();

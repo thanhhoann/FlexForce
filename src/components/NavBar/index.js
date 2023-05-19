@@ -70,11 +70,19 @@ export default function NavBar() {
   };
 
   return (
-    <Box>
+    <Box
+      position="fixed"
+      top="0"
+      left="0"
+      right="0"
+      zIndex="999"
+      boxShadow="md"
+      bg="white"
+    >
       <Flex
         bg="white"
         color={useColorModeValue("gray.600", "white")}
-        minH={"60px"}
+        minH={"40px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         align={"center"}
@@ -116,7 +124,10 @@ export default function NavBar() {
                             cursor={"pointer"}
                             minW={0}
                           >
-                            <Avatar size={"sm"} />
+                            <Avatar
+                              size={"md"}
+                              src={`https://api.dicebear.com/6.x/notionists/svg?seed=${persistUser.email}`}
+                            />
                           </MenuButton>
                           <MenuList zIndex={2}>
                             <MenuGroup color="black" title={persistUser.email}>
@@ -132,9 +143,6 @@ export default function NavBar() {
                               {persistUser.email}
                             </Text> */
                               }
-                              <MenuItem color="black">
-                                <Link href={USER_PROFILE}>User profile</Link>
-                              </MenuItem>
                               <MenuDivider />
                               <MenuItem _hover={{ bg: "none" }}>
                                 <Button
@@ -143,8 +151,9 @@ export default function NavBar() {
                                   p="2"
                                   onClick={handleSignOut}
                                   _hover={{ bg: "gray.500" }}
+                                  fontWeight="800"
                                 >
-                                  Sign out
+                                  SIGN OUT
                                 </Button>
                               </MenuItem>
                             </MenuGroup>
@@ -225,7 +234,6 @@ export default function NavBar() {
                 fontSize="2.5rem"
               >
                 <Link href="#">Why WiJob</Link>
-                <Link href={FIND_WORKERS}>Find workers</Link>
                 <Link href="#">Contact</Link>
 
                 <Divider />
@@ -303,7 +311,7 @@ const DesktopNav = () => {
 
   return (
     <>
-      <Stack direction={"row"} spacing={4}>
+      <Stack direction={"row"} spacing={"3rem"}>
         {NAV_ITEMS.map((navItem) => (
           <Box key={navItem.label}>
             <Popover trigger={"hover"} placement={"bottom-start"}>
@@ -311,7 +319,6 @@ const DesktopNav = () => {
                 <Link
                   p={2}
                   href={navItem.href ?? "#"}
-                  fontSize={"sm"}
                   fontWeight={700}
                   color={linkColor}
                   _hover={{
@@ -319,11 +326,26 @@ const DesktopNav = () => {
                     color: linkHoverColor,
                   }}
                 >
-                  <Flex align="center" gap="0.5rem">
-                    <Text color={prefixLinkColor} fontWeight={1000}>
+                  <Flex
+                    align="center"
+                    gap=".3rem"
+                    _hover={{ fontWeight: "1000" }}
+                  >
+                    <Text
+                      fontSize={"1.3rem"}
+                      color={prefixLinkColor}
+                      fontWeight={1000}
+                    >
                       /
                     </Text>
-                    <Text>{navItem.label}</Text>
+                    <Text fontSize={"1.1rem"} fontFamily>{navItem.label}</Text>
+                    <Text
+                      fontSize={"1.3rem"}
+                      color={prefixLinkColor}
+                      fontWeight={1000}
+                    >
+                      /
+                    </Text>
                   </Flex>
                 </Link>
               </PopoverTrigger>
@@ -391,9 +413,9 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 const NAV_ITEMS = [
   {
-    label: "Why WiJob",
+    label: "WHY WIJOB",
   },
   {
-    label: "Contact",
+    label: "CONTACT",
   },
 ];

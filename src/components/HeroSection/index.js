@@ -16,14 +16,16 @@ import {
 } from "@chakra-ui/react";
 import { motion, useInView } from "framer-motion";
 import React, { useRef, useState } from "react";
-import { ArrowDownGif } from "../../assets/AssetUtil";
+import { ArrowDownGif, ScrollDownGif } from "../../assets/AssetUtil";
+import { leadingColor } from "../../utils/colors";
 import { FIND_WORKERS, TAKE_JOBS } from "../../utils/route_name";
 import Testimonial from "../Testimonial";
+import HeroSectionButton from "./HeroSectionButton";
 
 export default function HeroSection({ role }) {
   return (
     <>
-      <Center h="100vh" px="1rem">
+      <Center h="100vh">
         <Stack
           textAlign={"center"}
           align={"center"}
@@ -35,14 +37,20 @@ export default function HeroSection({ role }) {
               fontWeight={700}
               fontSize={{ base: "4xl", sm: "4xl", md: "6xl", lg: "8xl" }}
             >
-              Quick Job&nbsp;
+              Speedy Job&nbsp;
             </Heading>
             <Heading
               fontWeight={700}
               fontSize={{ base: "4xl", sm: "4xl", md: "6xl", lg: "8xl" }}
-              color="orange"
+              color={leadingColor}
             >
-              Quick Money
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                Steady Income
+              </motion.div>
             </Heading>
           </Flex>
 
@@ -58,22 +66,12 @@ export default function HeroSection({ role }) {
             {localStorage.getItem("role") === "CLIENT"
               ? (
                 <Link href={FIND_WORKERS}>
-                  <Button
-                    rounded={"full"}
-                    px={6}
-                    colorScheme={"orange"}
-                    bg={"orange.400"}
-                    _hover={{ bg: "orange.500" }}
-                  >
-                    FIND WORKERS
-                  </Button>
+                  <HeroSectionButton text={"FIND WORKERS"} />
                 </Link>
               )
               : (
                 <Link href={TAKE_JOBS}>
-                  <Button rounded={"full"} px={6}>
-                    TAKE JOBS
-                  </Button>
+                  <HeroSectionButton text={"TAKE JOBS"} />
                 </Link>
               )}
           </Stack>
