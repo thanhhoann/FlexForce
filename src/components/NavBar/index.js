@@ -13,6 +13,7 @@ import {
   DrawerOverlay,
   Flex,
   Heading,
+  Highlight,
   Icon,
   IconButton,
   Image,
@@ -40,8 +41,10 @@ import {
   HamburgerIcon,
 } from "@chakra-ui/icons";
 import {
+  CONTACT,
   FIND_WORKERS,
   HOME,
+  INTRO,
   SIGNIN,
   SIGNUP,
   TAKE_JOBS,
@@ -51,7 +54,7 @@ import { ColorModeSwitcher } from "../../utils/helpers/color-mode.helper";
 import { HiOutlineUser } from "react-icons/hi";
 import { persistUser } from "../../utils/helpers/local-storage.helper";
 import { LogoImg } from "../../assets/AssetUtil";
-import { royalPurple } from "../../utils/colors";
+import { leadingColor, royalPurple } from "../../utils/colors";
 
 export default function NavBar() {
   const [isLaptop] = useMediaQuery("(min-width: 1024px)");
@@ -89,8 +92,20 @@ export default function NavBar() {
       >
         <Flex align="center" justify="space-between" w="full">
           <Link href={HOME}>
-            <Heading>
-              <Image src={LogoImg} rounded="1rem" w="3.5rem" />
+            <Heading
+              color="black"
+              fontWeight={1000}
+              _hover={{ fontStyle: "italic" }}
+            >
+              <Highlight
+                query="Force"
+                styles={{
+                  borderRadius: "1rem",
+                  color: leadingColor,
+                }}
+              >
+                FlexForce
+              </Highlight>
             </Heading>
           </Link>
 
@@ -230,13 +245,13 @@ export default function NavBar() {
               <Center
                 flexDir="column"
                 h="full"
-                fontWeight={700}
-                fontSize="2.5rem"
               >
-                <Link href="#">Why WiJob</Link>
-                <Link href="#">Contact</Link>
-
-                <Divider />
+                <Center flexDir="column" fontSize="6rem" mt="8rem">
+                  <Link href={INTRO} _hover={{ fontWeight: "800" }}>INTRO</Link>
+                  <Link href={CONTACT} _hover={{ fontWeight: "800" }}>
+                    CONTACT
+                  </Link>
+                </Center>
 
                 {persistUser
                   ? (
@@ -246,7 +261,7 @@ export default function NavBar() {
                       px="0.5rem"
                       py="0.2rem"
                       h="full"
-                      w="full"
+                      w="20vw"
                       gap="1rem"
                     >
                       <Button
@@ -413,9 +428,11 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 const NAV_ITEMS = [
   {
-    label: "WHY WIJOB",
+    label: "INTRO",
+    href: INTRO,
   },
   {
     label: "CONTACT",
+    href: CONTACT,
   },
 ];

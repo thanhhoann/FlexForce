@@ -1,7 +1,9 @@
 import { createStandaloneToast } from "@chakra-ui/toast";
 import {
+  CONTACT,
   FIND_WORKERS,
   HOME,
+  INTRO,
   PAGE404,
   PICK_ROLE,
   SIGNIN,
@@ -28,6 +30,9 @@ import FindWorkers from "./pages/find-workers";
 import PickRole from "./pages/pick-role";
 import TakeJobs from "./pages/take-jobs";
 import UserProfile from "./pages/user-profile";
+import Intro from "./pages/intro";
+import Contact from "./pages/contact";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 export const AppRouteConfig = [
   {
@@ -79,6 +84,18 @@ export const AppRouteConfig = [
     title: "Pick Role",
     component: <PickRole />,
   },
+  {
+    level: 0,
+    path: INTRO,
+    title: "Intro",
+    component: <Intro />,
+  },
+  {
+    level: 0,
+    path: CONTACT,
+    title: "Contact",
+    component: <Contact />,
+  },
 ];
 
 export default function AppRoute() {
@@ -87,12 +104,14 @@ export default function AppRoute() {
 
   return (
     <>
-      <MainLayout>
-        <BrowserRouter>
-          <Routes>{routes}</Routes>
-          <ToastContainer />
-        </BrowserRouter>
-      </MainLayout>
+      <ParallaxProvider>
+        <MainLayout>
+          <BrowserRouter>
+            <Routes>{routes}</Routes>
+            <ToastContainer />
+          </BrowserRouter>
+        </MainLayout>
+      </ParallaxProvider>
     </>
   );
 }

@@ -7,7 +7,7 @@ export default function HeroSectionButton({ text }) {
       <motion.div>
         <Button
           rounded={"1rem"}
-          px={6}
+          p={7}
           color={"white"}
           backgroundColor="gray.800"
           fontSize={"1.2rem"}

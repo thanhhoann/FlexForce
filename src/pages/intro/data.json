@@ -1,0 +1,26 @@
+{
+  "introduction": {
+    "purpose": "Providing a job market platform that caters to students in various fields, such as IT and programming, design, marketing and sales, writing and translation. Its primary goal is to integrate student learning with practical experience, offering stable job opportunities for freelancers, interns, and students seeking employment. The platform stands out with its immediate connection between employers and workers through Matching Algorithms, supported by Artificial Intelligence. This efficient process saves time and ensures the highest compatibility in job matching.",
+    "document_inventions": [
+      "FlexForce derives its name from the concept of flexibility, symbolizing the exceptional adaptability and high qualifications of our university students for the job market.",
+      "FlexForce provides a platform that connects students who are seeking internship positions, and freelance jobs with businesses.",
+      "The Matching Algorithms used to connect employers and workers are supported by Artificial Intelligence."
+    ]
+  },
+  "product_scope": [
+    "FlexForce is a web and mobile application that facilitates the recruitment process between university students and businesses, serving their mutual needs of finding qualified employees and rewarding job opportunities.",
+    "FlexForce serves the the needs via a mobile app (on iOS and Android) and a web-based application. The mobile app has higher priority than the latter due to its usability.",
+    "FlexForce utilizes advanced AI-driven Matching Algorithms, which enhances the accuracy and effectiveness of matching process, to match various factors, such as job titles, required skills, location, job duration, salary.",
+    "FlexForce, for employers, reduces manual effort and time required for finding and screening candidates, providing employers with a curated pool of qualified and compatible workers.",
+    "FlexForce, to flexers, also appears as the all-in-one platform that consolidates resources to assist candidates throughout the entire job-seeking process, from job searching to job acquisition."
+  ],
+  "product_perspective": [
+    "The FlexForce platform is a job market that caters to students in various fields, such as IT and programming, design, marketing and sales, writing and translation. Its primary goal is to integrate student learning with practical experience, offering stable job opportunities for freelancers, interns, and students seeking employment. The platform stands out with its immediate connection between employers and workers through Matching Algorithms, supported by Artificial Intelligence. This efficient process saves time and ensures the highest compatibility in job matching.",
+    "FlexForce addresses the existing lack of beneficial platforms for students, specifically those focusing on the development of life skills, scientific creativity, and soft skills. By providing a comprehensive platform, WORKABLE aims to enhance students' ability to apply their theoretical knowledge in practical settings, enabling them to gain professional experience and generate income before graduating.",
+    "The objective of FlexForce is to train students closely linked to practical experience, offering internship and work opportunities that align with their specialization and career development. By combining solid theoretical knowledge with practical skills, the platform connects student training with real-world experiences, effectively meeting the recruitment needs of businesses.",
+    "The vision of FlexForce is to improve the university education system by emphasizing the importance of practical requirements and societal needs. Integrating education institutions with businesses is considered a crucial requirement in building a more effective training model.",
+    "For user profiles as workers, FlexForce provides access to a diverse job market aligned with their respective fields of study. This facilitates easier job selection, and users can create personal profiles to attract the attention of potential employers, increasing their chances of securing job opportunities. The proactive nature of both user profiles enhances the user experience.",
+    "For user profiles as employers, FlexForce offers access to a rich pool of talent profiles, streamlining the recruitment process and reducing hiring costs for companies that require skilled labor but face financial constraints. This efficient platform enables employers to find suitable candidates more effectively.",
+    "Overall, FlexForce serves as a comprehensive job market, bridging the gap between students, freelancers, interns, and businesses, while fostering the integration of theoretical knowledge with practical experience in various fields."
+  ]
+}

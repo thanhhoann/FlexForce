@@ -27,6 +27,7 @@ import { LogoImg } from "../../assets/AssetUtil";
 import { authActions, AuthStatus } from "../../slices/authSlice";
 import { HOME, SIGNUP } from "../../utils/route_name";
 import { persistAuthStatus } from "../../utils/helpers/local-storage.helper";
+import { leadingColor } from "../../utils/colors";
 
 export default function PickRole() {
   const { toast } = createStandaloneToast();
@@ -51,7 +52,7 @@ export default function PickRole() {
 
   return (
     <>
-      <Flex align="center" justify="center" mx="1rem">
+      <Flex align="center" justify="center" mx="1rem" h="90vh">
         {/* {isRedirecting && <p>IS REDIRECTING TO HOME PAGE ...</p>} */}
         <Stack
           spacing={8}
@@ -62,64 +63,58 @@ export default function PickRole() {
           minW="24rem"
           maxW="30rem"
         >
-          <Box align="center">
-            <Heading fontSize="3xl">Pick your role</Heading>
-          </Box>
-
           <Center>
             {isLoading ? <Spinner /> : (
               <Center
                 flexDir="column"
                 justifyContent="space-around"
-                boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
                 w="full"
                 h="25rem"
                 rounded="1rem"
               >
-                <Image src={LogoImg} w="5rem" rounded="1rem" />
-                <Flex justify="space-around" w="full">
-                  <Center
-                    rounded="1rem"
-                    boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
-                    _hover={{
-                      boxShadow:
-                        "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px",
-                    }}
-                    w="10rem"
-                    h="10rem"
-                    cursor="pointer"
-                    onClick={() => handlePickRole("CLIENT")}
-                  >
-                    <Text fontWeight="700" fontSize="1.2rem">
-                      Join as&nbsp;
-                    </Text>
-                    <Text
-                      fontWeight="700"
-                      fontSize="1.2rem"
-                      color="orange.300"
-                    >
-                      Client
-                    </Text>
+                <Flex flexDir="column" justify="space-around" w="full">
+                  <Center mb="5rem">
+                    <Heading>Choose as</Heading>
                   </Center>
 
-                  <Center
-                    rounded="1rem"
-                    boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
-                    _hover={{
-                      boxShadow:
-                        "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px",
-                    }}
-                    w="10rem"
-                    h="10rem"
-                    cursor="pointer"
-                    onClick={() => handlePickRole("WORKER")}
-                  >
-                    <Text fontWeight="700" fontSize="1.2rem">
-                      Join as&nbsp;
-                    </Text>
-                    <Text fontWeight="700" fontSize="1.2rem" color="gray.400">
-                      Worker
-                    </Text>
+                  <Center gap="5rem">
+                    <Center
+                      rounded="1rem"
+                      boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
+                      _hover={{
+                        boxShadow:
+                          "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px",
+                      }}
+                      w="10rem"
+                      h="10rem"
+                      cursor="pointer"
+                      onClick={() => handlePickRole("CLIENT")}
+                    >
+                      <Text
+                        fontWeight="900"
+                        fontSize="1.2rem"
+                        color={leadingColor}
+                      >
+                        CLIENT
+                      </Text>
+                    </Center>
+
+                    <Center
+                      rounded="1rem"
+                      boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
+                      _hover={{
+                        boxShadow:
+                          "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px",
+                      }}
+                      w="10rem"
+                      h="10rem"
+                      cursor="pointer"
+                      onClick={() => handlePickRole("WORKER")}
+                    >
+                      <Text fontWeight="700" fontSize="1.2rem">
+                        WORKER
+                      </Text>
+                    </Center>
                   </Center>
                 </Flex>
               </Center>
