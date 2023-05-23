@@ -96,7 +96,7 @@ export default function SignIn() {
           maxW="30rem"
         >
           <Box align="center">
-            <Heading fontSize="3xl">Sign in to WiJob</Heading>
+            <Heading fontSize="3xl">Sign in to FlexForce</Heading>
           </Box>
 
           <Box
@@ -274,7 +274,7 @@ export default function SignIn() {
             <Flex align="center" mt="5rem" mb="1rem">
               <Divider borderColor="black" />
               <Text minW="14rem" textAlign="center">
-                Don't have an WiJob account ?
+                Don't have an FlexForce account ?
               </Text>
               <Divider borderColor="black" />
             </Flex>

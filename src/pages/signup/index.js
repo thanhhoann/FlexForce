@@ -84,7 +84,7 @@ export default function SignUp() {
           maxW="30rem"
         >
           <Box align="center">
-            <Heading fontSize="3xl">Sign up to WiJob</Heading>
+            <Heading fontSize="3xl">Sign up to FlexForce</Heading>
           </Box>
 
           <Box
@@ -157,7 +157,7 @@ export default function SignUp() {
 
                       if (
                         message ===
-                        "Firebase: Error (auth/email-already-in-use)."
+                          "Firebase: Error (auth/email-already-in-use)."
                       ) {
                         toast({
                           variant: "top-accent",
@@ -254,7 +254,7 @@ export default function SignUp() {
                               _hover={{ textDecor: "underline" }}
                               href="#"
                             >
-                              WiJob Terms of Service
+                              FlexForce Terms of Service
                             </Link>
                             , including the{" "}
                             <Link
@@ -298,8 +298,8 @@ export default function SignUp() {
             {/* sign in button */}
             <Flex align="center" mt="2rem" mb="1rem">
               <Divider borderColor="black" />
-              <Text minW="14rem" textAlign="center">
-                Already have an WiJob account ?
+              <Text minW="16rem" textAlign="center">
+                Already have an FlexForce account ?
               </Text>
               <Divider borderColor="black" />
             </Flex>

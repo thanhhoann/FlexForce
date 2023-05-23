@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   Box,
   Button,
@@ -78,43 +79,55 @@ export default function PickRole() {
                   </Center>
 
                   <Center gap="5rem">
-                    <Center
-                      rounded="1rem"
-                      boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
-                      _hover={{
-                        boxShadow:
-                          "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px",
-                      }}
-                      w="10rem"
-                      h="10rem"
-                      cursor="pointer"
-                      onClick={() => handlePickRole("CLIENT")}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5 }}
                     >
-                      <Text
-                        fontWeight="900"
-                        fontSize="1.2rem"
-                        color={leadingColor}
+                      <Center
+                        rounded="1rem"
+                        boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
+                        _hover={{
+                          boxShadow:
+                            "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px",
+                        }}
+                        w="10rem"
+                        h="10rem"
+                        cursor="pointer"
+                        onClick={() => handlePickRole("CLIENT")}
                       >
-                        CLIENT
-                      </Text>
-                    </Center>
+                        <Text
+                          fontWeight="900"
+                          fontSize="1.8rem"
+                          color={leadingColor}
+                        >
+                          CLIENT
+                        </Text>
+                      </Center>
+                    </motion.div>
 
-                    <Center
-                      rounded="1rem"
-                      boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
-                      _hover={{
-                        boxShadow:
-                          "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px",
-                      }}
-                      w="10rem"
-                      h="10rem"
-                      cursor="pointer"
-                      onClick={() => handlePickRole("WORKER")}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5 }}
                     >
-                      <Text fontWeight="700" fontSize="1.2rem">
-                        WORKER
-                      </Text>
-                    </Center>
+                      <Center
+                        rounded="1rem"
+                        boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
+                        _hover={{
+                          boxShadow:
+                            "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px",
+                        }}
+                        w="10rem"
+                        h="10rem"
+                        cursor="pointer"
+                        onClick={() => handlePickRole("WORKER")}
+                      >
+                        <Text fontWeight="700" fontSize="1.8rem">
+                          WORKER
+                        </Text>
+                      </Center>
+                    </motion.div>
                   </Center>
                 </Flex>
               </Center>

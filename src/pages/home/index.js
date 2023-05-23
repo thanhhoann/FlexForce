@@ -5,11 +5,12 @@ import HeroSection from "../../components/HeroSection";
 import { authActions, userSelect } from "../../slices/authSlice";
 import { ColorModeSwitcher } from "../../utils/helpers/color-mode.helper";
 import { persistUser } from "../../utils/helpers/local-storage.helper";
-import Testimonial from "../../components/Testimonial";
+import TestimonialWithSpeechBubbles from "../../components/TestimonialWithSpeechBubbles";
 import { persistAuthStatus } from "../../utils/helpers/local-storage.helper";
 import { AuthStatus } from "../../slices/authSlice";
 import scrollDownGIF from "../../assets/gifs/scroll-down.gif";
 import { purple_1 } from "../../utils/colors";
+import TestimonialWithCards from "../../components/TestimonialWithCards";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -39,7 +40,8 @@ export default function Home() {
   return (
     <>
       <HeroSection role={role} />
-      <Testimonial />
+      <TestimonialWithCards />
+      <TestimonialWithSpeechBubbles />
       {
         /* <VStack>
           {user ? (

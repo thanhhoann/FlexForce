@@ -19,7 +19,7 @@ import React, { useRef, useState } from "react";
 import { ArrowDownGif, ScrollDownGif } from "../../assets/AssetUtil";
 import { leadingColor } from "../../utils/colors";
 import { FIND_WORKERS, TAKE_JOBS } from "../../utils/route_name";
-import Testimonial from "../Testimonial";
+import TestimonialWithSpeechBubbles from "../TestimonialWithSpeechBubbles";
 import HeroSectionButton from "./HeroSectionButton";
 
 export default function HeroSection({ role }) {
