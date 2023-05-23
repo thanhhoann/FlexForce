@@ -4,6 +4,7 @@ import {
   FIND_WORKERS,
   HOME,
   INTRO,
+  JOB_LOG,
   PAGE404,
   PICK_ROLE,
   SIGNIN,
@@ -33,6 +34,7 @@ import UserProfile from "./pages/user-profile";
 import Intro from "./pages/intro";
 import Contact from "./pages/contact";
 import { ParallaxProvider } from "react-scroll-parallax";
+import JobLog from "./pages/job-log";
 
 export const AppRouteConfig = [
   {
@@ -95,6 +97,19 @@ export const AppRouteConfig = [
     path: CONTACT,
     title: "Contact",
     component: <Contact />,
+  },
+  {
+    level: 0,
+    path: USER_PROFILE,
+    title: "User Profile",
+    component: <UserProfile />,
+  },
+
+  {
+    level: 0,
+    path: JOB_LOG,
+    title: "Job Log",
+    component: <JobLog />,
   },
 ];
 

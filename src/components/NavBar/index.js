@@ -145,7 +145,10 @@ export default function NavBar() {
                             />
                           </MenuButton>
                           <MenuList zIndex={2}>
-                            <MenuGroup color="black" title={persistUser.email}>
+                            <MenuGroup
+                              color="black"
+                              title={persistUser.email}
+                            >
                               {
                                 /* <Text
                               color="black"
@@ -159,6 +162,24 @@ export default function NavBar() {
                             </Text> */
                               }
                               <MenuDivider />
+                              <MenuItem
+                                color="black"
+                                fontWeight={600}
+                                _hover={{ fontWeight: "800" }}
+                              >
+                                <Link href="user-profile">
+                                  User Profile
+                                </Link>
+                              </MenuItem>
+                              <MenuItem
+                                color="black"
+                                fontWeight={600}
+                                _hover={{ fontWeight: "800" }}
+                              >
+                                <Link href="job-log">
+                                  Job Log
+                                </Link>
+                              </MenuItem>
                               <MenuItem _hover={{ bg: "none" }}>
                                 <Button
                                   rounded="0.5rem"

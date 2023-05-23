@@ -39,18 +39,22 @@ export default function MainLayout({ children }) {
             {children}
             {/* <Footer /> */}
             {/* </ParallaxContainer> */}
-            <Box
-              position="relative"
+            <Center
+              position="fixed"
+              left={0}
               bottom={0}
               p={2}
+              w="full"
               textAlign="center"
               fontWeight="900"
             >
-              Made by&nbsp;
-              <Link href="https://www.instagram.com/hoanthanh_/" isExternal>
-                @hoanthanh_
-              </Link>
-            </Box>
+              <Box bgColor="black" py="1" px="3" rounded="0.5rem" color="white">
+                Made by&nbsp;
+                <Link href="https://www.instagram.com/hoanthanh_/" isExternal>
+                  @hoanthanh_
+                </Link>
+              </Box>
+            </Center>
           </>
         )}
     </>

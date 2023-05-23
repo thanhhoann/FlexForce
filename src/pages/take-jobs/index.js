@@ -19,6 +19,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { CheckSvg, MapSvg } from "../../assets/AssetUtil";
+import BackdropLoading from "../../components/BackdropLoading";
 
 export default function TakeJobs() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,6 +27,7 @@ export default function TakeJobs() {
   const [noWorkers, setNoWorkers] = React.useState(100);
   let [startIndex, setStartIndex] = React.useState(0);
   const [modifiedList, setModifiedList] = React.useState();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     setStartIndex(startIndex++);
@@ -38,14 +40,10 @@ export default function TakeJobs() {
   // };
 
   const handleAccept = () => {
-    setIsAccept(true);
-    onOpen();
+    setIsLoading(true);
 
     setTimeout(() => {
-      onClose();
-      setIsAccept(false);
-      window.location.reload();
-      window.location.replace("/");
+      setIsLoading(false);
     }, 1500);
   };
 
@@ -117,17 +115,7 @@ export default function TakeJobs() {
         ))}
       </Flex>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader></ModalHeader>
-          <ModalBody>
-            <Center p="1rem">
-              <Image src={CheckSvg} w="10rem" />
-            </Center>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      {isLoading && <BackdropLoading />}
     </>
   );
 }
