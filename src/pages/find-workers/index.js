@@ -1,18 +1,18 @@
 import {
   Box,
-  Text,
   Button,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
   ModalBody,
+  ModalCloseButton,
+  ModalContent,
   ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
   useDisclosure,
-} from '@chakra-ui/react';
-import React from 'react';
-import FindWorkersForm from '../../components/FindWorkersForm';
+} from "@chakra-ui/react";
+import React from "react";
+import FindWorkersForm from "../../components/FindWorkersForm";
 
 export default function FindWorkers() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,8 +29,7 @@ export default function FindWorkers() {
 
   return (
     <>
-      <FindWorkersForm getBookInfo={e => setBookInfo(e)} />
-
+      <FindWorkersForm getBookInfo={(e) => setBookInfo(e)} />
     </>
   );
 }

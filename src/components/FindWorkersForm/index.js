@@ -42,6 +42,7 @@ import {
   SuccessGif,
 } from "../../assets/AssetUtil";
 import { FIND_WORKERS } from "../../utils/route_name";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 
 export default function FindWorkersForm({ getBookInfo }) {
   const [typeOfJob, setTypeOfJob] = React.useState("");
@@ -370,7 +371,15 @@ export default function FindWorkersForm({ getBookInfo }) {
               : isAcceptBooking
               ? (
                 <Center p="1rem">
-                  <Image src={CheckSvg} w="10rem" />
+                  <Box textAlign="center" py={10} px={6}>
+                    <CheckCircleIcon boxSize={"50px"} color={"green.500"} />
+                    <Heading as="h2" size="xl" mt={6} mb={2}>
+                      Successfully
+                    </Heading>
+                    <Text color={"gray.500"}>
+                      Heading back to find your next jobmate ...
+                    </Text>
+                  </Box>
                 </Center>
               )
               : <UserCard />}

@@ -48,8 +48,9 @@ export default function Contact() {
     >
       <Flex>
         <Box
-          bg="gray.800"
-          color="white"
+          border="3px solid black"
+          boxShadow="2xl"
+          color="black"
           borderRadius="lg"
           m={{ sm: 4, md: 16, lg: 10 }}
           p={{ sm: 5, md: 5, lg: 16 }}
@@ -69,7 +70,6 @@ export default function Contact() {
                         height="48px"
                         width="200px"
                         variant="ghost"
-                        color="#DCE2FF"
                         _hover={{ border: "2px solid #1C6FEB" }}
                         leftIcon={<MdPhone color={leadingColor} size="20px" />}
                       >
@@ -80,7 +80,6 @@ export default function Contact() {
                         height="48px"
                         width="200px"
                         variant="ghost"
-                        color="#DCE2FF"
                         _hover={{ border: "2px solid #1C6FEB" }}
                         leftIcon={<MdEmail color={leadingColor} size="20px" />}
                       >
@@ -91,7 +90,6 @@ export default function Contact() {
                         height="48px"
                         width="200px"
                         variant="ghost"
-                        color="#DCE2FF"
                         _hover={{ border: "2px solid #1C6FEB" }}
                         leftIcon={
                           <MdLocationOn color={leadingColor} size="20px" />
@@ -103,8 +101,9 @@ export default function Contact() {
                   </Box>
                 </Box>
               </WrapItem>
+
               <WrapItem>
-                <Box bg="white" borderRadius="lg">
+                <Box border="2px solid black" rounded="lg" boxShadow="2xl">
                   <Box m={8} color="#0B0E3F">
                     <VStack spacing={5}>
                       <FormControl id="name">

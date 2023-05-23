@@ -1,24 +1,24 @@
-import React from 'react';
-import jobs from '../../utils/sample_workers.json';
+import React from "react";
+import jobs from "../../utils/sample_workers.json";
 import {
-  Button,
   Badge,
   Box,
+  Button,
   Center,
   Flex,
   Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Stack,
   Text,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-} from '@chakra-ui/react';
-import { CheckSvg, MapSvg } from '../../assets/AssetUtil';
+} from "@chakra-ui/react";
+import { CheckSvg, MapSvg } from "../../assets/AssetUtil";
 
 export default function TakeJobs() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -45,7 +45,7 @@ export default function TakeJobs() {
       onClose();
       setIsAccept(false);
       window.location.reload();
-      window.location.replace('/');
+      window.location.replace("/");
     }, 1500);
   };
 
@@ -74,32 +74,32 @@ export default function TakeJobs() {
             w="20rem"
           >
             <TakeJobsComponent
-              title={'Type of job'}
+              title={"Type of job"}
               content={job.type_of_job}
             />
             <TakeJobsComponent
-              title={'Street address'}
+              title={"Street address"}
               content={job.street_address}
             />
-            <TakeJobsComponent title={'Start time'} content={job.start_time} />
+            <TakeJobsComponent title={"Start time"} content={job.start_time} />
             <TakeJobsComponent
-              title={'Salary per hour'}
+              title={"Salary per hour"}
               content={job.salary_per_hour}
             />
             <TakeJobsComponent
-              title={'Total working hours'}
+              title={"Total working hours"}
               content={job.total_working_hours}
             />
             <TakeJobsComponent
-              title={'Total salary'}
+              title={"Total salary"}
               content={job.total_salary}
             />
             <TakeJobsComponent
-              title={'Transaction method'}
+              title={"Transaction method"}
               content={job.transaction_method}
             />
             <TakeJobsComponent
-              title={'Description'}
+              title={"Description"}
               content={job.description}
             />
             <Center w="full" mx="2rem" gap="3rem">
