@@ -449,6 +449,12 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 const NAV_ITEMS = [
   {
+    label: localStorage.getItem("role") === "WORKER"
+      ? "TAKE JOBS"
+      : "FIND WORKERS",
+    href: localStorage.getItem("role") === "WORKER" ? TAKE_JOBS : FIND_WORKERS,
+  },
+  {
     label: "INTRO",
     href: INTRO,
   },

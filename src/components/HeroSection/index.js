@@ -34,13 +34,13 @@ export default function HeroSection({ role }) {
         >
           <Flex>
             <Heading
-              fontWeight={700}
+              fontWeight={900}
               fontSize={{ base: "4xl", sm: "4xl", md: "6xl", lg: "8xl" }}
             >
               Speedy Job&nbsp;
             </Heading>
             <Heading
-              fontWeight={700}
+              fontWeight={900}
               fontSize={{ base: "4xl", sm: "4xl", md: "6xl", lg: "8xl" }}
               color={leadingColor}
             >

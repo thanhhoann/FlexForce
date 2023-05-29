@@ -1,5 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Center, Image, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Divider,
+  Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import HeroSection from "../../components/HeroSection";
 import { authActions, userSelect } from "../../slices/authSlice";
@@ -11,15 +27,13 @@ import { AuthStatus } from "../../slices/authSlice";
 import scrollDownGIF from "../../assets/gifs/scroll-down.gif";
 import { purple_1 } from "../../utils/colors";
 import TestimonialWithCards from "../../components/TestimonialWithCards";
+import firebase from "../../firebase";
+import { USER_INFO_FORM } from "../../utils/route_name";
 
 export default function Home() {
   const dispatch = useDispatch();
   const persistRoot = JSON.parse(localStorage.getItem("persist:root"));
   const [role, setRole] = useState("");
-  // const user = JSON.parse(persistRoot.auth).user;
-
-  // force reload when local storage key not found
-  // if (!persistUser) window.location.reload();
 
   useEffect(() => {
     if (persistAuthStatus === AuthStatus.UNAUTHORIZED) {
@@ -35,6 +49,26 @@ export default function Home() {
         setRole(roleFromLocalStorage);
       }
     }
+
+    const fetchUser = async () => {
+      try {
+        const db = firebase.firestore();
+
+        // Query Firestore for users with a matching email
+        const querySnapshot = await db
+          .collection("users")
+          .where("email", "==", persistUser.email)
+          .get();
+
+        if (querySnapshot.empty) {
+          window.location.replace(USER_INFO_FORM);
+        }
+      } catch (error) {
+        console.error("Error retrieving user:", error);
+      }
+    };
+
+    fetchUser();
   }, []);
 
   return (
@@ -42,28 +76,6 @@ export default function Home() {
       <HeroSection role={role} />
       <TestimonialWithCards />
       <TestimonialWithSpeechBubbles />
-      {
-        /* <VStack>
-          {user ? (
-            <>
-              <Text>
-                Email: <span style={{ fontWeight: '700' }}>{user?.email}</span>
-              </Text>
-              <Text>
-                Display name:{' '}
-                <span style={{ fontWeight: '700' }}>{user?.displayName}</span>
-              </Text>
-            </>
-          ) : (
-            <Text fontSize="1rem">
-              Hi there, <span style={{ fontWeight: '700' }}>stranger</span>
-            </Text>
-          )}
-          <Button w="7rem" onClick={() => dispatch(authActions.logOut())}>
-            Log out
-          </Button>
-        </VStack> */
-      }
     </>
   );
 }

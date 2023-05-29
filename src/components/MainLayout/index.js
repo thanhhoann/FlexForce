@@ -35,26 +35,31 @@ export default function MainLayout({ children }) {
         : (
           <>
             {/* <ParallaxContainer>  */}
-            <NavBar />
-            {children}
-            {/* <Footer /> */}
-            {/* </ParallaxContainer> */}
-            <Center
-              position="fixed"
-              left={0}
-              bottom={0}
-              p={2}
-              w="full"
-              textAlign="center"
-              fontWeight="900"
-            >
-              <Box bgColor="black" py="1" px="3" rounded="0.5rem" color="white">
-                Made by&nbsp;
-                <Link href="https://www.instagram.com/hoanthanh_/" isExternal>
-                  @hoanthanh_
-                </Link>
-              </Box>
-            </Center>
+            <Box>
+              <NavBar />
+              {children}
+              {/* <Footer /> */}
+              {/* </ParallaxContainer> */}
+              <Center
+                position="fixed"
+                left={0}
+                bottom={0}
+                p={2}
+                w="full"
+                textAlign="center"
+                fontWeight="900"
+              >
+                <Box
+                  bgColor="black"
+                  py="1"
+                  px="3"
+                  rounded="0.5rem"
+                  color="white"
+                >
+                  <Text>© 2022-2023 FlexForce. All rights reserved.</Text>
+                </Box>
+              </Center>
+            </Box>
           </>
         )}
     </>

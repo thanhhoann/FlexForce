@@ -10,6 +10,7 @@ import {
   SIGNIN,
   SIGNUP,
   TAKE_JOBS,
+  USER_INFO_FORM,
   USER_PROFILE,
 } from "./utils/route_name";
 import {
@@ -35,6 +36,7 @@ import Intro from "./pages/intro";
 import Contact from "./pages/contact";
 import { ParallaxProvider } from "react-scroll-parallax";
 import JobLog from "./pages/job-log";
+import UserInfoForm from "./pages/user-info-form";
 
 export const AppRouteConfig = [
   {
@@ -110,6 +112,12 @@ export const AppRouteConfig = [
     path: JOB_LOG,
     title: "Job Log",
     component: <JobLog />,
+  },
+  {
+    level: 0,
+    path: USER_INFO_FORM,
+    title: "User Info Form",
+    component: <UserInfoForm />,
   },
 ];
 

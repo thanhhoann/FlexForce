@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { CheckSvg, MapSvg } from "../../assets/AssetUtil";
 import BackdropLoading from "../../components/BackdropLoading";
+import { faker } from "@faker-js/faker";
 
 export default function TakeJobs() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -95,10 +96,6 @@ export default function TakeJobs() {
             <TakeJobsComponent
               title={"Transaction method"}
               content={job.transaction_method}
-            />
-            <TakeJobsComponent
-              title={"Description"}
-              content={job.description}
             />
             <Center w="full" mx="2rem" gap="3rem">
               <Button
