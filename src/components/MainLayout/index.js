@@ -10,6 +10,7 @@ import { purple_1 } from "../../utils/colors";
 import ParallaxContainer from "../../utils/Parallax/ParallaxContainer";
 import Footer from "../Footer";
 import NavBar from "../NavBar";
+import { motion } from "framer-motion";
 
 export default function MainLayout({ children }) {
   const [isSmallerThan768] = useMediaQuery("(max-width: 768px)");
@@ -49,15 +50,30 @@ export default function MainLayout({ children }) {
                 textAlign="center"
                 fontWeight="900"
               >
-                <Box
-                  bgColor="black"
-                  py="1"
-                  px="3"
-                  rounded="0.5rem"
-                  color="white"
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 0.3,
+                    ease: [0, 0.71, 0.2, 1.01],
+                    scale: {
+                      type: "spring",
+                      damping: 5,
+                      stiffness: 100,
+                      restDelta: 0.001,
+                    },
+                  }}
                 >
-                  <Text>© 2022-2023 FlexForce. All rights reserved.</Text>
-                </Box>
+                  <Box
+                    bgColor="black"
+                    py="1"
+                    px="3"
+                    rounded="0.5rem"
+                    color="white"
+                  >
+                    <Text>© 2022-2023 FlexForce. All rights reserved.</Text>
+                  </Box>
+                </motion.div>
               </Center>
             </Box>
           </>

@@ -38,7 +38,6 @@ export default function UserProfile() {
 
         if (!querySnapshot.empty) {
           setUser(querySnapshot.docs[0].data());
-          console.log(user.docs[0].data());
         } else {
           window.location.replace(USER_INFO_FORM);
         }

@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { persistUser } from "../../utils/helpers/local-storage.helper";
 import firebase from "../../firebase";
-import { HOME, USER_INFO_FORM } from "../../utils/route_name";
+import { HOME, USER_INFO_FORM, USER_PROFILE } from "../../utils/route_name";
 
 export default function UserInfoForm() {
   const toast = useToast();
@@ -40,84 +40,58 @@ export default function UserInfoForm() {
 
     const data = { email: persistUser.email, ...formData };
 
-    if (
-      formData.firstName.length != 0 || formData.lastName.length != 0 ||
-      formData.address.length != 0 || formData.dateOfBirth.length != 0 ||
-      formData.bio.length != 0
-    ) {
-      try {
-        const db = firebase.firestore();
-        await db.collection("users").add(data);
+    const db = firebase.firestore();
+    const user = firebase.firestore().collection("users").doc(
+      JSON.stringify(localStorage.getItem("firestore_userId")),
+    );
+    const userId = JSON.stringify(localStorage.getItem("firestore_userId"));
+    console.log(userId);
 
-        toast({
-          title: "Account created.",
-          description: "Heading back to Home",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
-        setTimeout(() => window.location.replace(HOME), 3000);
-      } catch (error) {
-        console.log("Error adding user", error);
-      }
-    } else {
+    if (userId != "null") {
+      console.log("user exists !");
+      await db.collection("users").doc(userId.replace(/^"|"$/g, ""))
+        .update(data);
+
       toast({
-        title: "Please fill in all your information",
-        status: "warning",
+        title: "Account updated.",
+        description: "Heading back to Profile page",
+        status: "success",
         duration: 3000,
         isClosable: true,
       });
+      setTimeout(() => window.location.replace(USER_PROFILE), 3000);
+    } else if (userId == "null") {
+      console.log("user doesnt exists !");
+      if (
+        formData.firstName.length != 0 || formData.lastName.length != 0 ||
+        formData.address.length != 0 || formData.dateOfBirth.length != 0 ||
+        formData.bio.length != 0
+      ) {
+        try {
+          const db = firebase.firestore();
+          await db.collection("users").add(data);
+
+          toast({
+            title: "Account created.",
+            description: "Heading back to Home",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+          setTimeout(() => window.location.replace(HOME), 3000);
+        } catch (error) {
+          console.log("Error adding user", error);
+        }
+      } else {
+        toast({
+          title: "Please fill in all your information",
+          status: "warning",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     }
   };
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const db = firebase.firestore();
-
-        // Query Firestore for users with a matching email
-        const querySnapshot = await db
-          .collection("users")
-          .where("email", "==", persistUser.email)
-          .get();
-
-        if (!querySnapshot.empty) {
-          setUser(querySnapshot.docs[0].data());
-          console.log(user.docs[0].data());
-        }
-      } catch (error) {
-        console.error("Error retrieving user:", error);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
-    const updateUser = async () => {
-      try {
-        const data = { email: persistUser.email, ...formData };
-        const db = firebase.firestore();
-
-        // Update the user if it already exists
-        if (user) {
-          await db.collection("users").doc(user.id).update(data);
-          console.log("User updated successfully!");
-        }
-      } catch (error) {
-        console.error("Error adding/updating user:", error);
-      }
-    };
-
-    updateUser();
-  }, [
-    formData.email,
-    formData.firstName,
-    formData.lastName,
-    formData.dateOfBirth,
-    formData.address,
-    formData.bio,
-  ]);
 
   return (
     <>

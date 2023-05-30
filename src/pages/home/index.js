@@ -62,6 +62,8 @@ export default function Home() {
 
         if (querySnapshot.empty) {
           window.location.replace(USER_INFO_FORM);
+        } else {
+          localStorage.setItem("firestore_userId", querySnapshot.docs[0].id);
         }
       } catch (error) {
         console.error("Error retrieving user:", error);
