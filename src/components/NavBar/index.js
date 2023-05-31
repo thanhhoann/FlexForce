@@ -72,8 +72,6 @@ export default function NavBar() {
     window.location.replace(SIGNIN);
   };
 
-  console.log(persistUser.photoURL);
-
   return (
     <Box
       position="fixed"

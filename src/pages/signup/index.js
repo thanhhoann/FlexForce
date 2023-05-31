@@ -56,7 +56,7 @@ export default function SignUp() {
             email: res.user.email,
             uid: res.user.uid,
             displayName: res.user.displayName,
-            // photoURL: res.user.photoURL,
+            photoURL: res.user.photoURL,
           }),
         );
         window.location.reload();
