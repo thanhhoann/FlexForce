@@ -1,6 +1,11 @@
 import { Box, Heading, Link, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { DownloadIcon, ExternalLinkIcon } from "@chakra-ui/icons";
+import {
+  DownloadIcon,
+  ExternalLinkIcon,
+  ViewIcon,
+  ViewOffIcon,
+} from "@chakra-ui/icons";
 
 export default function UserInfoBox({ title, content, contentType = "text" }) {
   return (
@@ -19,7 +24,7 @@ export default function UserInfoBox({ title, content, contentType = "text" }) {
             <>
               <Heading size="sm">Resume</Heading>
               <Link isExternal href={content}>
-                View your resume <ExternalLinkIcon />
+                {title} {content ? <ViewIcon /> : <ViewOffIcon />}
               </Link>
             </>
           )}

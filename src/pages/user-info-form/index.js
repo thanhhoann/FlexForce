@@ -7,6 +7,7 @@ import {
   FormLabel,
   Heading,
   Input,
+  Text,
   Textarea,
   Toast,
   useToast,
@@ -36,6 +37,36 @@ export default function UserInfoForm() {
     address: "",
   });
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const db = firebase.firestore();
+
+        // Query Firestore for users with a matching email
+        const querySnapshot = await db
+          .collection("users")
+          .where("email", "==", persistUser.email)
+          .get();
+
+        if (!querySnapshot.empty) {
+          const data = querySnapshot.docs[0].data();
+          setFormData({
+            firstName: data.firstName,
+            lastName: data.lastName,
+            dateOfBirth: data.dateOfBirth,
+            bio: data.bio,
+            address: data.address,
+          });
+          console.log(user);
+        }
+      } catch (error) {
+        console.error("Error retrieving user:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -61,9 +92,6 @@ export default function UserInfoForm() {
 
         // Get the download URL of the uploaded file
         const downloadURL = await getDownloadURL(snapshot.ref);
-        setSelectedFileDownloadURL(downloadURL);
-
-        console.log(snapshot);
 
         // Handle success (e.g., display a success toast)
         toast({
@@ -76,8 +104,10 @@ export default function UserInfoForm() {
           position: "bottom",
         });
 
+        console.log("Uploaded ", snapshot);
         // Use the downloadURL as needed (e.g., save it to Firestore)
         console.log("Download URL:", downloadURL);
+        setSelectedFileDownloadURL(downloadURL);
       } catch (error) {
         // Handle error (e.g., display an error toast)
         toast({
@@ -94,8 +124,6 @@ export default function UserInfoForm() {
       }
     }
   };
-
-  console.log(selectedFileDownloadURL);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,9 +143,6 @@ export default function UserInfoForm() {
       try {
         await db.collection("users").doc(userId.replace(/^"|"$/g, ""))
           .update(data);
-
-        if (selectedFile) handleFileUpload();
-        console.log(data);
 
         toast({
           title: "User Information",
@@ -150,8 +175,6 @@ export default function UserInfoForm() {
         try {
           const db = firebase.firestore();
           await db.collection("users").add(data);
-
-          if (selectedFile) handleFileUpload();
 
           toast({
             title: "User Information",
@@ -192,7 +215,7 @@ export default function UserInfoForm() {
           <form onSubmit={handleSubmit}>
             <VStack spacing={4} align="stretch" mx={1} mt={1} mb={3}>
               <Flex gap="1rem">
-                <FormControl isRequired>
+                <FormControl>
                   <FormLabel>First Name</FormLabel>
                   <Input
                     type="text"
@@ -204,7 +227,7 @@ export default function UserInfoForm() {
                   />
                 </FormControl>
 
-                <FormControl isRequired>
+                <FormControl>
                   <FormLabel>Last Name</FormLabel>
                   <Input
                     type="text"
@@ -217,7 +240,7 @@ export default function UserInfoForm() {
                 </FormControl>
               </Flex>
 
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel>Date of Birth</FormLabel>
                 <Input
                   type="date"
@@ -229,7 +252,7 @@ export default function UserInfoForm() {
                 />
               </FormControl>
 
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel>Street Address</FormLabel>
                 <Input
                   type="text"
@@ -241,12 +264,15 @@ export default function UserInfoForm() {
                 />
               </FormControl>
 
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel>Resume</FormLabel>
                 <Input type="file" onChange={handleFileChange} />
+                <Button colorScheme="gray" onClick={handleFileUpload}>
+                  <MdCloudUpload /> <Text ml="0.4rem">Upload</Text>
+                </Button>
               </FormControl>
 
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel>Bio</FormLabel>
                 <Textarea
                   name="bio"
