@@ -63,7 +63,7 @@ export default function SignIn() {
             email: res.user.email,
             uid: res.user.uid,
             displayName: res.user.displayName,
-            // photoURL: res.user.photoURL,
+            photoURL: res.user.photoURL,
           }),
         );
         window.location.reload();
@@ -156,6 +156,7 @@ export default function SignIn() {
                         authActions.setUser({
                           uid: res.user.uid,
                           email: res.user.email,
+                          photoURL: res.user.photoURL,
                         }),
                       );
                       setIsRedirecting(true);

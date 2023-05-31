@@ -72,6 +72,8 @@ export default function NavBar() {
     window.location.replace(SIGNIN);
   };
 
+  console.log(persistUser.photoURL);
+
   return (
     <Box
       position="fixed"
@@ -139,10 +141,19 @@ export default function NavBar() {
                             cursor={"pointer"}
                             minW={0}
                           >
-                            <Avatar
-                              size={"md"}
-                              src={`https://api.dicebear.com/6.x/notionists/svg?seed=${persistUser.email}`}
-                            />
+                            {persistUser.photoURL
+                              ? (
+                                <Avatar
+                                  size={"md"}
+                                  src={persistUser.photoURL}
+                                />
+                              )
+                              : (
+                                <Avatar
+                                  size={"md"}
+                                  src={`https://api.dicebear.com/6.x/notionists/svg?seed=${persistUser.email}`}
+                                />
+                              )}
                           </MenuButton>
                           <MenuList zIndex={2}>
                             <MenuGroup

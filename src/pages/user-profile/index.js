@@ -53,9 +53,19 @@ export default function UserProfile() {
     <>
       <Flex w="100vw" mt="8rem" ml="2rem">
         <Flex>
-          <AvatarCard
-            src={`https://api.dicebear.com/6.x/notionists/svg?seed=${persistUser.email}`}
-          />
+          {persistUser.photoURL
+            ? (
+              <Avatar
+                w={"20rem"}
+                h={"20rem"}
+                src={persistUser.photoURL}
+              />
+            )
+            : (
+              <Avatar
+                src={`https://api.dicebear.com/6.x/notionists/svg?seed=${persistUser.email}`}
+              />
+            )}
         </Flex>
 
         <Stack ml="5rem" mt="5rem">
@@ -72,6 +82,11 @@ export default function UserProfile() {
                   content={user.address}
                 />
                 <UserInfoBox title="Bio" content={user.bio} />
+                <UserInfoBox
+                  contentType="link"
+                  title={user.resume.name}
+                  content={user.resume.downloadURL}
+                />
               </>
             )
             : (
