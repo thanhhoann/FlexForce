@@ -48,7 +48,8 @@ export default function TakeJobs() {
     setIsLoading(true);
 
     const firestore = getFirestore();
-    const job = jobs.slice(startIndex, 100)[0];
+    const randomValue = Math.floor(Math.random() * 100) + 1;
+    const job = jobs.slice(randomValue, 100)[0];
 
     try {
       const docRef = await addDoc(
