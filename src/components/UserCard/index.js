@@ -1,51 +1,46 @@
 import {
-  chakra,
-  Box,
-  Stack,
-  Link,
-  HStack,
-  Text,
-  Container,
-  Icon,
   Avatar,
-  Tooltip,
-  StackProps,
-  Divider,
-  useColorModeValue,
   Badge,
+  Box,
+  chakra,
+  Container,
+  Divider,
+  HStack,
+  Icon,
+  Link,
   List,
   ListItem,
+  Stack,
+  StackProps,
+  Text,
+  Tooltip,
   UnorderedList,
-} from '@chakra-ui/react';
-import React from 'react';
+  useColorModeValue,
+} from "@chakra-ui/react";
+import React from "react";
 // Here we have used react-icons package for the icons
-import { AiFillGithub } from 'react-icons/ai';
-import sample_users from '../../utils/sample_users.json';
+import { AiFillGithub } from "react-icons/ai";
+import sample_users from "../../utils/sample_users.json";
 
-const UserCard = () => {
+const UserCard = ({ sendDataToParent }) => {
   const [profile, setProfle] = React.useState();
 
   React.useEffect(() => {
     setProfle(sample_users[Math.floor(Math.random() * 100)]);
   }, []);
-  console.log(profile);
+
+  if (profile) {
+    sendDataToParent(profile);
+  }
 
   return (
-    <Container maxW="5xl" p={{ base: 5, md: 6 }}>
+    <Container>
       <Stack
         w="23rem"
         spacing={2}
         p={4}
-        border="1px solid"
-        borderColor={useColorModeValue('gray.400', 'gray.600')}
         rounded="md"
         margin="0 auto"
-        _hover={{
-          boxShadow: useColorModeValue(
-            '0 4px 6px rgba(160, 174, 192, 0.6)',
-            '0 4px 6px rgba(9, 17, 28, 0.4)'
-          ),
-        }}
       >
         <HStack justifyContent="space-between" alignItems="baseline">
           <Box pos="relative">

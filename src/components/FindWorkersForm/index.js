@@ -44,6 +44,11 @@ import {
 import { FIND_WORKERS } from "../../utils/route_name";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 
+import { persistUser } from "../../utils/helpers/local-storage.helper";
+
+import { addDoc, collection } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+
 export default function FindWorkersForm({ getBookInfo }) {
   const [typeOfJob, setTypeOfJob] = React.useState("");
   const [streetAddress, setStreetAddress] = React.useState("");
@@ -59,10 +64,11 @@ export default function FindWorkersForm({ getBookInfo }) {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isAcceptBooking, setIsAcceptBooking] = React.useState(false);
 
+  const [selectedWorker, setSelectedWorker] = React.useState(null);
+
   React.useEffect(() => {
     if (
       typeOfJob.length > 0 &&
-      streetAddress.length > 0 &&
       transactionMethod.length > 0 &&
       startTime.length > 0
     ) {
@@ -70,42 +76,67 @@ export default function FindWorkersForm({ getBookInfo }) {
     } else setIsDisableBook(true);
   }, [description, startTime, streetAddress, transactionMethod, typeOfJob]);
 
-  const handleAcceptBooking = () => {
+  const handleAcceptBooking = async () => {
     setIsLoading(false);
     setIsAcceptBooking(true);
 
-    setTimeout(() => {
-      onClose();
-      setIsAcceptBooking(false);
-      window.location.reload();
-      window.location.replace(FIND_WORKERS);
-    }, 1500);
-  };
-
-  const book = () => {
-    setIsLoading(true);
     const bookInfo = {
       type_of_job: typeOfJob,
-      street_address: streetAddress,
       start_time: startTime,
       transaction_method: transactionMethod,
       description: description,
     };
 
-    // open modal
-    onOpen();
+    const bookingDetails = {
+      book: bookInfo,
+      booked: selectedWorker,
+    };
 
-    // set loading state
-    setTimeout(() => setIsLoading(false), Math.floor(Math.random() * 3000));
+    console.log("booking details ", bookingDetails);
+
+    const firestore = getFirestore();
+
+    try {
+      const docRef = await addDoc(
+        collection(firestore, "job_log"),
+        {
+          email: persistUser.email,
+          bookingDetails,
+        },
+      );
+      console.log("Document added with ID: ", docRef.id);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
 
     // reset forms
     setTypeOfJob("");
     setStreetAddress("");
     setStartTime("");
     setTransactionMethod("");
+    setSalaryPerHour("");
+    setTotalSalary("");
+    setTotalWorkingHours("");
     setDescription("");
 
-    // reset accept booking state
+    setTimeout(() => {
+      onClose();
+      setIsAcceptBooking(false);
+    }, 1500);
+  };
+
+  const book = () => {
+    setIsLoading(true);
+
+    // open modal
+    onOpen();
+
+    // set loading state
+    setTimeout(() => setIsLoading(false), Math.floor(Math.random() * 3000));
+  };
+
+  const handleDataFromUserCard = (worker) => {
+    setSelectedWorker(worker);
   };
 
   return (
@@ -139,40 +170,19 @@ export default function FindWorkersForm({ getBookInfo }) {
             value={typeOfJob}
             onChange={(e) => setTypeOfJob(e.target.value)}
           >
-            <option>Presence Hiring</option>
-            <option>Landyard Work</option>
-            <option>Chores</option>
-            <option>Clarical Work</option>
-            <option>Pet Care</option>
+            <option value="Software Engineer">Software Engineer</option>
+            <option value="Web Developer">Web Developer</option>
+            <option value="Data Analyst">Data Analyst</option>
+            <option value="Network Administrator">Network Administrator</option>
+            <option value="System Administrator">System Administrator</option>
+            <option value="Database Administrator">
+              Database Administrator
+            </option>
+            <option value="Cyber Security Specialist">
+              Cyber Security Specialist
+            </option>
+            <option value="Cloud Architect">Cloud Architect</option>
           </Select>
-        </FormControl>
-
-        {/* street address */}
-        <FormControl as={GridItem} colSpan={6} isRequired>
-          <FormLabel
-            htmlFor="street_address"
-            font
-            fontWeight="700"
-            color="gray.700"
-            _dark={{
-              color: "gray.50",
-            }}
-            mt="2%"
-          >
-            Street address
-          </FormLabel>
-          <Input
-            type="text"
-            name="street_address"
-            id="street_address"
-            autoComplete="street-address"
-            focusBorderColor="brand.400"
-            shadow="sm"
-            w="full"
-            rounded="md"
-            value={streetAddress}
-            onChange={(e) => setStreetAddress(e.target.value)}
-          />
         </FormControl>
 
         {/* start time */}
@@ -202,67 +212,69 @@ export default function FindWorkersForm({ getBookInfo }) {
           />
         </FormControl>
 
-        {/* total working hours */}
-        <FormControl as={GridItem} colSpan={6} isRequired>
-          <FormLabel
-            font
-            fontWeight="700"
-            color="gray.700"
-            _dark={{
-              color: "gray.50",
-            }}
-            mt="2%"
-          >
-            Total Working Hours
-          </FormLabel>
-          <InputGroup>
-            <Input
-              type="number"
-              name="total_working_hours"
-              id="total_working_hours"
-              focusBorderColor="brand.400"
-              shadow="sm"
-              w="full"
-              rounded="md"
-              value={totalWorkingHours}
-              onChange={(e) => setTotalWorkingHours(e.target.value)}
-            />
-            <InputRightAddon children="hours" />
-          </InputGroup>
-        </FormControl>
+        <Flex gap="1rem" mt="1rem">
+          {/* salary per hour */}
+          <FormControl as={GridItem} colSpan={6} isRequired>
+            <FormLabel
+              font
+              fontWeight="700"
+              color="gray.700"
+              _dark={{
+                color: "gray.50",
+              }}
+              mt="2%"
+            >
+              Salary Per Hour
+            </FormLabel>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                fontSize="1.1rem"
+                children="$"
+              />
+              <Input
+                type="number"
+                name="salay_per_hour"
+                id="salay_per_hour"
+                focusBorderColor="brand.400"
+                shadow="sm"
+                w="full"
+                rounded="md"
+                value={salaryPerHour}
+                onChange={(e) => setSalaryPerHour(e.target.value)}
+              />
+            </InputGroup>
+          </FormControl>
 
-        {/* salary per hour */}
-        <FormControl as={GridItem} colSpan={6} isRequired>
-          <FormLabel
-            font
-            fontWeight="700"
-            color="gray.700"
-            _dark={{
-              color: "gray.50",
-            }}
-            mt="2%"
-          >
-            Salary Per Hour
-          </FormLabel>
-          <InputGroup>
-            <InputLeftElement
-              pointerEvents="none"
-              fontSize="1.1rem"
-              children="$"
-            />
-            <Input
-              type="number"
-              name="salay_per_hour"
-              id="salay_per_hour"
-              focusBorderColor="brand.400"
-              shadow="sm"
-              w="full"
-              rounded="md"
-              value={salaryPerHour}
-              onChange={(e) => setSalaryPerHour(e.target.value)}
-            />
-          </InputGroup>
-        </FormControl>
+          {/* total working hours */}
+          <FormControl as={GridItem} colSpan={6} isRequired>
+            <FormLabel
+              font
+              fontWeight="700"
+              color="gray.700"
+              _dark={{
+                color: "gray.50",
+              }}
+              mt="2%"
+            >
+              Total Working Hours
+            </FormLabel>
+            <InputGroup>
+              <Input
+                type="number"
+                name="total_working_hours"
+                id="total_working_hours"
+                focusBorderColor="brand.400"
+                shadow="sm"
+                w="full"
+                rounded="md"
+                value={totalWorkingHours}
+                onChange={(e) => setTotalWorkingHours(e.target.value)}
+              />
+              <InputRightAddon children="hours" />
+            </InputGroup>
+          </FormControl>
+        </Flex>
 
         {/* total salary */}
         <FormControl as={GridItem} colSpan={6} isReadOnly>
@@ -336,7 +348,7 @@ export default function FindWorkersForm({ getBookInfo }) {
               color: "gray.50",
             }}
           >
-            Description
+            Note
           </FormLabel>
           <Textarea
             rows={3}
@@ -358,31 +370,32 @@ export default function FindWorkersForm({ getBookInfo }) {
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader></ModalHeader>
           <ModalBody>
-            {isLoading
-              ? (
-                <Center flexDir="column" mb="2rem">
-                  <Text fontWeight={700} fontSize="2xl">
-                    Finding your match ...
-                  </Text>
-                </Center>
-              )
-              : isAcceptBooking
-              ? (
-                <Center p="1rem">
-                  <Box textAlign="center" py={10} px={6}>
-                    <CheckCircleIcon boxSize={"50px"} color={"green.500"} />
-                    <Heading as="h2" size="xl" mt={6} mb={2}>
-                      Successfully
-                    </Heading>
-                    <Text color={"gray.500"}>
-                      Heading back to find your next jobmate ...
+            <Box py="1rem">
+              {isLoading
+                ? (
+                  <Center flexDir="column" mb="2rem">
+                    <Text fontWeight={700} fontSize="2xl">
+                      Finding your match ...
                     </Text>
-                  </Box>
-                </Center>
-              )
-              : <UserCard />}
+                  </Center>
+                )
+                : isAcceptBooking
+                ? (
+                  <Center p="1rem">
+                    <Box textAlign="center" py={10} px={6}>
+                      <CheckCircleIcon boxSize={"50px"} color={"green.500"} />
+                      <Heading as="h2" size="xl" mt={6} mb={2}>
+                        Successfully
+                      </Heading>
+                      <Text color={"gray.500"}>
+                        Heading back to find your next jobmate ...
+                      </Text>
+                    </Box>
+                  </Center>
+                )
+                : <UserCard sendDataToParent={handleDataFromUserCard} />}
+            </Box>
           </ModalBody>
 
           {!isAcceptBooking && (

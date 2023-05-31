@@ -22,6 +22,10 @@ import { CheckSvg, MapSvg } from "../../assets/AssetUtil";
 import BackdropLoading from "../../components/BackdropLoading";
 import { faker } from "@faker-js/faker";
 
+import { addDoc, collection } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import { persistUser } from "../../utils/helpers/local-storage.helper";
+
 export default function TakeJobs() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isAccept, setIsAccept] = React.useState(false);
@@ -40,8 +44,24 @@ export default function TakeJobs() {
   //   console.log(modifiedList);
   // };
 
-  const handleAccept = () => {
+  const handleAccept = async () => {
     setIsLoading(true);
+
+    const firestore = getFirestore();
+    const job = jobs.slice(startIndex, 100)[0];
+
+    try {
+      const docRef = await addDoc(
+        collection(firestore, "job_log_WORKER"),
+        {
+          email: persistUser.email,
+          job: job,
+        },
+      );
+      console.log("Document added with ID: ", docRef.id);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
 
     setTimeout(() => {
       setIsLoading(false);
